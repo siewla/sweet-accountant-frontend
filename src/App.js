@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
+import Main from './pages/notLogin/Main'
 
 function App() {
   return (
     <Fragment>
-      <h1>Hello</h1>
+      <Main />
     </Fragment>
   );
 }
