@@ -10,7 +10,6 @@ const Categories = () => {
             <h3><span class="material-icons">shopping_cart</span>Groceries</h3>
             <h3><span class="material-icons">live_tv</span>Entertainment</h3>
             <h3><span class="material-icons">sports_handball</span>Sports</h3>
-            <h3><span class="material-icons">school</span>Education</h3>
             <h3><span class="material-icons">medical_services</span>Medical</h3>
             <h3><span class="material-icons">school</span>Education</h3>
             <h3><span class="material-icons">shopping_bag</span>Shopping</h3>
