@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
-import Main from './pages/notLogin/Main'
-import Categories from './components/Categories'
+import Landing from './pages/Landing';
+import './App.css';
 
 function App() {
   return (
     <Fragment>
-      <Main />
-      <Categories />
+    
+      <Landing />
+      
     </Fragment>
   );
 }
