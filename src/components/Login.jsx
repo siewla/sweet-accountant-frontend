@@ -18,12 +18,8 @@ const Login = () => {
                             <a href="/" className="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Learn more</a>
                         </div>
 
-<<<<<<< HEAD
                     {/* form */}
                         <div class="col-md-6 col-xl-5 mb-4  ">
-=======
-                        <div className="col-md-6 col-xl-5 mb-4  ">
->>>>>>> 5605357ba8aade72860d8f382d8f1d1937a20435
 
                             <form className="login z-depth-2 rounded">
 
