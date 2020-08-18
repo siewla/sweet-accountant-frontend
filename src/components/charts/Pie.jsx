@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Chart } from "react-google-charts";
 
 const Pie = (props) => {
-    
     const chartDetails = props.data
     const chartTitle = props.title
 
