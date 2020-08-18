@@ -81,10 +81,10 @@ h5 {
   .btn-login {
       color: white;
       border-radius: 20px;
-      background-color: rgb(179, 87, 197);
+      background-color: rgb(73, 143, 143);
       padding: 1% 15%;
       border: none;
   }
   .btn-login:hover {
-    background-color: rgb(99, 10, 117);
+    background-color: rgb(30, 95, 95)
   }
