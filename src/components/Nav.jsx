@@ -2,35 +2,35 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 const Nav = () => {
     return (
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
-            <div class="container">
+        <nav className="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+            <div className="container">
                 <Link to="/">
-                    <a class="navbar-brand" href="#"><strong>SLG</strong></a>
+                    <p href="/" className="navbar-brand"><strong>SLG</strong></p>
                 </Link>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
-                    <ul class="navbar-nav mr-auto">
+                <div className="collapse navbar-collapse" id="navbarSupportedContent-7">
+                    <ul className="navbar-nav mr-auto">
                         <Link to="/">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            <li className="nav-item active">
+                                <p className="nav-link">Home <span className="sr-only">(current)</span></p>
                             </li>
                         </Link>
                         <Link to="/signup">
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Sign up</a>
+                            <li className="nav-item">
+                                <p className="nav-link">Sign up</p>
                             </li>
                         </Link>
                         <Link to="/login">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Log in</a>
+                        <li className="nav-item">
+                            <p className="nav-link">Log in</p>
                         </li>
                         </Link>
                     </ul>
-                    <form class="form-inline">
-                        <div class="md-form my-0">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+                    <form className="form-inline">
+                        <div className="md-form my-0">
+                            <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
                         </div>
                     </form>
                 </div>
