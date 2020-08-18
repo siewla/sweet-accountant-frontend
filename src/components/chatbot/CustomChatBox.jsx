@@ -58,7 +58,7 @@ const CustomChatBox = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <ChatBox headerTitle="Sweet Accountant" steps = {steps} {...config} speechSynthesis={{ enable: true, lang: 'en' }}/>
+            <ChatBox headerTitle="Sweet Accountant" steps = {steps} {...config} speechSynthesis={{ enable: false, lang: 'en' }}/>
         </ThemeProvider>     
     )
 }
