@@ -1,11 +1,11 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 const Introduction = () => {
     return (
         <div>
            <div class="mask rgba-black-light align-items-center">
            
-              <div class="container">
+              <div class="introduction">
               
                 <div class="row">
              
@@ -13,8 +13,12 @@ const Introduction = () => {
                     <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInDown" data-wow-delay="0.3s"><strong>Sweet Accountant</strong></h1>
                     <hr class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s" />
                     <h5 class="text-uppercase mb-4 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Your best friend</strong></h5>
+                    <Link to="/signup">
                     <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">Signup</a>
+                    </Link>
+                    <Link to="/login">
                     <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">Login</a>
+                    </Link>
                   </div>
                 
                 </div>
