@@ -1,0 +1,46 @@
+html,
+body,
+header {
+  height: 100%;
+}
+ header {
+    background-image: url('https://mdbootstrap.com/img/Photos/Others/images/91.jpg'); 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center;
+    padding: 18%;
+ }
+@media (max-width: 740px) {
+  html,
+  body,
+  header{
+    height: 100vh;
+  }
+}
+
+.top-nav-collapse {
+  background-color: #78909c ;
+}
+
+.navbar:not(.top-nav-collapse) {
+  background: rgba(121, 139, 121, 0.3) ;
+}
+
+@media (max-width: 991px) {
+  .navbar:not(.top-nav-collapse) {
+    background: #78909c ;
+  }
+}
+
+h1 {
+  letter-spacing: 8px;
+}
+
+h5 {
+  letter-spacing: 3px;
+}
+
+.hr-light {
+  border-top: 3px solid #fff;
+  width: 80px;
+}
