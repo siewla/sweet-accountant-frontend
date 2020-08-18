@@ -19,7 +19,7 @@ const Login = () => {
                         </div>
 
                     {/* form */}
-                        <div class="col-md-6 col-xl-5 mb-4  ">
+                        <div className="col-md-6 col-xl-5 mb-4  ">
 
                             <form className="login z-depth-2 rounded">
 
@@ -27,12 +27,12 @@ const Login = () => {
                                     <p className="h4 text-center py-4 label">Log in</p>
                                     <div className="md-form">
                                         <i className="fa fa-envelope prefix grey-text"></i>
-                                        <input type="email" id="materialFormCardEmailEx" className="form-control" />
+                                        <input type="email" id="materialFormCardEmailEx" className="form-control" autoComplete="username" />
                                         <label htmlFor="materialFormCardEmailEx" className="font-weight-light">Your email</label>
                                     </div>
                                     <div className="md-form">
                                         <i className="fa fa-lock prefix grey-text"></i>
-                                        <input type="password" id="materialFormCardPasswordEx" className="form-control" />
+                                        <input type="password" id="materialFormCardPasswordEx" className="form-control" autoComplete="current-password" />
                                         <label htmlFor="materialFormCardPasswordEx" className="font-weight-light">Your password</label>
                                     </div>
 
@@ -68,3 +68,5 @@ const Login = () => {
 }
 
 export default Login
+
+// https://www.chromium.org/developers/design-documents/form-styles-that-chromium-understands

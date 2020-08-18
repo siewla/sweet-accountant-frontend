@@ -14,7 +14,7 @@ const Header = () => {
                 <header>
                     <Nav />
                     <Switch>
-                    <Route path="/" exact component={Introduction} />
+                        <Route path="/" exact component={Introduction} />
                         <Route path="/signup" component={Signup} />
                         <Route path="/login" component={Login} />
                         <Route path='/dashboard' component={Dashboard} /> 
