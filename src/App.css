@@ -3,14 +3,16 @@ body,
 header {
   height: 100%;
 }
- header {
-    background-image: url('https://mdbootstrap.com/img/Photos/Others/images/91.jpg'); 
-    background-repeat: no-repeat; 
-    background-size: cover; 
-    background-position: center;
-    padding: 10%;
-    min-height: 800px;
- }
+
+header {
+  background-image: url('https://mdbootstrap.com/img/Photos/Others/images/91.jpg'); 
+  background-repeat: no-repeat; 
+  background-size: cover; 
+  background-position: center;
+  padding: 10%;
+  min-height: 800px;
+}
+
 @media (max-width: 740px) {
   html,
   body,
@@ -32,6 +34,7 @@ header {
     width: fit-content;
     margin: 5% auto;
 }
+
 @media (max-width: 991px) {
   .navbar:not(.top-nav-collapse) {
     background: #78909c ;
@@ -50,41 +53,47 @@ h5 {
   border-top: 3px solid #fff;
 }
 
-.rgba-gradient {
-    background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
-    background: -webkit-gradient(linear, 45deg, from(rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%));
-    background: linear-gradient(to 45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
-  }
-  
-  .card-body {
-    background: rgba(89, 92, 89, 0.3) ;
-  }
-  
-  .md-form, .label, label {
-    color: #ffffff;
-  }
-  
-  h6 {
-    line-height: 1.7;
-  }
+/* .rgba-gradient {
+  background: -webkit-linear-gradient(45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
+  background: -webkit-gradient(linear, 45deg, from(rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%));
+  background: linear-gradient(to 45deg, rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%);
+} */
 
-  .login {
-      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRaSJle6RKR1nDAKGE0kmlowCNE9MVN2bPgdg&usqp=CAU');
-      background-repeat: no-repeat;
-      background-size: cover;
-  }
+/* Above code caused npm run build not working,  */
+/* Cannot read property 'length' of undefined
+CompileError: Begins at CSS selector undefined */
 
-  .login-content {
-    background: rgba(8, 8, 8, 0.3) ;
-    padding: 3%;
-  }
-  .btn-login {
-      color: white;
-      border-radius: 20px;
-      background-color: rgb(73, 143, 143);
-      padding: 1% 15%;
-      border: none;
-  }
-  .btn-login:hover {
-    background-color: rgb(30, 95, 95)
-  }
+.card-body {
+  background: rgba(89, 92, 89, 0.3) ;
+}
+
+.md-form, .label, label {
+  color: #ffffff;
+}
+
+h6 {
+  line-height: 1.7;
+}
+
+.login {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRaSJle6RKR1nDAKGE0kmlowCNE9MVN2bPgdg&usqp=CAU');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-content {
+  background: rgba(8, 8, 8, 0.3) ;
+  padding: 3%;
+}
+
+.btn-login {
+    color: white;
+    border-radius: 20px;
+    background-color: rgb(73, 143, 143);
+    padding: 1% 15%;
+    border: none;
+}
+
+.btn-login:hover {
+  background-color: rgb(30, 95, 95)
+}
