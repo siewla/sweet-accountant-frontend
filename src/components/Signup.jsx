@@ -18,6 +18,7 @@ const Signup = () => {
                     <a class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Learn more</a>
                   </div>
                   
+                  {/* Form */}
                   <div class="col-md-6 col-xl-5 mb-4">
                   
                     <div>
