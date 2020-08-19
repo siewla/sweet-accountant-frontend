@@ -45,6 +45,16 @@ export default {
         } catch (err) {
             console.log(err)
         }
+    },
+
+    async logInWithGoogle(idToken){
+        try {
+            console.log(idToken);
+            const response = await apiUtil.post(buildUrl('/users/googlelogin'), idToken);
+            return response
+        } catch (err) {
+            console.log(err)
+        }
     }
 
 };
