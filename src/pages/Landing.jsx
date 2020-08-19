@@ -1,9 +1,12 @@
 import React from 'react'
-import Header from '../components/Header';
-const Landing = () => {
+import Header from '../components/landing/Header';
+import Footer from '../components/Footer';
+const Landing = (props) => {
+    const login = props.login
     return (
         <div>
-           <Header />
+           <Header login={login}/>
+            <Footer />
         </div>
     )
 }
