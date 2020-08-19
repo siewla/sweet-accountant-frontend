@@ -6,7 +6,7 @@ const SignupForm = (props) => {
     const handleSubmit = props.handleSubmit;
     const err = props.err
     return (
-        <div class="col-md-6 col-xl-5 mb-4">
+        <div className="col-md-6 col-xl-5 mb-4">
             <div>
                 <div className="card-body">
                     <form onSubmit={handleSubmit}>
@@ -19,17 +19,17 @@ const SignupForm = (props) => {
                         <div className="md-form">
                             <i className="fas fa-user prefix white-text active"></i>
                             <input type="text" id="username" className="white-text form-control" value={username} onChange={handleChange} required />
-                            <label htmlFor="username" className="active">Your name</label>
+                            <label htmlFor="username" className="active white-text">Your name</label>
                         </div>
                         <div className="md-form">
                             <i className="fas fa-envelope prefix white-text active"></i>
                             <input type="email" id="email" className="white-text form-control" value={email} onChange={handleChange} required />
-                            <label htmlFor="email" className="active">Your email</label>
+                            <label htmlFor="email" className="active white-text">Your email</label>
                         </div>
                         <div className="md-form">
                             <i className="fas fa-lock prefix white-text active"></i>
                             <input type="password" id="password" className="white-text form-control" value={password} onChange={handleChange} required />
-                            <label htmlFor="password">Your password</label>
+                            <label htmlFor="password" className="active white-text">Your password</label>
                         </div>
                         {/* Show error */}
                         {err ?

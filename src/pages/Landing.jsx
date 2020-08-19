@@ -5,7 +5,7 @@ const Landing = (props) => {
     const login = props.login
     return (
         <div>
-           <Header login={login}/>
+            <Header login={login}/>
             <Footer />
         </div>
     )

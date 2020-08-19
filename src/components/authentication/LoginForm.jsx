@@ -1,4 +1,5 @@
 import React from 'react'
+import Googlelogin from './Googlelogin';
 
 const LoginForm = (props) => {
     const { email, password } = props.loginForm;
@@ -7,7 +8,7 @@ const LoginForm = (props) => {
     const err = props.err;
 
     return (
-        <div class="col-md-6 col-xl-5 mb-4  ">
+        <div className="col-md-6 col-xl-5 mb-4  ">
             <form className="login z-depth-2 rounded" onSubmit={handleSubmit}>
 
                 <div className="login-content">
@@ -40,9 +41,10 @@ const LoginForm = (props) => {
                         <a href="/" className="p-2 m-2 tw-ic">
                             <i className="fab fa-facebook-f white-text"></i>
                         </a>
-                        <a href="/" className="p-2 m-2 li-ic">
+                        {/* <a href="/" className="p-2 m-2 li-ic">
                             <i className="fab fa-google white-text"></i>
-                        </a>
+                        </a> */}
+                        <Googlelogin />
                         <a href="/" className="p-2 m-2 ins-ic">
                             Forget password?
                         </a>
