@@ -1,7 +1,8 @@
 import React from 'react'
 import LoginForm from './LoginForm';
 import { useState } from 'react';
-import authenticaton from '../../services/authentication';
+import authentication from '../../services/authentication';
+import { Redirect } from 'react-router-dom'
 
 const Login = (props) => {
     const [loginForm, setLoginForm] = useState({
@@ -27,7 +28,7 @@ const Login = (props) => {
         event.preventDefault();
         const user = loginForm;
 
-        const currentUser = await authenticaton.logIn(user);
+        const currentUser = await authentication.logIn(user);
 
         if (!currentUser.err) {
             setLoginForm({
@@ -45,7 +46,6 @@ const Login = (props) => {
     return (
         <div>
             {!isLogin ?
-            
             <div className="mask rgba-gradient align-items-center">
                 <div className="container">
                     <div className="row mt-5">

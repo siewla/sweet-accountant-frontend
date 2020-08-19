@@ -21,7 +21,7 @@ const Header = (props) => {
                         {/* <Route path='/dashboard' component={Dashboard} />  */}
                         {/* just test the buttons on the left */}
                     </Switch>
-                    <Chatbot />
+                    {/* <Chatbot /> */}
                 </header>
             </Router>
 
