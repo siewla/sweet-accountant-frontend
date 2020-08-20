@@ -1,12 +1,20 @@
 import React from 'react';
+import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 
 const Nav = (props) => {
-    const username = props.username;
-    const logout = props.logout;
     return (
-        <nav className="navbar-dark secondary-color lighten-1 nav-db">
-            <button className="btn btn-info">Hi {username}</button>
-            <button className="btn btn-light" onClick={logout}>SIGN OUT</button>
+        <nav className="navbar-dark  lighten-1 nav-db">
+            <OverlayTrigger
+                placement="bottom"
+                overlay={
+                    <Tooltip id={`tooltip-bottom`}>
+                        Add transaction
+        </Tooltip>
+                }
+            >
+                <Button variant="secondary"><i class="fas fa-plus-circle fa-lg"></i></Button>
+            </OverlayTrigger>
+           
         </nav>
     )
 }

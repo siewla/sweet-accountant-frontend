@@ -32,7 +32,7 @@ export default {
     },
     async getDataFacebook (accessToken) {
         try {
-            const response = await apiUtil.post(buildUrl('/get_data_fb'), accessToken);
+            const response = await apiUtil.post(buildUrl('/users/get_data_fb'), accessToken);
             return response.data
         } catch (err) {
             console.log(err)
