@@ -13,15 +13,19 @@ class Googlelogin extends Component{
 
     // send google token
     sendGoogleToken = tokenId => {
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/googlelogin`,{
+        axios.post(`http://localhost:4000/users/googlelogin`,{
             idToken: tokenId
         })
-        .then(res =>{
-            // console.log(res.data)
+        .then(async res =>{
             this.setState({
-                currentUserEmail: res.data.data
+                currentUserEmail: res.data.data,
             })
-            console.log('email', this.state.currentUserEmail)
+            const currentUser = await authentication.logInWithFbOrGoogle({email: this.state.currentUserEmail});
+            if(!currentUser.err) {
+                this.props.login(currentUser);
+            } else {
+                this.props.showErr(currentUser.err);
+            }   
         })
         .catch(err =>{
             console.log(err)
@@ -30,13 +34,7 @@ class Googlelogin extends Component{
 
     //get response from google 
     responseGoogle = async response =>{
-        this.sendGoogleToken(response.tokenId);
-        const currentUser = await authentication.logInWithFbOrGoogle({email: this.state.currentUserEmail});
-        if(!currentUser.err) {
-            this.props.login(currentUser);
-        } else {
-            this.props.showErr(currentUser.err);
-        }   
+        this.sendGoogleToken(response.tokenId); 
     }
 
     render(){

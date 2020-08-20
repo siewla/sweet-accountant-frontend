@@ -41,7 +41,6 @@ export default {
     async logInWithFbOrGoogle (email) {
         try {
             const response = await apiUtil.post(buildUrl('/users/log_in_fb_google'), email);
-            console.log(response.data);
             return response.data
         } catch (err) {
             console.log(err)
