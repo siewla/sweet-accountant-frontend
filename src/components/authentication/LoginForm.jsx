@@ -6,7 +6,9 @@ const LoginForm = (props) => {
     const handleChange = props.handleChange;
     const handleSubmit = props.handleSubmit;
     const err = props.err;
-
+    const login = props.login;
+    const showErr = props.showErr;
+    
     return (
         <div className="col-md-6 col-xl-5 mb-4  ">
             <form className="login z-depth-2 rounded" onSubmit={handleSubmit}>
@@ -44,7 +46,7 @@ const LoginForm = (props) => {
                         {/* <a href="/" className="p-2 m-2 li-ic">
                             <i className="fab fa-google white-text"></i>
                         </a> */}
-                        <Googlelogin />
+                        <Googlelogin login={login} showErr={showErr}/>
                         <a href="/" className="p-2 m-2 ins-ic">
                             Forget password?
                         </a>

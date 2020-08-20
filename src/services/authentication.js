@@ -38,9 +38,10 @@ export default {
             console.log(err)
         }
     },
-    async logInWithFb (email) {
+    async logInWithFbOrGoogle (email) {
         try {
-            const response = await apiUtil.post(buildUrl('/log_in_with_fb'), email);
+            const response = await apiUtil.post(buildUrl('/users/log_in_fb_google'), email);
+            console.log(response.data);
             return response.data
         } catch (err) {
             console.log(err)

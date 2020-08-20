@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { GoogleLogin } from 'react-google-login'
+import authentication from '../../services/authentication';
 
 class Googlelogin extends Component{
     constructor(props) {
@@ -28,10 +29,14 @@ class Googlelogin extends Component{
     }
 
     //get response from google 
-    responseGoogle = response =>{
-        // console.log(process.env.REACT_APP_GOOGLE_CLIENT)
-        // console.log(response)
-        this.sendGoogleToken(response.tokenId)
+    responseGoogle = async response =>{
+        this.sendGoogleToken(response.tokenId);
+        const currentUser = await authentication.logInWithFbOrGoogle({email: this.state.currentUserEmail});
+        if(!currentUser.err) {
+            this.props.login(currentUser);
+        } else {
+            this.props.showErr(currentUser.err);
+        }   
     }
 
     render(){
