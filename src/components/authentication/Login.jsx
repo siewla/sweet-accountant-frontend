@@ -2,7 +2,6 @@ import React from 'react'
 import LoginForm from './LoginForm';
 import { useState } from 'react';
 import authentication from '../../services/authentication';
-import { Redirect } from 'react-router-dom'
 
 const Login = (props) => {
     const [loginForm, setLoginForm] = useState({
@@ -12,8 +11,11 @@ const Login = (props) => {
 
     const [err, setErr] = useState(null);
 
-    const [isLogin, setIsLogin] = useState(false);
+    const login = props.login;
 
+    const showErr = (err) => {
+        setErr(err);
+    }
     // Handle Form Input Change
     const handleChange = event => {
         const { id, value } = event.target;
@@ -35,8 +37,7 @@ const Login = (props) => {
                 email: '',
                 password: ''
             });
-            setIsLogin(true);
-            props.login(currentUser);
+            login(currentUser);
         } else {
             setErr(currentUser.err)
         }
@@ -45,7 +46,6 @@ const Login = (props) => {
 
     return (
         <div>
-            {!isLogin ?
             <div className="mask rgba-gradient align-items-center">
                 <div className="container">
                     <div className="row mt-5">
@@ -60,11 +60,13 @@ const Login = (props) => {
                         <LoginForm loginForm={loginForm}
                             handleChange={handleChange}
                             handleSubmit={handleSubmit}
-                            err={err} />
+                            err={err}
+                            login={login} 
+                            showErr={showErr}/>
                     </div>
                 </div>
 
-            </div> : ""}
+            </div>
         </div>
     )
 }
