@@ -9,17 +9,21 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
 
+
+
+  //log in
   const login = (currentUser) => {
     setCurrentUser(currentUser);
     setIsLogin(true);
   }
-
+  // Log out
   const logout = async () => {
     await authentication.logOut();
     setIsLogin(false);
     setCurrentUser({});
   }
 
+  // check authentication
   const checkAuthentication = async () => {
     const response = await authentication.checkAuthentication();
 
@@ -32,15 +36,20 @@ function App() {
     }
   }
 
+  // 
   useEffect(() => {
     checkAuthentication();
   }, [])
 
+  
   return (
     <Fragment>
       {!isLogin ?
         <Landing login={login} /> :
-        <Dashboard username={currentUser.username} logout={logout} email={currentUser.email}/>
+        <Dashboard username={currentUser.username} 
+        logout={logout} 
+        email={currentUser.email}
+        />
       }
     </Fragment>
   );

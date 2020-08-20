@@ -119,9 +119,32 @@ h6 {
     justify-content: flex-end;
 }
 
+.content {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 8%;
+}
+
+.currentContent {
+    margin-right: 55%;
+}
 /* Profile */
 .profile {
     padding: 1%;
     margin-right: 30%;
     margin-top: 10%;
+}
+
+/* Accounts */
+.accounts {
+    padding: 1%;
+    width: 20%;
+    margin-right: 5%;
+}
+
+.table-accounts {
+    width: 40%;
+    margin-right: 10%;
 }
