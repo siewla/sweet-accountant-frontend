@@ -40,7 +40,7 @@ function App() {
     <Fragment>
       {!isLogin ?
         <Landing login={login} /> :
-        <Dashboard username={currentUser.username} logout={logout} />
+        <Dashboard username={currentUser.username} logout={logout} email={currentUser.email}/>
       }
     </Fragment>
   );

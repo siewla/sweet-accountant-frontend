@@ -1,5 +1,6 @@
 import React from 'react'
 import Googlelogin from './Googlelogin';
+import FacebookLogin from './FacebookLogin';
 
 const LoginForm = (props) => {
     const { email, password } = props.loginForm;
@@ -8,7 +9,6 @@ const LoginForm = (props) => {
     const err = props.err;
     const login = props.login;
     const showErr = props.showErr;
-    
     return (
         <div className="col-md-6 col-xl-5 mb-4  ">
             <form className="login z-depth-2 rounded" onSubmit={handleSubmit}>
@@ -40,12 +40,7 @@ const LoginForm = (props) => {
                     <hr className="hr-light mb-3 mt-4" />
                     <div className="inline-ul text-center">
 
-                        <a href="/" className="p-2 m-2 tw-ic">
-                            <i className="fab fa-facebook-f white-text"></i>
-                        </a>
-                        {/* <a href="/" className="p-2 m-2 li-ic">
-                            <i className="fab fa-google white-text"></i>
-                        </a> */}
+                        <FacebookLogin login={login} showErr={showErr}/>
                         <Googlelogin login={login} showErr={showErr}/>
                         <a href="/" className="p-2 m-2 ins-ic">
                             Forget password?
