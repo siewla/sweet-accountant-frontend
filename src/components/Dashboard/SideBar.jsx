@@ -10,29 +10,35 @@ const SideBar = (props) => {
             </a>
             <div className="list-group list-group-flush">
 
-                <p className="list-group-item active waves-effect">
-                    <i className="fas fa-chart-pie mr-3"></i>Dashboard</p>
-
                 <Link to="/login" >
-                    <p className="list-group-item list-group-item-action waves-effect" onClick={() => {changeCurrentContent('Profile')}}>
+                    <p className="list-group-item list-group-item-action waves-effect" onClick={() => { changeCurrentContent('Profile') }}>
                         <i className="fas fa-user mr-3"></i>Profile</p>
                 </Link>
 
-                <p className="list-group-item list-group-item-action waves-effect" onClick={() => {changeCurrentContent('All Transactions')}}>
-                    <i className="fas fa-money-bill-alt mr-3"></i>Transactions</p>
+                <Link to="/transactions">
+                    <p className="list-group-item list-group-item-action waves-effect" onClick={() => { changeCurrentContent('All Transactions') }}>
+                        <i className="fas fa-money-bill-alt mr-3"></i>Transactions</p>
+                </Link>
 
-                <p className="list-group-item list-group-item-action waves-effect" onClick={() => {changeCurrentContent('Categories')}}>
-                    <i className="fas fa-table mr-3"></i>Categories</p>
+                <Link to="/categories">
+                    <p className="list-group-item list-group-item-action waves-effect" onClick={() => { changeCurrentContent('Categories') }}>
+                        <i className="fas fa-table mr-3"></i>Categories</p>
+                </Link>
 
                 <Link to="/accounts">
-                    <p className="list-group-item list-group-item-action waves-effect" onClick={() => {changeCurrentContent('All Accounts')}}>
+                    <p className="list-group-item list-group-item-action waves-effect" onClick={() => { changeCurrentContent('All Accounts') }}>
                         <i className="fas fa-wallet mr-3"></i>Accounts</p>
                 </Link>
-                <p className="list-group-item list-group-item-action waves-effect" onClick={() => {changeCurrentContent('Reports')}}>
-                    <i className="far fa-chart-bar mr-3"></i>Reports</p>
 
-                <p className="list-group-item list-group-item-action waves-effect" onClick={() => {changeCurrentContent('Import')}}>
+                <Link to="/reports">
+                <p className="list-group-item list-group-item-action waves-effect" onClick={() => { changeCurrentContent('Reports') }}>
+                    <i className="far fa-chart-bar mr-3"></i>Reports</p>
+                </Link>
+
+                <Link to="import">
+                <p className="list-group-item list-group-item-action waves-effect" onClick={() => { changeCurrentContent('Import') }}>
                     <i className="fas fa-file-import mr-3"></i>Import</p>
+                </Link>
             </div>
 
         </div>
