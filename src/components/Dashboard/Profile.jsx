@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import usersService from '../../services/usersService';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import { MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact';
 
 
 const Profile = (props) => {
@@ -62,7 +62,7 @@ const Profile = (props) => {
                             <label data-error="wrong" data-success="right" for="form29" class="ml-0">Password </label>
                         </div>
                         <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-cyan mt-1"> Update and Save<i class="fas fa-sign-in ml-1"></i></button>
+                            <button type="submit" class="btn btn-cyan mt-1"> Update and Save</button>
                         </div>
                     </form>
                 </MDBModalBody>

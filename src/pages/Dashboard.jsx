@@ -4,6 +4,7 @@ import Nav from '../components/Dashboard/Nav';
 import Profile from '../components/Dashboard/Profile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Accounts from '../components/Dashboard/Accounts';
+import TopMenu from '../components/Dashboard/TopMenu';
 const Dashboard = (props) => {
     const currentUser = props.currentUser;
     const logout = props.logout;
@@ -18,11 +19,10 @@ const Dashboard = (props) => {
     return (
         <div>
             <Router>
-
                 <div className="dashboard">
                     <SideBar changeCurrentContent={changeCurrentContent} />
-                    <div className="nav-content">
-                        <Nav currentContent={currentContent} />
+                    <div className="main-content">
+                        <TopMenu currentContent={currentContent} currentUser={currentUser}/>
                         <div className="content">
                             <Switch>
                                 <Route path="/profile" 

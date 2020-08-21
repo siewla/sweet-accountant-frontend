@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 const SideBar = (props) => {
     const changeCurrentContent = props.changeCurrentContent;
     return (
-        <div className="sidebar-fixed position-fixed">
+        <div className="sidebar">
             <a className="logo-wrapper waves-effect" href="/">
                 <img src="../../../img/sweet.png" className="img-fluid" alt="" />
             </a>
             <div>
-                <button className="list-group-item list-group-item-action waves-effect">
-                    <i className="fas fa-chart-pie mr-3"></i>Dashboard</button>
+                <h3 className="list-group-item list-group-item-action waves-effect">
+                    <i className="fas fa-chart-pie mr-3"></i>Dashboard</h3>
                 <Link to="/profile" >
                     <button className="list-group-item list-group-item-action waves-effect" onClick={() => {changeCurrentContent('Profile')}}>
                         <i className="fas fa-user mr-3"></i>Profile</button>

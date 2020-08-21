@@ -18,7 +18,7 @@ const Nav = (props) => {
                 overlay={
                     <Tooltip id={`tooltip-bottom`}>
                         Add transaction
-        </Tooltip>
+            </Tooltip>
                 }
             >
                 <Button variant="secondary" data-toggle="modal" data-target="#modalPush"><i class="fas fa-plus-circle fa-lg"></i></Button>
@@ -28,7 +28,7 @@ const Nav = (props) => {
             <AddTransaction />
 
             {/* Modal show categories */}
-            <ModalCategories />  
+            {/* <ModalCategories />   */}
         </nav>
     )
 }
