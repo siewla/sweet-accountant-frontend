@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-const Nav = () => {
+
+const PageHeader = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
             <div className="container">
@@ -13,8 +14,8 @@ const Nav = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent-7">
                     <ul className="navbar-nav mr-auto">
                         <Link to="/">
-                            <li className="nav-item active">
-                                <p className="nav-link">Home <span className="sr-only">(current)</span></p>
+                            <li className="nav-item">
+                                <p className="nav-link">Home</p>
                             </li>
                         </Link>
                         <Link to="/signup">
@@ -39,4 +40,4 @@ const Nav = () => {
     )
 }
 
-export default Nav
+export default PageHeader

@@ -1,7 +1,7 @@
 import React from 'react';
 import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
-import AddTransaction from './AddTransaction';
-import ModalCategories from './ModalCategories';
+import AddTransaction from '../AddTransaction';
+import ModalCategories from '../ModalCategories';
 
 const Nav = (props) => {
     const currentContent = props.currentContent;
@@ -18,7 +18,7 @@ const Nav = (props) => {
                 overlay={
                     <Tooltip id={`tooltip-bottom`}>
                         Add transaction
-        </Tooltip>
+            </Tooltip>
                 }
             >
                 <Button variant="secondary" data-toggle="modal" data-target="#modalPush"><i class="fas fa-plus-circle fa-lg"></i></Button>

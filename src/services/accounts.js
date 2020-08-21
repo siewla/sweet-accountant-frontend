@@ -14,16 +14,19 @@ export default {
             return [];
         }
     },
-    async create (newAccount) {
-        const response = await apiUtil.post(buildUrl('/accounts/new'), newAccount);
+
+    async create (userId, name) {
+        const response = await apiUtil.post(buildUrl('/accounts/new'), { userId, name });
         return response.data;
     },
+
     async update (id, updateContent) {
         const response = await apiUtil.update(buildUrl(`/accounts/${id}`),
             updateContent,
         );
         return response.data;
     },
+
     async delete (id) {
         const response = await apiUtil.delete(buildUrl(`/accounts/${id}`));
         return response.data;

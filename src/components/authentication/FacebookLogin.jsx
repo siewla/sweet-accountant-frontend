@@ -21,7 +21,7 @@ const Facebooklogin = (props) => {
             fields="email"
             scope="public_profile,email"
             render={renderProps => (
-                 <button className="btn blue-gradient" onClick={renderProps.onClick}>Sign in with <i class="fab fa-facebook"></i></button>
+                <h3 onClick={renderProps.onClick}><i className="fab fa-facebook p-2"></i></h3>
             )}
         />
     )

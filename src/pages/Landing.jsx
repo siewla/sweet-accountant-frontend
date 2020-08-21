@@ -1,13 +1,10 @@
 import React from 'react'
-import Header from '../components/landing/Header';
-import Footer from '../components/Footer';
+import LandingBoilerPlate from '../components/landing/LandingBoilerPlate';
+
 const Landing = (props) => {
     const login = props.login
     return (
-        <div>
-            <Header login={login}/>
-            <Footer />
-        </div>
+        <LandingBoilerPlate login={login}/>
     )
 }
 
