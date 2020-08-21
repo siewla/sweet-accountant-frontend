@@ -1,7 +1,6 @@
 import React, { useState }from 'react'
 import { MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBInput } from 'mdbreact';
 import accountsServices from '../../services/accounts';
-import axios from 'axios';
 
 const AddNewAccount = (props) => {
     const [formData, setFormData] = useState({

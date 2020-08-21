@@ -9,8 +9,6 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({});
 
-
-
   //log in
   const login = (currentUser) => {
     setCurrentUser(currentUser);

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import SideBar from '../components/Dashboard/SideBar';
-import Nav from '../components/Dashboard/Nav';
 import Profile from '../components/Dashboard/Profile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Accounts from '../components/Dashboard/Accounts';
+import AccountsDetail from '../components/Dashboard/AccountsDetail';
 import TopMenu from '../components/Dashboard/TopMenu';
+
 const Dashboard = (props) => {
     const currentUser = props.currentUser;
     const logout = props.logout;
@@ -26,12 +26,18 @@ const Dashboard = (props) => {
                         <div className="content">
                             <Switch>
                                 <Route path="/profile" 
-                                    render={() => <Profile currentUser={currentUser}
-                                    logout={logout} 
-                                    updateCurrentUser={updateCurrentUser}/>} 
+                                    render={() => 
+                                    <Profile 
+                                        currentUser={currentUser}
+                                        logout={logout} 
+                                        updateCurrentUser={updateCurrentUser}
+                                    />} 
                                 />
                                 <Route path="/accounts" 
-                                    render={() => <Accounts />} 
+                                    render={() => 
+                                    <AccountsDetail 
+                                        currentUser={currentUser}
+                                    />} 
                                 />
                             </Switch>
                         </div>

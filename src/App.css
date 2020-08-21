@@ -61,7 +61,7 @@
 } 
 
 .sidebar {
-  width: 15%;
+  width: 25%;
   height: 1000px;
   background-color: white;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
@@ -84,26 +84,27 @@
     align-items: center;
 }
 
+.content{
+  width: 100%;
+}
+
 /* Profile */
 .profile {
-    padding: 1%;
-    margin-right: 35%;
-    margin-top: 5%;
+    margin: 20vh auto;
+    width: 50%;
 }
 
 /* Accounts */
-.accounts {
-    padding: 1%;
-    width: 20%;
-    margin-right: 5%;
+.accounts{
+  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
 }
-
-.table-accounts {
-    width: 40%;
-    margin-right: 10%;
-}
-
-.list-group {
-    max-height: 400px;
-    overflow: scroll;
+.accounts-details-container {
+  padding: 4vh;
+  background-color: white;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }

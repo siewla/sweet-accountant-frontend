@@ -1,7 +1,7 @@
 import React from 'react';
 import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
-import AddTransaction from './AddTransaction';
-import ModalCategories from './ModalCategories';
+import AddTransaction from '../AddTransaction';
+import ModalCategories from '../ModalCategories';
 
 const Nav = (props) => {
     const currentContent = props.currentContent;
@@ -28,7 +28,7 @@ const Nav = (props) => {
             <AddTransaction />
 
             {/* Modal show categories */}
-            {/* <ModalCategories />   */}
+            <ModalCategories />  
         </nav>
     )
 }
