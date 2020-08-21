@@ -36,7 +36,7 @@ const SignupForm = (props) => {
 
                     {/* end error */}
                     <div className="text-center mt-4">
-                        <button className="btn btn-indigo" type="submit">Sign up</button>
+                        <button className="btn btn-outline-white wow fadeInDown" type="submit">Sign up</button>
                         <hr className="hr-light mb-3 mt-4" />
                     </div>
                 </div>

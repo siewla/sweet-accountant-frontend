@@ -14,8 +14,8 @@ const PageHeader = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent-7">
                     <ul className="navbar-nav mr-auto">
                         <Link to="/">
-                            <li className="nav-item active">
-                                <p className="nav-link">Home <span className="sr-only">(current)</span></p>
+                            <li className="nav-item">
+                                <p className="nav-link">Home</p>
                             </li>
                         </Link>
                         <Link to="/signup">

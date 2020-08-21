@@ -29,7 +29,7 @@ const LoginForm = (props) => {
                         <label htmlFor="password" className="active white-text font-weight-light">Your password</label>
                     </div>
                     <div className="text-center mt-4">
-                        <button className="btn btn-indigo" type="submit">Log in</button>
+                        <button className="btn btn-outline-white wow fadeInDown" type="submit">Log in</button>
                         <hr className="hr-light mb-3 mt-4" />
                     </div>
                     {/* Show error */}
