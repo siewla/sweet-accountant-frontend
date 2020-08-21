@@ -25,12 +25,14 @@ const Dashboard = (props) => {
                         <Nav currentContent={currentContent} />
                         <div className="content">
                             <Switch>
-                                <Route path="/login" render={() => <Profile currentUser={currentUser}
-                                 logout={logout} 
-                                 updateCurrentUser={updateCurrentUser}/>} />
-                            </Switch>
-                            <Switch>
-                                <Route path="/accounts" render={() => <Accounts />} />
+                                <Route path="/profile" 
+                                    render={() => <Profile currentUser={currentUser}
+                                    logout={logout} 
+                                    updateCurrentUser={updateCurrentUser}/>} 
+                                />
+                                <Route path="/accounts" 
+                                    render={() => <Accounts />} 
+                                />
                             </Switch>
                         </div>
                     </div>
