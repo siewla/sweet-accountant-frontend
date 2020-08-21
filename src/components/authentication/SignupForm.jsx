@@ -7,45 +7,40 @@ const SignupForm = (props) => {
     const err = props.err
     return (
         <div className="col-md-6 col-xl-5 mb-4">
-            <div>
-                <div className="card-body">
-                    <form onSubmit={handleSubmit}>
-                        <div className="text-center">
-                            <h3 className="white-text">
-                                <i className="fas fa-user white-text"></i> Register</h3>
-                            <hr className="hr-light" />
-                        </div>
+            <form className="login z-depth-2 rounded" onSubmit={handleSubmit}>
+                <div className="login-content">
+                    <div className="h4 text-center py-4 label">
+                        <h3>Sign Up</h3>
+                        <hr className="hr-light" />
+                    </div>
+                    <div className="md-form">
+                        <i className="fas fa-user prefix white-text active"></i>
+                        <input type="text" id="username" className="white-text form-control" value={username} onChange={handleChange} required />
+                        <label htmlFor="username" className="active white-text">Your name</label>
+                    </div>
+                    <div className="md-form">
+                        <i className="fas fa-envelope prefix white-text active"></i>
+                        <input type="email" id="email" className="white-text form-control" value={email} onChange={handleChange} required />
+                        <label htmlFor="email" className="active white-text">Your email</label>
+                    </div>
+                    <div className="md-form">
+                        <i className="fas fa-lock prefix white-text active"></i>
+                        <input type="password" id="password" className="white-text form-control" value={password} onChange={handleChange} required />
+                        <label htmlFor="password" className="active white-text">Your password</label>
+                    </div>
+                    {/* Show error */}
+                    {err ?
+                        <div class="alert alert-danger text-center" role="alert">
+                            {err}
+                        </div> : ''}
 
-                        <div className="md-form">
-                            <i className="fas fa-user prefix white-text active"></i>
-                            <input type="text" id="username" className="white-text form-control" value={username} onChange={handleChange} required />
-                            <label htmlFor="username" className="active white-text">Your name</label>
-                        </div>
-                        <div className="md-form">
-                            <i className="fas fa-envelope prefix white-text active"></i>
-                            <input type="email" id="email" className="white-text form-control" value={email} onChange={handleChange} required />
-                            <label htmlFor="email" className="active white-text">Your email</label>
-                        </div>
-                        <div className="md-form">
-                            <i className="fas fa-lock prefix white-text active"></i>
-                            <input type="password" id="password" className="white-text form-control" value={password} onChange={handleChange} required />
-                            <label htmlFor="password" className="active white-text">Your password</label>
-                        </div>
-                        {/* Show error */}
-                        {err ?
-                            <div class="alert alert-danger text-center" role="alert">
-                                {err}
-                            </div> : ''}
-
-                        {/* end error */}
-                        <div className="text-center mt-4">
-                            <button className="btn btn-indigo" type="submit">Sign up</button>
-                            <hr className="hr-light mb-3 mt-4" />
-                        </div>
-                    </form>
+                    {/* end error */}
+                    <div className="text-center mt-4">
+                        <button className="btn btn-indigo" type="submit">Sign up</button>
+                        <hr className="hr-light mb-3 mt-4" />
+                    </div>
                 </div>
-            </div>
-
+            </form>
         </div>
     )
 }

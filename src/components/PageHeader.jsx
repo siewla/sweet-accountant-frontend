@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-const Nav = () => {
+
+const PageHeader = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
             <div className="container">
@@ -39,4 +40,4 @@ const Nav = () => {
     )
 }
 
-export default Nav
+export default PageHeader

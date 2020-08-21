@@ -44,6 +44,9 @@ class Googlelogin extends Component{
                 onSuccess={ this.responseGoogle }
                 onFailure={ this.responseGoogle }
                 cookiePolicy = { 'single_host_origin' }
+                render={renderProps => (
+                    <h3 onClick={renderProps.onClick}><i className="fab fa-google p-2"></i></h3>
+                )}
             />
         )
     }
