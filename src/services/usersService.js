@@ -31,5 +31,13 @@ export default {
             updateContent,
         );
         return response.data;
+    },
+    async getAllAccounts (id) {
+        try {
+            const response = await apiUtil.get(buildUrl(`/users/${id}/accounts`));
+            return response.data;
+        } catch(err) {
+            console.log(err);
+        }
     }
 }

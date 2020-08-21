@@ -41,14 +41,17 @@ function App() {
     checkAuthentication();
   }, [])
 
-  
+  // update currentUser
+  const updateCurrentUser = (updatedUser) => {
+    setCurrentUser(updatedUser)
+  }
   return (
     <Fragment>
       {!isLogin ?
         <Landing login={login} /> :
-        <Dashboard username={currentUser.username} 
+        <Dashboard currentUser={currentUser}
         logout={logout} 
-        email={currentUser.email}
+        updateCurrentUser={updateCurrentUser}
         />
       }
     </Fragment>

@@ -10,7 +10,7 @@ export default {
             const response = await apiUtil.get(buildUrl(`/accounts/${idAccount}/transactions`));
             return response.data;
         } catch (err) {
-            console.log(err);
+            console.log(err);   
             return [];
         }
     },
