@@ -4,6 +4,7 @@ import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 const Accounts = (props) => {
     return (
         <React.Fragment>
+            {/* LEFT BOX */}
             <div className="accounts z-depth-1 card">
                 <p>Credit: 0</p>
                 <p>Debit: 0</p>
@@ -20,6 +21,8 @@ const Accounts = (props) => {
                     <Button className="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm"><i class="fas fa-plus-circle fa-lg"></i></Button>
                 </OverlayTrigger>
             </div>
+
+            {/* TABLE */}
             <div className="table-accounts z-depth-1 card">
                 <table class="table table-hover">
                     <thead>
@@ -65,7 +68,7 @@ const Accounts = (props) => {
                         </div>
                         <div class="modal-body mx-3">
                             <div class="md-form ml-0 mr-0">
-                                <input type="text" id="form29" class="form-control form-control-sm validate ml-0" />
+                                <input type="number" id="form29" class="form-control form-control-sm validate ml-0" />
                                 <label data-error="wrong" data-success="right" for="form29" class="ml-0">Initial balance:</label>
                             </div>
 
