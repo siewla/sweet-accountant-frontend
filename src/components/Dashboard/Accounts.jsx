@@ -60,27 +60,29 @@ const Accounts = (props) => {
                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header text-center">
-                            <h4 class="modal-title w-100 font-weight-bold">Add new account</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body mx-3">
-                            <div class="md-form ml-0 mr-0">
-                                <input type="number" id="form29" class="form-control form-control-sm validate ml-0" />
-                                <label data-error="wrong" data-success="right" for="form29" class="ml-0">Initial balance:</label>
+                        <form>
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title w-100 font-weight-bold">Add new account</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
+                            <div class="modal-body mx-3">
+                                <div class="md-form ml-0 mr-0">
+                                    <input type="number" id="form29" class="form-control form-control-sm validate ml-0" />
+                                    <label data-error="wrong" data-success="right" for="form29" class="ml-0">Initial balance:</label>
+                                </div>
 
-                            <div class="md-form ml-0 mr-0">
-                                <input type="text" id="form29" class="form-control form-control-sm validate ml-0" />
-                                <label data-error="wrong" data-success="right" for="form29" class="ml-0">Name:</label>
+                                <div class="md-form ml-0 mr-0">
+                                    <input type="text" id="form29" class="form-control form-control-sm validate ml-0" />
+                                    <label data-error="wrong" data-success="right" for="form29" class="ml-0">Name:</label>
+                                </div>
+
                             </div>
-
-                        </div>
-                        <div class="modal-footer d-flex justify-content-center">
-                            <button class="btn btn-default" data-dismiss="modal">Add</button>
-                        </div>
+                            <div class="modal-footer d-flex justify-content-center">
+                                <button type="submit" class="btn btn-default" data-dismiss="modal">Add</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
