@@ -68,10 +68,6 @@ const Accounts = (props) => {
                                 </button>
                             </div>
                             <div class="modal-body mx-3">
-                                <div class="md-form ml-0 mr-0">
-                                    <input type="number" id="form29" class="form-control form-control-sm validate ml-0" />
-                                    <label data-error="wrong" data-success="right" for="form29" class="ml-0">Initial balance:</label>
-                                </div>
 
                                 <div class="md-form ml-0 mr-0">
                                     <input type="text" id="form29" class="form-control form-control-sm validate ml-0" />
