@@ -4,10 +4,12 @@ import Profile from '../components/Dashboard/Profile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AccountsDetail from '../components/Dashboard/AccountsDetail';
 import TopMenu from '../components/Dashboard/TopMenu';
+import { useHistory } from 'react-router-dom';
 
 const Dashboard = (props) => {
     const currentUser = props.currentUser;
     const logout = props.logout;
+    const isLogin = props.isLogin;
     const updateCurrentUser = props.updateCurrentUser;
     const [currentContent, setCurrentContent] = useState('Profile');
 

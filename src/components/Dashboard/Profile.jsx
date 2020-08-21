@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import usersService from '../../services/usersService';
 import { MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact';
+import { Redirect } from 'react-router-dom'
 
 
 const Profile = (props) => {
@@ -41,33 +42,36 @@ const Profile = (props) => {
     }
 
     return (
-        <div className="profile z-depth-1 card text-center">
-            <h1>Hi, {username}! </h1>
-            <p>{email}</p>
-            <button className="btn btn-default" onClick={()=>setModalIsOpen(true)}>Edit Profile</button>
-            <button className="btn btn-light" onClick={logout}>SIGN OUT</button>
-            <MDBModal isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
-                <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>
-                    <h3><i class="fa fa-user-circle" aria-hidden="true"></i> Edit Profile </h3>
-                </MDBModalHeader>
-                <MDBModalBody>
-                    <form onSubmit = {handleSubmit}>
-                        <h5 class="mt-1 mb-2">{email}</h5>
-                        <div class="md-form ml-0 mr-0">
-                            <input type="text" id="username" class="form-control form-control-sm validate ml-0" value={updateUser.username} onChange={handleChange} required />
-                            <label data-error="wrong" data-success="right" for="form29" class="ml-0">Name</label>
-                        </div>
-                        <div class="md-form ml-0 mr-0">
-                            <input type="password" id="password" class="form-control form-control-sm validate ml-0" value={updateUser.password} onChange={handleChange} required />
-                            <label data-error="wrong" data-success="right" for="form29" class="ml-0">Password </label>
-                        </div>
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-cyan mt-1"> Update and Save</button>
-                        </div>
-                    </form>
-                </MDBModalBody>
-            </MDBModal>
+        <div>
+            <div className="profile z-depth-1 card text-center">
+                <h1>Hi, {username}! </h1>
+                <p>{email}</p>
+                <button className="btn btn-default" onClick={()=>setModalIsOpen(true)}>Edit Profile</button>
+                <button className="btn btn-light" onClick={logout}>SIGN OUT</button>
+                <MDBModal isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
+                    <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>
+                        <h3><i class="fa fa-user-circle" aria-hidden="true"></i> Edit Profile </h3>
+                    </MDBModalHeader>
+                    <MDBModalBody>
+                        <form onSubmit = {handleSubmit}>
+                            <h5 class="mt-1 mb-2">{email}</h5>
+                            <div class="md-form ml-0 mr-0">
+                                <input type="text" id="username" class="form-control form-control-sm validate ml-0" value={updateUser.username} onChange={handleChange} required />
+                                <label data-error="wrong" data-success="right" for="form29" class="ml-0">Name</label>
+                            </div>
+                            <div class="md-form ml-0 mr-0">
+                                <input type="password" id="password" class="form-control form-control-sm validate ml-0" value={updateUser.password} onChange={handleChange} required />
+                                <label data-error="wrong" data-success="right" for="form29" class="ml-0">Password </label>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-cyan mt-1"> Update and Save</button>
+                            </div>
+                        </form>
+                    </MDBModalBody>
+                </MDBModal>
+            </div>
         </div>
+        
     )
 }
 

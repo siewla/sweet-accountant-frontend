@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+
+*{
+  font-family: 'Raleway', sans-serif;
+}
+
 .landing-container {
   padding: 10%;
   min-height: 1000px;
@@ -64,8 +70,62 @@
   width: 25%;
   height: 1000px;
   background-color: white;
+  /* background-image: url('/img/background.jpeg'); 
+  background-repeat: no-repeat; 
+  background-size: cover;  */
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }
+
+.sidebar-components{
+  margin: auto;
+  width: 80%;
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+
+.sidebar-buttons{
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+  width: 100%;
+  margin: 1vh;
+  background-color: white;
+  border-radius: 0.5em;
+  font-size: 2.5vh;
+  padding: 0.5vh;
+  cursor: pointer;
+  transition: all 0.5s;
+  border: 0.1em solid black;
+}
+
+.sidebar-buttons span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.sidebar-buttons span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.sidebar-buttons:hover span {
+  padding-right: 25px;
+}
+
+.sidebar-buttons:hover {
+  padding-right: 25px;
+  background-color: #c6ff00 ;
+}
+
+.sidebar-buttons:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
 
 .top-menu {
   width: 100%;
@@ -104,7 +164,7 @@
   
 }
 .accounts-details-container {
-  padding: 4vh;
+  padding: 3vh;
   background-color: white;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
 }

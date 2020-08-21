@@ -4,7 +4,8 @@ import Dashboard from './pages/Dashboard';
 import './App.css';
 import authentication from './services/authentication';
 
-function App() {
+function App(props) {
+  
   const [isLogin, setIsLogin] = useState(false);
 
   const [currentUser, setCurrentUser] = useState({});
