@@ -15,8 +15,8 @@ const Dashboard = (props) => {
 
     // change current content
     const changeCurrentContent = (content) => {
-        console.log(content);
         setCurrentContent(content);
+        console.log(currentContent);
     }
     return (
         <div>
