@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import usersService from '../../services/usersService';
 import { MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact';
-import { Redirect } from 'react-router-dom'
-
 
 const Profile = (props) => {
     const { username, email, id } = props.currentUser;
@@ -50,21 +48,21 @@ const Profile = (props) => {
                 <button className="btn btn-light" onClick={logout}>SIGN OUT</button>
                 <MDBModal isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
                     <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>
-                        <h3><i class="fa fa-user-circle" aria-hidden="true"></i> Edit Profile </h3>
+                        <i className="fa fa-user-circle" aria-hidden="true">Edit Profile</i> 
                     </MDBModalHeader>
                     <MDBModalBody>
                         <form onSubmit = {handleSubmit}>
-                            <h5 class="mt-1 mb-2">{email}</h5>
-                            <div class="md-form ml-0 mr-0">
-                                <input type="text" id="username" class="form-control form-control-sm validate ml-0" value={updateUser.username} onChange={handleChange} required />
-                                <label data-error="wrong" data-success="right" for="form29" class="ml-0">Name</label>
+                            <h5 className="mt-1 mb-2">{email}</h5>
+                            <div className="md-form ml-0 mr-0">
+                                <input type="text" id="username" className="form-control form-control-sm validate ml-0" value={updateUser.username} onChange={handleChange} required autoComplete="username" />
+                                <label data-error="wrong" data-success="right" htmlFor="form29" className="ml-0">Name</label>
                             </div>
-                            <div class="md-form ml-0 mr-0">
-                                <input type="password" id="password" class="form-control form-control-sm validate ml-0" value={updateUser.password} onChange={handleChange} required />
-                                <label data-error="wrong" data-success="right" for="form29" class="ml-0">Password </label>
+                            <div className="md-form ml-0 mr-0">
+                                <input type="password" id="password" className="form-control form-control-sm validate ml-0" value={updateUser.password} onChange={handleChange} required autoComplete="current-password" />
+                                <label data-error="wrong" data-success="right" htmlFor="form29" className="ml-0">Password </label>
                             </div>
-                            <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-cyan mt-1"> Update and Save</button>
+                            <div className="text-center mt-4">
+                                <button type="submit" className="btn btn-cyan mt-1"> Update and Save</button>
                             </div>
                         </form>
                     </MDBModalBody>

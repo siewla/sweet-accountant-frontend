@@ -13,7 +13,7 @@ class Googlelogin extends Component{
 
     // send google token
     sendGoogleToken = tokenId => {
-        axios.post(`http://localhost:4000/users/googlelogin`,{
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/googlelogin`,{
             idToken: tokenId
         })
         .then(async res =>{

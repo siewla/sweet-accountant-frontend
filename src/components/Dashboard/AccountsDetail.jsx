@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import AddNewAccount from './AddNewAccount'
 import { MDBDataTableV5 } from 'mdbreact';
-import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 const AccountsDetail = (props) => {
@@ -34,28 +33,29 @@ const AccountsDetail = (props) => {
                 name: 'dbs',
                 balance: 324.12,
                 actions: 'edit',
-                clickEvent: () => handleClick(1)
             },
             {
                 number:2,
                 name: 'ocbc',
                 balance: 3321.52,
                 actions: 'edit',
-                clickEvent: () => handleClick(2)
             },
             {
                 number:3,
                 name: 'citibank',
                 balance: 34.19,
                 actions: 'edit',
-                clickEvent: () => handleClick(3)
             },
             {
                 number:4,
-                name: 'cash',
+                name: <button onClick ={()=>handleAccount(4)}>cash</button>,
                 balance: 194.17,
-                actions: 'edit',
-                clickEvent: () => handleClick(4)
+                actions: 
+                    <div>
+                        <button onClick={()=>handleDelete(4)}>Delete</button>
+                        <button onClick={()=>handleEdit(4)}>Edit</button>
+                    </div>
+                    ,
             }
         ]
     })
@@ -66,8 +66,16 @@ const AccountsDetail = (props) => {
     }
     
 
-    const handleClick = (e) =>{
+    const handleAccount = (e) =>{
         routeChange(e)
+    }
+
+    const handleDelete = (e) =>{
+        console.log('handle delete')
+    }
+
+    const handleEdit = (e) =>{
+        console.log('handle edit')
     }
 
     return (

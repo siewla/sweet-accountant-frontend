@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AccountsDetail from '../components/Dashboard/AccountsDetail';
 import IndividualAccountDetail from '../components/Dashboard/IndividualAccountDetail'
 import TopMenu from '../components/Dashboard/TopMenu';
+import Categories from '../components/Dashboard/Categories'
 
 const Dashboard = (props) => {
     const currentUser = props.currentUser;
@@ -14,7 +15,7 @@ const Dashboard = (props) => {
 
     // change current content
     const changeCurrentContent = (content) => {
-        console.log(content);
+        // console.log(content);
         setCurrentContent(content);
     }
     return (
@@ -44,10 +45,13 @@ const Dashboard = (props) => {
                                     render={(props) => 
                                     <AccountsDetail 
                                         currentUser={currentUser}
-
                                     {...props}/>} 
                                 />
-                                
+                                <Route path="/categories" 
+                                    render={(props) => 
+                                    <Categories 
+                                    {...props}/>} 
+                                />
                             </Switch>
                         </div>
                     </div>

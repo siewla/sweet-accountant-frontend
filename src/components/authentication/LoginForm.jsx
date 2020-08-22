@@ -19,13 +19,13 @@ const LoginForm = (props) => {
                     </div>
                     <div className="md-form">
                         <i className="fa fa-envelope prefix white-text"></i>
-                        <input type="email" id="email" className="white-text form-control" value={email} required onChange={handleChange} />
+                        <input type="email" id="email" className="white-text form-control" value={email} required onChange={handleChange} autoComplete="username" />
                         <label htmlFor="email" className="active white-text font-weight-light">Your email</label>
                     </div>
                     
                     <div className="md-form">
                         <i className="fa fa-lock prefix white-text"></i>
-                        <input type="password" id="password" className="white-text form-control" value={password} required onChange={handleChange} />
+                        <input type="password" id="password" className="white-text form-control" value={password} required onChange={handleChange} autoComplete="current-password" />
                         <label htmlFor="password" className="active white-text font-weight-light">Your password</label>
                     </div>
                     <div className="text-center mt-4">

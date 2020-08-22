@@ -1,12 +1,7 @@
 import React from 'react'
-
 import AddNewTransaction from './AddNewTransaction';
 
-import ModalCategories from './ModalCategories';
-
 const TopMenu = (props) => {
-    const currentUser = props.currentUser;
-
     const currentContent = props.currentContent;
 
     return (

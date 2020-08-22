@@ -20,9 +20,11 @@ const SideBar = (props) => {
 
                     <button className="sidebar-buttons" onClick={() => {changeCurrentContent('All Transactions')}}>
                         <i className="fas fa-money-bill-alt mr-3"></i><span>Transactions</span></button>
-
+                    
+                    <Link to='/categories'>
                     <button className="sidebar-buttons" onClick={() => {changeCurrentContent('Categories')}}>
                         <i className="fas fa-table mr-3"></i><span>Categories</span></button>
+                    </Link>
 
                     <Link to="/accounts">
                         <button className="sidebar-buttons" onClick={() => {changeCurrentContent('All Accounts')}}>

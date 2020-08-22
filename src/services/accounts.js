@@ -15,8 +15,8 @@ export default {
         }
     },
 
-    async create (userId, name) {
-        const response = await apiUtil.post(buildUrl('/accounts/new'), { userId, name });
+    async create (name) {
+        const response = await apiUtil.post(buildUrl('/accounts/new'), { name });
         return response.data;
     },
 
