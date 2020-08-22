@@ -15,6 +15,7 @@ export default {
     },
 
     async create (newData) {
+        console.log(newData)
         const response = await apiUtil.post(buildUrl('/transactions/new'), newData);
         return response.data;
     },

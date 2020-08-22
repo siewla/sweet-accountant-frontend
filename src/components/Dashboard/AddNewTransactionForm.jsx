@@ -47,15 +47,19 @@ const AddNewTransactionForm = (props) => {
 
     const handleSubmit = async event => {
         event.preventDefault();
-        await transactions.create(formData)
-        // console.log(formData)
+        const transactionsData = formData
+        transactionsData.amount = parseInt(transactionsData.amount)
+        transactionsData.accountId = parseInt(transactionsData.accountId)
+        transactionsData.categoryId = parseInt(transactionsData.categoryId)
+        const response = await transactions.create(transactionsData)
+        console.log(response)
     }
 
     return (
         <form onSubmit={handleSubmit}>
             <MDBInput 
                 label="amount" 
-                type="text" 
+                type="number" 
                 onChange={handleChange('amount')}
                 value={amount}
                 required
@@ -69,21 +73,21 @@ const AddNewTransactionForm = (props) => {
             />
             <MDBInput 
                 label="paidAt" 
-                type="text" 
+                type="date" 
                 onChange={handleChange('paidAt')}
                 value={paidAt}
                 required
             />
             <MDBInput 
                 label="Category" 
-                type="text" 
+                type="number" 
                 onChange={handleChange('categoryId')}
                 value={categoryId}
                 required
             />
             <MDBInput 
                 label="Account" 
-                type="text" 
+                type="number" 
                 onChange={handleChange('accountId')}
                 value={accountId}
                 required

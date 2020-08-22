@@ -68,7 +68,7 @@ const AccountsDetail = (props) => {
     const { allAccounts} = initialData
 
     const fetchData= async () => {
-        // console.log(currentUser);
+        console.log('fetch', currentUser);
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
         setData({
             allAccounts: allAccountsResponse
