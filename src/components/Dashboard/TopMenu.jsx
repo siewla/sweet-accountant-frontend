@@ -7,7 +7,7 @@ const TopMenu = (props) => {
     return (
         <div className="top-menu">
             <h1>{currentContent}</h1>
-            <AddNewTransaction />
+            <AddNewTransaction currentUser={props.currentUser}/>
         </div>
     )
 }

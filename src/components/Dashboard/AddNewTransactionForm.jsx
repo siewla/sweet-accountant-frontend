@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react'
 import transactions from '../../services/transactions'
 import { MDBInput, MDBBtn } from 'mdbreact'
 import categoriesService from '../../services/categories'
+import usersService from '../../services/usersService'
 
-const AddNewTransactionForm = () => {
+const AddNewTransactionForm = (props) => {
+    const currentUser = props.currentUser
+
     const [formData, setFormData] = useState({
         amount: '',
         description: '',
@@ -11,38 +14,78 @@ const AddNewTransactionForm = () => {
         categoryId: '',
         accountId: '',
     })
-    const handleSubmit = async event => {
-        event.preventDefault()
-        // await transactions.create(transactionDetails)
+
+    const { amount, description, paidAt, categoryId, accountId } = formData
+
+    const handleChange = text => event => {
+        setFormData({...formData,[text]:event.target.value})
     }
+
 
     const [initialData, setData] = useState({
         incomeCategories: [],
-        expenseCategories: []
+        expenseCategories: [],
+        allAccounts:[]
     })
 
-    const {incomeCategories, expenseCategories} = initialData
+    const {incomeCategories, expenseCategories, allAccounts} = initialData
 
-    const fetchCategories = async () => {
+    const fetchData = async () => {
         const incomeResponse = await categoriesService.getAllIncomeCategories()
         const expenseResponse = await categoriesService.getAllExpenseCategories()
+        const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
         setData({
             incomeCategories: incomeResponse,
-            expenseCategories: expenseResponse
+            expenseCategories: expenseResponse,
+            allAccountsResponse: allAccountsResponse
         })
     }
 
     useEffect(() => {
-        fetchCategories()}, []
+        fetchData()}, []
     )
 
+    const handleSubmit = async event => {
+        event.preventDefault();
+        await transactions.create(formData)
+        // console.log(formData)
+    }
+
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <MDBInput 
-                label="New Account Name" 
+                label="amount" 
                 type="text" 
-                // onChange={handleChange('accountName')}
-                // value={accountName}
+                onChange={handleChange('amount')}
+                value={amount}
+                required
+            />
+            <MDBInput 
+                label="description" 
+                type="text" 
+                onChange={handleChange('description')}
+                value={description}
+                required
+            />
+            <MDBInput 
+                label="paidAt" 
+                type="text" 
+                onChange={handleChange('paidAt')}
+                value={paidAt}
+                required
+            />
+            <MDBInput 
+                label="Category" 
+                type="text" 
+                onChange={handleChange('categoryId')}
+                value={categoryId}
+                required
+            />
+            <MDBInput 
+                label="Account" 
+                type="text" 
+                onChange={handleChange('accountId')}
+                value={accountId}
                 required
             />
             <div className="text-center">

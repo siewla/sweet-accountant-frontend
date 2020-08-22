@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AddNewAccount from './AddNewAccount'
 import { MDBDataTableV5 } from 'mdbreact';
 import { useHistory } from 'react-router-dom';
+import usersService from '../../services/usersService'
 
 const AccountsDetail = (props) => {
     const history = useHistory();
@@ -60,6 +61,25 @@ const AccountsDetail = (props) => {
         ]
     })
 
+    const [initialData, setData] = useState({
+        allAccounts: []
+    })
+
+    const { allAccounts} = initialData
+
+    const fetchData= async () => {
+        // console.log(currentUser);
+        const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
+        setData({
+            allAccounts: allAccountsResponse
+        })
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, []
+    )
+
     const routeChange =(accountId)=> {
         let path = `/accounts/${accountId}`;
         history.push(path);
@@ -94,6 +114,10 @@ const AccountsDetail = (props) => {
                 entries = {5}
                 data = {datatable}
             />
+            <h1>Account Name</h1>
+            {allAccounts.map(account=>{
+                return <h2 key={account.id}>{account.name}</h2>
+            })}
         </div>
     )
 }

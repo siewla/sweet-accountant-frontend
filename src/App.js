@@ -25,7 +25,7 @@ function App(props) {
   // check authentication
   const checkAuthentication = async () => {
     const response = await authentication.checkAuthentication();
-
+    
     if(response.message) {
       setIsLogin(false);
       setCurrentUser({});
@@ -49,8 +49,9 @@ function App(props) {
       {!isLogin ?
         <Landing login={login} /> :
         <Dashboard currentUser={currentUser}
-        logout={logout} 
-        updateCurrentUser={updateCurrentUser}
+          logout={logout} 
+          updateCurrentUser={updateCurrentUser}
+          checkAuthentication={checkAuthentication}
         />
       }
     </Fragment>
