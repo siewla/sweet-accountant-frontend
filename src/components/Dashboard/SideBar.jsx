@@ -5,23 +5,28 @@ const SideBar = (props) => {
     const changeCurrentContent = props.changeCurrentContent;
     return (
         <div className="sidebar">
-            <a className="logo-wrapper waves-effect" href="/">
-                <img src="../../../img/sweet.png" className="img-fluid" alt="" />
-            </a>
+            
             <div>
+                <h3 className="logo-wrapper waves-effect text-center">
+                    <img src="../../../img/sweet.png" className="img-fluid" alt="" />
+                </h3>
                 <h3 className="text-center">
                     <i className="fas fa-chart-pie mr-3"></i>Dashboard</h3>
                 <div className="sidebar-components">
-                    <Link to="/profile" >
+                    <Link to="/login" >
                     <button className="sidebar-buttons" onClick={() => {changeCurrentContent('Profile')}}>
                         <i className="fas fa-user mr-3"></i><span>Profile</span></button>
                     </Link>
 
+                    <Link to="/transactions">
                     <button className="sidebar-buttons" onClick={() => {changeCurrentContent('All Transactions')}}>
                         <i className="fas fa-money-bill-alt mr-3"></i><span>Transactions</span></button>
-
+                    </Link>
+                    
+                    <Link to='/categories'>
                     <button className="sidebar-buttons" onClick={() => {changeCurrentContent('Categories')}}>
                         <i className="fas fa-table mr-3"></i><span>Categories</span></button>
+                    </Link>
 
                     <Link to="/accounts">
                         <button className="sidebar-buttons" onClick={() => {changeCurrentContent('All Accounts')}}>

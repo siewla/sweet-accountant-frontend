@@ -18,8 +18,10 @@ const AddNewAccount = (props) => {
 
     const handleSubmit = async event =>{
         event.preventDefault();
-        await accountsServices.create(accountName, props.currentUser.id);
+        // await accountsServices.create(accountName, props.currentUser.id);
+        await accountsServices.create(accountName);
         setModalIsOpen(false);
+        props.fetchData(props.currentUser)
     }
 
     return (

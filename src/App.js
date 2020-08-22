@@ -32,7 +32,6 @@ function App(props) {
     } else {
       setIsLogin(true);
       setCurrentUser(response);
-      console.log('apps',isLogin);
     }
   }
 

@@ -15,17 +15,17 @@ const SignupForm = (props) => {
                     </div>
                     <div className="md-form">
                         <i className="fas fa-user prefix white-text active"></i>
-                        <input type="text" id="username" className="white-text form-control" value={username} onChange={handleChange} required />
+                        <input type="text" id="username" className="white-text form-control" value={username} onChange={handleChange} required autoComplete="username"/>
                         <label htmlFor="username" className="active white-text">Your name</label>
                     </div>
                     <div className="md-form">
                         <i className="fas fa-envelope prefix white-text active"></i>
-                        <input type="email" id="email" className="white-text form-control" value={email} onChange={handleChange} required />
+                        <input type="email" id="email" className="white-text form-control" value={email} onChange={handleChange} required autoComplete="username"/>
                         <label htmlFor="email" className="active white-text">Your email</label>
                     </div>
                     <div className="md-form">
                         <i className="fas fa-lock prefix white-text active"></i>
-                        <input type="password" id="password" className="white-text form-control" value={password} onChange={handleChange} required />
+                        <input type="password" id="password" className="white-text form-control" value={password} onChange={handleChange} required autoComplete="current-password"/>
                         <label htmlFor="password" className="active white-text">Your password</label>
                     </div>
                     {/* Show error */}

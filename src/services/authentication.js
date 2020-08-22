@@ -25,6 +25,7 @@ export default {
     async checkAuthentication () {
         try {
             const response = await apiUtil.get(buildUrl('/check_authentication'));
+            // console.log(response)
             return response.data
         } catch (err) {
             console.log(err)

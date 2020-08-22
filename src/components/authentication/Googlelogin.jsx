@@ -6,9 +6,6 @@ import authentication from '../../services/authentication';
 class Googlelogin extends Component{
     constructor(props) {
         super(props)
-        this.state = {
-            currentUserEmail:''
-        }
     }
 
     // send google token
@@ -17,10 +14,7 @@ class Googlelogin extends Component{
             idToken: tokenId
         })
         .then(async res =>{
-            this.setState({
-                currentUserEmail: res.data.data,
-            })
-            const currentUser = await authentication.logInWithFbOrGoogle({email: this.state.currentUserEmail});
+            const currentUser = await authentication.logInWithFbOrGoogle({email: res.data.data});
             if(!currentUser.err) {
                 this.props.login(currentUser);
             } else {
@@ -44,9 +38,6 @@ class Googlelogin extends Component{
                 onSuccess={ this.responseGoogle }
                 onFailure={ this.responseGoogle }
                 cookiePolicy = { 'single_host_origin' }
-                render={renderProps => (
-                    <h3 onClick={renderProps.onClick}><i className="fab fa-google p-2"></i></h3>
-                )}
             />
         )
     }
