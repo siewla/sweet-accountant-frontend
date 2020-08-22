@@ -18,8 +18,10 @@ const SideBar = (props) => {
                         <i className="fas fa-user mr-3"></i><span>Profile</span></button>
                     </Link>
 
+                    <Link to="/transactions">
                     <button className="sidebar-buttons" onClick={() => {changeCurrentContent('All Transactions')}}>
                         <i className="fas fa-money-bill-alt mr-3"></i><span>Transactions</span></button>
+                    </Link>
                     
                     <Link to='/categories'>
                     <button className="sidebar-buttons" onClick={() => {changeCurrentContent('Categories')}}>

@@ -6,6 +6,7 @@ import AccountsDetail from '../components/Dashboard/AccountsDetail';
 import IndividualAccountDetail from '../components/Dashboard/IndividualAccountDetail'
 import TopMenu from '../components/Dashboard/TopMenu';
 import Categories from '../components/Dashboard/Categories'
+import Transactions from '../components/Dashboard/Transactions';
 
 const Dashboard = (props) => {
     const currentUser = props.currentUser;
@@ -50,6 +51,12 @@ const Dashboard = (props) => {
                                 <Route path="/categories" 
                                     render={(props) => 
                                     <Categories 
+                                    {...props}/>} 
+                                />
+                                <Route path="/transactions" 
+                                    render={(props) => 
+                                    <Transactions
+                                        currentUser={currentUser}
                                     {...props}/>} 
                                 />
                             </Switch>

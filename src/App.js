@@ -52,7 +52,6 @@ function App(props) {
         <Dashboard currentUser={currentUser}
           logout={logout} 
           updateCurrentUser={updateCurrentUser}
-          checkAuthentication={checkAuthentication}
         />
       }
     </Fragment>
