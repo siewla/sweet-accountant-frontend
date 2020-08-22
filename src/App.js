@@ -38,6 +38,7 @@ function App(props) {
   // 
   useEffect(() => {
     checkAuthentication();
+  // eslint-disable-next-line 
   }, [])
 
   // update currentUser

@@ -21,6 +21,7 @@ const AddNewAccount = (props) => {
         // await accountsServices.create(accountName, props.currentUser.id);
         await accountsServices.create(accountName);
         setModalIsOpen(false);
+        props.fetchData(props.currentUser)
     }
 
     return (

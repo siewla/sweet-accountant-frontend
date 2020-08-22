@@ -3,10 +3,23 @@ import AddNewAccount from './AddNewAccount'
 import { MDBDataTableV5 } from 'mdbreact';
 import { useHistory } from 'react-router-dom';
 import usersService from '../../services/usersService'
+import authentication from '../../services/authentication';
+
 
 const AccountsDetail = (props) => {
     const history = useHistory();
-    const currentUser = props.currentUser;
+    const [currentUser, setCurrentUser] = useState({});
+
+    // check authentication
+    const checkAuthentication = async () => {
+        const response = await authentication.checkAuthentication();
+        if(response.message) {
+            return []
+        } else {
+            return response
+        }
+    }
+
     const [datatable, setDatatable] = useState({
         columns:[
             {
@@ -65,20 +78,14 @@ const AccountsDetail = (props) => {
         allAccounts: []
     })
 
-    const { allAccounts} = initialData
+    const { allAccounts } = initialData
 
-    const fetchData= async () => {
-        console.log('fetch', currentUser);
+    const fetchData= async (currentUser) => {
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
         setData({
             allAccounts: allAccountsResponse
         })
     }
-
-    useEffect(() => {
-        fetchData()
-    }, []
-    )
 
     const routeChange =(accountId)=> {
         let path = `/accounts/${accountId}`;
@@ -98,6 +105,15 @@ const AccountsDetail = (props) => {
         console.log('handle edit')
     }
 
+    useEffect(() => {
+        async function fetchCurrentUser (){
+            const data = await checkAuthentication();
+            setCurrentUser(data)
+            fetchData(data)
+        }
+        fetchCurrentUser()     
+    }, [])
+
     return (
         <div className="accounts">
             <div className="d-flex justify-content-center align-items-center">
@@ -106,7 +122,7 @@ const AccountsDetail = (props) => {
                     <h4>Debit: <strong className="grey-text">0.00</strong></h4>
                     <h4>Balance: <strong className="grey-text">0.00</strong></h4>
                 </div>
-                <AddNewAccount currentUser = {currentUser} />
+                <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
             </div>
             <MDBDataTableV5 
                 hover
