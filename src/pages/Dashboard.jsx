@@ -27,7 +27,7 @@ const Dashboard = (props) => {
                         <TopMenu currentContent={currentContent} currentUser={currentUser}/>
                         <div className="content">
                             <Switch>
-                                <Route path="/profile" 
+                                <Route path="/login" 
                                     render={() => 
                                     <Profile 
                                         currentUser={currentUser}
