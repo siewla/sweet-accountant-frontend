@@ -5,7 +5,7 @@ const executeApiCall = async (method, url, body) => {
     const response = await fetch(url, {
         method: method,
         credentials: 'include',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
         },
