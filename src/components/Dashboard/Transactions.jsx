@@ -17,6 +17,7 @@ const Transactions = () => {
     // check authentication
     const checkAuthentication = async () => {
         const response = await authentication.checkAuthentication();
+        console.log('response from Transactions line 20',response)
         if(response.message) {
             return []
         } else {
