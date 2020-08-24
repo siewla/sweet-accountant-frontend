@@ -147,9 +147,9 @@ const Transactions = () => {
         }
 
         if( filterType === 'byAccount'){
-            setfilterMsg(`by Account Name: ${filterString}`)
+            setfilterMsg(`Account Name: ${filterString}`)
         } else if( filterType === 'byCategory'){
-            setfilterMsg(`by Category Name: ${filterString}`)
+            setfilterMsg(`Category Name: ${filterString}`)
         }
 
         setData((prevState) =>({
