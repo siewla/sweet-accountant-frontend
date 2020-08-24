@@ -3,10 +3,8 @@ import SideBar from '../components/Dashboard/SideBar';
 import Profile from '../components/Dashboard/Profile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AccountsDetail from '../components/Dashboard/AccountsDetail';
-import IndividualAccountDetail from '../components/Dashboard/IndividualAccountDetail'
 import TopMenu from '../components/Dashboard/TopMenu';
-import Categories from '../components/Dashboard/Categories'
-import Transactions from '../components/Dashboard/Transactions';
+import { useHistory } from 'react-router-dom';
 
 const Dashboard = (props) => {
     const currentUser = props.currentUser;
@@ -16,12 +14,7 @@ const Dashboard = (props) => {
 
     // change current content
     const changeCurrentContent = (content) => {
-<<<<<<< HEAD
-=======
-        // console.log(content);
->>>>>>> d64d23a545f94db01e5998d2c815727578ecf844
         setCurrentContent(content);
-        console.log(currentContent);
     }
     return (
         <div>
@@ -33,35 +26,18 @@ const Dashboard = (props) => {
                         <div className="content">
                             <Switch>
                                 <Route path="/login" 
-                                    render={(props) => 
+                                    render={() => 
                                     <Profile 
                                         currentUser={currentUser}
                                         logout={logout} 
                                         updateCurrentUser={updateCurrentUser}
-                                    {...props}/>} 
-                                />
-                                <Route path="/accounts/:id" 
-                                    render={(props) => 
-                                    <IndividualAccountDetail 
-                                        currentUser={currentUser}
-                                    {...props} />} 
+                                    />} 
                                 />
                                 <Route path="/accounts" 
-                                    render={(props) => 
+                                    render={() => 
                                     <AccountsDetail 
                                         currentUser={currentUser}
-                                    {...props}/>} 
-                                />
-                                <Route path="/categories" 
-                                    render={(props) => 
-                                    <Categories 
-                                    {...props}/>} 
-                                />
-                                <Route path="/transactions" 
-                                    render={(props) => 
-                                    <Transactions
-                                        currentUser={currentUser}
-                                    {...props}/>} 
+                                    />} 
                                 />
                             </Switch>
                         </div>
