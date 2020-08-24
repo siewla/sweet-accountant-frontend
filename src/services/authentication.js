@@ -23,7 +23,7 @@ export default {
         }
     },
     async checkAuthentication () {
-        console.log(BACKEND_URL)
+        // console.log(BACKEND_URL)
         try {
             const response = await apiUtil.get(buildUrl('/check_authentication'));
             // console.log(response)

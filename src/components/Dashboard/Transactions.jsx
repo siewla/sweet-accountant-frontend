@@ -5,19 +5,16 @@ import usersService from '../../services/usersService'
 import { useHistory } from 'react-router-dom';
 import authentication from '../../services/authentication'
 import { MDBDataTableV5 } from 'mdbreact';
-import dummyTransactions from './dummyTransactions'
+import Moment from 'react-moment';
 
 
 const Transactions = () => {
     const history = useHistory();
     const [currentUser, setCurrentUser] = useState({});
 
-    const [allTransactionsDummy, setAllTransactionsDummy] = useState(dummyTransactions);
-
     // check authentication
     const checkAuthentication = async () => {
         const response = await authentication.checkAuthentication();
-        console.log('response from Transactions line 20',response)
         if(response.message) {
             return []
         } else {
@@ -30,25 +27,26 @@ const Transactions = () => {
         expenseCategories: [],
         allAccounts:[],
         allTransactions: [],
-        categoryFilterName: 'clear',
-        accountFilterName: 'clear'
+        tableTransactions: []
     })
 
-    const {incomeCategories, expenseCategories, allAccounts, allTransactions, categoryFilterName, accountFilterName} = initialData
+    const {incomeCategories, expenseCategories, allAccounts, allTransactions, tableTransactions, categoryFilterName, accountFilterName} = initialData
 
+    const [filterMsg, setfilterMsg] = useState('none')
+    
     const dataColumn= 
         [
             {
                 label: '#',
-                field: 'number'
+                field: 'id'
             },
             {
                 label: "Category",
-                field: 'category'
+                field: 'categoryName'
             },
             {
                 label: 'Account',
-                field: 'account'
+                field: 'accountName'
 
             },
             {
@@ -60,21 +58,58 @@ const Transactions = () => {
                 field: 'description'
             },
             {
+                label: 'date',
+                field: 'paidAt'
+            },
+            
+            {
                 label: 'Actions',
                 field: 'actions'
             }
         ]
-
+    
     const fetchData= async (currentUser) => {
         const allTransactionsResponse = await transactions.getAllTransactions(currentUser.id)
         const incomeResponse = await categoriesService.getAllIncomeCategories()
         const expenseResponse = await categoriesService.getAllExpenseCategories()
+        const allCategories = [...incomeResponse, ...expenseResponse]
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
+        const amendedTransactions = allTransactionsResponse.map((transaction,index) =>
+        {
+            allAccountsResponse.filter( account=>{ 
+                if( account.id === transaction.accountId){
+                    transaction.accountName = account.name
+                    return transaction
+                } else
+                    return null
+            })
+            allCategories.filter ( category =>{
+                if ( category.id === transaction.categoryId){
+                    transaction.categoryName = category.name
+                    return transaction
+                } else
+                    return null
+            })
+
+            const calendarStrings = {
+                lastDay : '[Yesterday]' ,
+                sameDay : '[Today]',
+                nextDay : 'DD/MM/YYYY',
+                lastWeek : 'DD/MM/YYYY',
+                nextWeek : 'DD/MM/YYYY',
+                sameElse : 'DD/MM/YYYY'
+            };
+
+            transaction.paidAt = <Moment calendar={calendarStrings}>{transaction.paidAt}</Moment>
+            return transaction
+        }) 
+
         setData({
             incomeCategories: incomeResponse,
             expenseCategories: expenseResponse,
             allAccounts: allAccountsResponse,
-            allTransactions: allTransactionsResponse
+            allTransactions: amendedTransactions,
+            tableTransactions: amendedTransactions
         })
     }
 
@@ -96,16 +131,33 @@ const Transactions = () => {
         console.log('handle edit')
     }
 
-    const handleFilter = (filterString) => {
-        console.log(filterString)
-        const filteredTransactions = dummyTransactions.filter(transaction =>{
-            if (filterString === 'clear'){
+    const handleFilter = (filterString, filterType) => {
+        let filteredTransactions;
+        if (filterType===null){
+            filteredTransactions = allTransactions
+        } else{
+            filteredTransactions = allTransactions.filter(transaction =>{
+            if( filterType === 'byAccount' && transaction.accountName === filterString){
                 return transaction
-            } else{
-                return transaction.account === filterString
-            }
+            } else if( filterType === 'byCategory' && transaction.categoryName === filterString){
+
+                return transaction
+            } else return null
         })
-        setAllTransactionsDummy(filteredTransactions)
+        }
+
+        if( filterType === 'byAccount'){
+            setfilterMsg(`by Account Name: ${filterString}`)
+        } else if( filterType === 'byCategory'){
+            setfilterMsg(`by Category Name: ${filterString}`)
+        }
+
+        setData((prevState) =>({
+            ...prevState,
+            tableTransactions: filteredTransactions,
+            categoryFilterName: '',
+            accountFilterName: ''
+        }))
     }
 
     useEffect(() => {
@@ -114,7 +166,7 @@ const Transactions = () => {
             setCurrentUser(data)
             fetchData(data)
         }
-        fetchCurrentUser()     
+        fetchCurrentUser() 
     }, [])
 
     return (
@@ -126,25 +178,26 @@ const Transactions = () => {
                 <h4>Total Balance: <strong className="grey-text">0.00</strong></h4>
             </div>
             <h1>Filters</h1>
-            <button onClick={()=>handleFilter('clear')}>Clear Filter</button>
-            <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value)}>
+            <button onClick={()=>handleFilter('clear', null)}>Clear Filter</button>
+            <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value, 'byCategory')}>
                 <option>Filter by Income Categories</option>
                 {incomeCategories.map(category => {
                     return <option value={category.name} key={category.id}>{category.name}</option>
                 })}
             </select>
-            <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value)}>
+            <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value, 'byCategory')}>
                 <option>Filter by Expense Categories</option>
                 {expenseCategories.map(category => {
                     return <option value={category.name} key={category.id}>{category.name}</option>
                 })}
             </select>
-            <select className="browser-default custom-select" value={accountFilterName} onChange={(e)=>handleFilter(e.target.value)}>
+            <select className="browser-default custom-select" value={accountFilterName} onChange={(e)=>handleFilter(e.target.value, 'byAccount')}>
                 <option>Filter by Account</option>
                 {allAccounts.map(account => {
                     return <option value={account.name} key={account.id}>{account.name}</option>
                 })}
             </select>
+            <h5>Filtered by {filterMsg}</h5>
             <h1>Transactions List</h1>
             <MDBDataTableV5 
                 hover
@@ -152,7 +205,7 @@ const Transactions = () => {
                 entries = {5}
                 data = {{
                     columns: dataColumn,
-                    rows: allTransactionsDummy
+                    rows: tableTransactions
                 }}
             />
         </div>

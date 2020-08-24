@@ -51,7 +51,7 @@ const AddNewTransaction = (props) => {
         const expenseResponse = await categoriesService.getAllExpenseCategories()
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
         const allTransactionsResponse = await transactions.getAllTransactions(currentUser.id)
-        console.log(allTransactionsResponse)
+        // console.log(allTransactionsResponse)
         setData({
             incomeCategories: incomeResponse,
             expenseCategories: expenseResponse,
@@ -82,10 +82,6 @@ const AddNewTransaction = (props) => {
         }
     }
         
-        
-
-    console.log(allTransactions)
-
     return (
         <div>
             <MDBBtn onClick={()=>setModalIsOpen(!modalIsOpen)}>Add New Transaction</MDBBtn>
