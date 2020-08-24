@@ -92,7 +92,7 @@ const Transactions = () => {
             })
 
             const calendarStrings = {
-                lastDay : '[Yesterday]' ,
+                lastDay : '[Yesterday]',
                 sameDay : '[Today]',
                 nextDay : 'DD/MM/YYYY',
                 lastWeek : 'DD/MM/YYYY',
