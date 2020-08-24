@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import authentication from '../../services/authentication'
 import { MDBDataTableV5 } from 'mdbreact';
 import Moment from 'react-moment';
+import AddNewTransaction from './AddNewTransaction';
 
 
 const Transactions = () => {
@@ -58,13 +59,15 @@ const Transactions = () => {
                 field: 'description'
             },
             {
-                label: 'date',
-                field: 'paidAt'
+                label: 'Date',
+                field: 'paidAt',
+                sort: 'disabled'
             },
             
             {
                 label: 'Actions',
-                field: 'actions'
+                field: 'actions',
+                sort: 'disabled'
             }
         ]
     
@@ -101,6 +104,7 @@ const Transactions = () => {
             };
 
             transaction.paidAt = <Moment calendar={calendarStrings}>{transaction.paidAt}</Moment>
+            transaction.amount = parseFloat(transaction.amount)/100
             return transaction
         }) 
 
@@ -171,6 +175,7 @@ const Transactions = () => {
 
     return (
         <div>
+            <AddNewTransaction currentUser={currentUser} fetchData={fetchData}/>
             <div className="statistic-box">
                 <h4>Total Transactions: <strong className="grey-text">0.00</strong></h4>
                 <h4>Total Income: <strong className="grey-text">0.00</strong></h4>

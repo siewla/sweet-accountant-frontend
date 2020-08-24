@@ -5,9 +5,11 @@ import categoriesService from '../../services/categories'
 import usersService from '../../services/usersService'
 import authentication from '../../services/authentication'
 import DatePicker from "react-datepicker";
+import { useHistory } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 
 const AddNewTransaction = (props) => {
+    const history = useHistory();
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [transactionDate, setTransactionDate] = useState(new Date());
     const today = new Date();
@@ -76,10 +78,21 @@ const AddNewTransaction = (props) => {
             transactionsData.amount = parseInt(transactionsData.amount*100)
             transactionsData.accountId = parseInt(transactionsData.accountId)
             transactionsData.categoryId = parseInt(transactionsData.categoryId)
-            const response = await transactions.create(transactionsData)
-            console.log(response)
+            await transactions.create(transactionsData)
+            // console.log(response)
+            setFormData({
+                amount: '',
+                description: '',
+                paidAt: new Date(),
+                categoryId: '',
+                accountId: '',
+            })
             setModalIsOpen(!modalIsOpen)
         }
+        
+        history.push('/transactions')
+        // console.log(props.currentUser)
+        props.fetchData(props.currentUser)
     }
         
     return (
