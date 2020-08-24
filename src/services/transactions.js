@@ -7,9 +7,9 @@ const buildUrl = apiPath => {
 export default {
     async getAllTransactions (id) {
         try {
-            // console.log(id)
+            console.log(id)
             const response = await apiUtil.get(buildUrl(`/users/${id}/transactions`));
-            // console.log('transaction', response)
+            console.log(response.data)
             return response.data;
         } catch (err) {
             console.log(err);   

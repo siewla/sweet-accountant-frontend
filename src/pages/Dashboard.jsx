@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AccountsDetail from '../components/Dashboard/AccountsDetail';
 import TopMenu from '../components/Dashboard/TopMenu';
 import { useHistory } from 'react-router-dom';
+import Categories from '../components/Dashboard/Categories'
+import Transactions from '../components/Dashboard/Transactions';
 
 const Dashboard = (props) => {
     const currentUser = props.currentUser;
@@ -38,6 +40,18 @@ const Dashboard = (props) => {
                                     <AccountsDetail 
                                         currentUser={currentUser}
                                     />} 
+                                />
+                                <Route path="/categories" 
+                                    render={(props) => 
+                                    <Categories
+                                        currentUser={currentUser}
+                                    {...props}/>} 
+                                />
+                                <Route path="/transactions" 
+                                    render={(props) => 
+                                    <Transactions
+                                        currentUser={currentUser}
+                                    {...props}/>} 
                                 />
                             </Switch>
                         </div>

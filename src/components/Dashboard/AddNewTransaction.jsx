@@ -40,19 +40,23 @@ const AddNewTransaction = (props) => {
     const [initialData, setData] = useState({
         incomeCategories: [],
         expenseCategories: [],
-        allAccounts:[]
+        allAccounts:[],
+        allTransactions: []
     })
 
-    const {incomeCategories, expenseCategories, allAccounts} = initialData
+    const {incomeCategories, expenseCategories, allAccounts, allTransactions} = initialData
 
     const fetchData = async (currentUser) => {
         const incomeResponse = await categoriesService.getAllIncomeCategories()
         const expenseResponse = await categoriesService.getAllExpenseCategories()
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
+        const allTransactionsResponse = await transactions.getAllTransactions(currentUser.id)
+        console.log(allTransactionsResponse)
         setData({
             incomeCategories: incomeResponse,
             expenseCategories: expenseResponse,
-            allAccounts: allAccountsResponse
+            allAccounts: allAccountsResponse,
+            allTransactions: allTransactionsResponse
         })
     }
 
@@ -80,7 +84,7 @@ const AddNewTransaction = (props) => {
         
         
 
-    // console.log(initialData)
+    console.log(allTransactions)
 
     return (
         <div>
@@ -101,7 +105,7 @@ const AddNewTransaction = (props) => {
                     <MDBInput 
                         label="Description" 
                         type="text" 
-                        maxlength="25"
+                        maxLength="25"
                         onChange={handleChange('description')}
                         value={description}
                         required
