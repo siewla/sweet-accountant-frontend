@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import transactions from '../../services/transactions'
+import transactions from '../../../services/transactions'
 import { MDBInput, MDBBtn } from 'mdbreact'
-import categoriesService from '../../services/categories'
-import usersService from '../../services/usersService'
+import categoriesService from '../../../services/categories'
+import usersService from '../../../services/usersService'
 
 const AddNewTransactionForm = (props) => {
     const currentUser = props.currentUser
@@ -30,20 +30,20 @@ const AddNewTransactionForm = (props) => {
 
     const {incomeCategories, expenseCategories, allAccounts} = initialData
 
-    const fetchData = async () => {
-        const incomeResponse = await categoriesService.getAllIncomeCategories()
-        const expenseResponse = await categoriesService.getAllExpenseCategories()
-        const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
-        setData({
-            incomeCategories: incomeResponse,
-            expenseCategories: expenseResponse,
-            allAccountsResponse: allAccountsResponse
-        })
-    }
+    // const fetchData = async () => {
+    //     const incomeResponse = await categoriesService.getAllIncomeCategories()
+    //     const expenseResponse = await categoriesService.getAllExpenseCategories()
+    //     const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
+    //     setData({
+    //         incomeCategories: incomeResponse,
+    //         expenseCategories: expenseResponse,
+    //         allAccountsResponse: allAccountsResponse
+    //     })
+    // }
 
-    useEffect(() => {
-        fetchData()}, []
-    )
+    // useEffect(() => {
+    //     fetchData()}, [fetchData]
+    // )
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -53,6 +53,7 @@ const AddNewTransactionForm = (props) => {
         transactionsData.categoryId = parseInt(transactionsData.categoryId)
         const response = await transactions.create(transactionsData)
         console.log(response)
+        props.setModalIsOpen(!props.modalIsOpen)
     }
 
     return (

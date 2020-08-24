@@ -131,7 +131,7 @@ const AccountsDetail = (props) => {
                 data = {datatable}
             />
             <h1>Account Name</h1>
-            {allAccounts.map(account=>{
+            {allAccounts.length >0 && allAccounts.map(account=>{
                 return <h2 key={account.id}>{account.name}</h2>
             })}
         </div>

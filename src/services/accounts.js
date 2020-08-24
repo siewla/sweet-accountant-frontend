@@ -5,7 +5,7 @@ const buildUrl = apiPath => {
 };
 
 export default {
-    async getAllTransaction (idAccount) {
+    async getAllTransactions (idAccount) {
         try {
             const response = await apiUtil.get(buildUrl(`/accounts/${idAccount}/transactions`));
             return response.data;
