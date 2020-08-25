@@ -30,5 +30,29 @@ export default {
     async delete (id) {
         const response = await apiUtil.delete(buildUrl(`/accounts/${id}`));
         return response.data;
-    }
+    },
+    
+    async getAllAccountsStatistic (idAccount){
+        // console.log(idAccount)
+        try {
+            const response = await apiUtil.get(buildUrl(`/users/${idAccount}/accounts/statistic`));
+            return response.data;
+        } catch (err) {
+            console.log(err);   
+            return [];
+        }
+    },
+
+    async getEachAccountStatistic (idAccount){
+        // console.log(idAccount)
+        try {
+            const response = await apiUtil.get(buildUrl(`/users/${idAccount}/accounts/statistic/each`));
+            return response.data;
+        } catch (err) {
+            console.log(err);   
+            return [];
+        }
+    },
+
+    
 }

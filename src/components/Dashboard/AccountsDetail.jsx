@@ -3,6 +3,9 @@ import AddNewAccount from './AddNewAccount'
 import { MDBDataTableV5 } from 'mdbreact';
 import { useHistory } from 'react-router-dom';
 import usersService from '../../services/usersService'
+import accounts from '../../services/accounts'
+import { Link } from 'react-router-dom';
+
 import authentication from '../../services/authentication';
 
 
@@ -20,11 +23,10 @@ const AccountsDetail = (props) => {
         }
     }
 
-    const [datatable, setDatatable] = useState({
-        columns:[
+    const dataColumn = [
             {
                 label: '#',
-                field: 'number'
+                field: 'id'
 
             },
             {
@@ -40,61 +42,44 @@ const AccountsDetail = (props) => {
                 label: 'Actions',
                 field: 'actions'
             }
-        ], 
-        rows: [
-            {
-                number:1,
-                name: 'dbs',
-                balance: 324.12,
-                actions: 'edit',
-            },
-            {
-                number:2,
-                name: 'ocbc',
-                balance: 3321.52,
-                actions: 'edit',
-            },
-            {
-                number:3,
-                name: 'citibank',
-                balance: 34.19,
-                actions: 'edit',
-            },
-            {
-                number:4,
-                name: <button onClick ={()=>handleAccount(4)}>cash</button>,
-                balance: 194.17,
-                actions: 
-                    <div>
-                        <button onClick={()=>handleDelete(4)}>Delete</button>
-                        <button onClick={()=>handleEdit(4)}>Edit</button>
-                    </div>
-                    ,
-            }
         ]
-    })
 
     const [initialData, setData] = useState({
-        allAccounts: []
+        allAccounts: [],
+        tableAccounts: [],
+        allAccountsStatistic:{
+            totalIncome: 0.00,
+            totalExpense: 0.00,
+            balance: 0.00
+        }
     })
 
-    const { allAccounts } = initialData
+    const { allAccounts, tableAccounts, allAccountsStatistic} = initialData
 
+    // eslint-disable-next-line 
     const fetchData= async (currentUser) => {
+        const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
+        const allAccountsBalance = await accounts.getEachAccountStatistic(currentUser.id)
+        // console.log(allAccountsBalance)
+        const amendedAccounts = allAccountsResponse.map((accountMain,index) =>{
+            allAccountsBalance.filter( account=>{ 
+                if( account.accountId === accountMain.id){
+                    accountMain.balance = parseFloat(account.balance)/100
+                    return accountMain
+                } else
+                    return null
+            })
+            const path =`/accounts/${accountMain.id}`
+            accountMain.name = <Link to={path}><p>{accountMain.name}</p></Link>
+            return accountMain
+        }
+        )
         setData({
-            allAccounts: allAccountsResponse
+            allAccounts: amendedAccounts,
+            tableAccounts: amendedAccounts,
+            allAccountsStatistic: allAccountsStatisticResponse
         })
-    }
-
-    const routeChange =(accountId)=> {
-        let path = `/accounts/${accountId}`;
-        history.push(path);
-    }
-    
-
-    const handleAccount = (e) =>{
-        routeChange(e)
     }
 
     const handleDelete = (e) =>{
@@ -111,16 +96,19 @@ const AccountsDetail = (props) => {
             setCurrentUser(data)
             fetchData(data)
         }
-        fetchCurrentUser()     
+        fetchCurrentUser()   
+    // eslint-disable-next-line   
     }, [])
+
+    // console.log(allAccounts)
 
     return (
         <div className="accounts">
             <div className="d-flex justify-content-center align-items-center">
                 <div className="accounts-details-container">
-                    <h4>Credit: <strong className="grey-text">0.00</strong></h4>
-                    <h4>Debit: <strong className="grey-text">0.00</strong></h4>
-                    <h4>Balance: <strong className="grey-text">0.00</strong></h4>
+                    <h4>Credit: <strong className="grey-text">{parseFloat(allAccountsStatistic.totalExpense)/100}</strong></h4>
+                    <h4>Debit: <strong className="grey-text">{parseFloat(allAccountsStatistic.totalIncome)/100}</strong></h4>
+                    <h4>Balance: <strong className="grey-text">{parseFloat(allAccountsStatistic.balance)/100}</strong></h4>
                 </div>
                 <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
             </div>
@@ -128,7 +116,10 @@ const AccountsDetail = (props) => {
                 hover
                 entriesOptions = {[5, 10, 25, 50]}
                 entries = {5}
-                data = {datatable}
+                data = {{
+                    columns: dataColumn,
+                    rows: tableAccounts
+                }}
             />
             <h1>Account Name</h1>
             {allAccounts.length >0 && allAccounts.map(account=>{
