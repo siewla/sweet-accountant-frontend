@@ -20,6 +20,7 @@ function App(props) {
     await authentication.logOut();
     setIsLogin(false);
     setCurrentUser({});
+    localStorage.clear();
   }
 
   // check authentication

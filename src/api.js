@@ -6,6 +6,7 @@ const executeApiCall = async (method, url, body) => {
         method: method,
         credentials: 'include',
         mode: 'cors',
+        httpOnly: true,
         headers: {
             'Content-Type': 'application/json',
         },
