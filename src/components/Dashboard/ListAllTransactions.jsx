@@ -9,6 +9,9 @@ import authentication from '../../services/authentication'
 import dataColumn from './transactionsTableDataColumn'
 import UpdateIndividualTransaction from './UpdateIndividualTransaction';
 
+import IndividualAccountStatisticBox from './IndividualAccountStatisticBox'
+import IndividualCategoryStatisticBox from './IndividualCategoryStatisticBox'
+
 
 
 const ListAllTransactions = (props) => {
@@ -153,8 +156,14 @@ const ListAllTransactions = (props) => {
 
     return (
         <div>
+            <div>
+                {type==='account'&&
+                <IndividualAccountStatisticBox />}
+                {type==='category'&&
+                <IndividualCategoryStatisticBox />}
+            </div>
             <h2>{message}</h2>
-    <h1>List of Transactions by <span className="blue-text">{type} {typeId}</span></h1>
+            <h1>List of Transactions by <span className="blue-text">{type} {typeId}</span></h1>
             {editState?
             <UpdateIndividualTransaction 
                 incomeCategories={incomeCategories}
