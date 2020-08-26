@@ -48,5 +48,23 @@ export default {
             updateContent,
         );
         return response.data;
+    },
+
+    async getIncomeDetail (id) {
+        try {
+            const response = await apiUtil.get(buildUrl(`/users/${id}/categories/income`));
+            return response.data;
+        } catch(err) {
+            console.log(err);
+        }
+    },
+
+    async getExpenseDetail (id) {
+        try {
+            const response = await apiUtil.get(buildUrl(`/users/${id}/categories/expense`));
+            return response.data;
+        } catch(err) {
+            console.log(err);
+        }
     }
 }
