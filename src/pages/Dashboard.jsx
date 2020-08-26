@@ -3,11 +3,10 @@ import SideBar from '../components/Dashboard/SideBar';
 import Profile from '../components/Dashboard/Profile';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AccountsDetail from '../components/Dashboard/AccountsDetail';
-import IndividualAccountsDetail from '../components/Dashboard/IndividualAccountDetail'
 import TopMenu from '../components/Dashboard/TopMenu';
-import { useHistory } from 'react-router-dom';
 import Categories from '../components/Dashboard/Categories'
 import Transactions from '../components/Dashboard/Transactions';
+import ListAllTransactions from '../components/Dashboard/ListAllTransactions';
 
 
 const Dashboard = (props) => {
@@ -47,9 +46,9 @@ const Dashboard = (props) => {
                                             currentUser={currentUser}
                                         />}
                                 />
-                                <Route path="/accounts/:id"
+                                <Route path="/listalltransactions/:type/:id"
                                     render={(props) =>
-                                        <IndividualAccountsDetail
+                                        <ListAllTransactions
                                             currentUser={currentUser}
                                             {...props} />}
                                 />

@@ -70,7 +70,7 @@ const AccountsDetail = (props) => {
                 } else
                     return null
             })
-            const path =`/accounts/${accountMain.id}`
+            const path =`/listalltransactions/account/${accountMain.id}`
             accountMain.name = <Link to={path}><p>{accountMain.name}</p></Link>
             return accountMain
         }

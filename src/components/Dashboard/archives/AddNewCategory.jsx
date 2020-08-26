@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBInput } from 'mdbreact';
-import categoriesServices from '../../services/categories';
+import categoriesServices from '../../../services/categories';
 
 const AddNewCategory = (props) => {
     const [formData, setFormData] = useState({

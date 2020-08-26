@@ -37,5 +37,31 @@ export default {
             updateContent,
         );
         return response.data;
-    }
+    },
+
+    async getAllTransactionsByAccountId (id) {
+        try {
+            const response = await apiUtil.get(buildUrl(`/accounts/${id}/transactions`));
+            return response.data;
+        } catch (err) {
+            console.log(err);   
+            return [];
+        }
+    },
+
+    async deleteTransactionById (id){
+        const response = await apiUtil.delete(buildUrl(`/transactions/${id}`));
+        return response.data;
+    },
+
+    async getAllTransactionsByCategoriesId (id) {
+        try {
+            const response = await apiUtil.get(buildUrl(`/transactions/categories/${id}`));
+            return response.data;
+        } catch (err) {
+            console.log(err);   
+            return [];
+        }
+    },
+
 }
