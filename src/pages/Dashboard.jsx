@@ -29,7 +29,7 @@ const Dashboard = (props) => {
                 <div className="dashboard">
                     <SideBar changeCurrentContent={changeCurrentContent} />
                     <div className="main-content">
-                        <TopMenu currentContent={currentContent} currentUser={currentUser} />
+                        <TopMenu currentContent={currentContent} currentUser={currentUser} changeCurrentContent={changeCurrentContent}/>
                         <div className="content">
                             <Switch>
                                 <Route path="/login"

@@ -19,6 +19,12 @@ const ListAllTransactions = (props) => {
     });
     const {currentUserId} = currentUserData
 
+    const [messageData, setMessage] = useState({
+        message: ''
+    })
+
+    const { message } = messageData
+
      // check authentication
     const checkAuthentication = async () => {
         const response = await authentication.checkAuthentication();
@@ -38,6 +44,9 @@ const ListAllTransactions = (props) => {
                     currentUserId: data.id
                 })
                 fetchData(data.id)
+                setMessage({
+                    message: `Successfully delete transaction #${transactionId}.`
+                })
             } else {
                 fetchData(currentUserId)
             }
@@ -49,9 +58,15 @@ const ListAllTransactions = (props) => {
 
     const [editState, toggleDisplayEditForm] = useState(false)
 
+    const [currentTransactionId, setCurrentTransactionId] =useState(null)
+
 
     const handleEdit = (transactionId) =>{
         toggleDisplayEditForm(true)
+        setCurrentTransactionId(transactionId)
+        setMessage({
+            message:''
+        })
     }
 
 
@@ -133,12 +148,13 @@ const ListAllTransactions = (props) => {
         }
         fetchCurrentUser() 
         // eslint-disable-next-line
-    }, [])
+    }, [message])
 
 
     return (
         <div>
-            <h1>List of Transactions by <span className="blue-text">{type}</span></h1>
+            <h2>{message}</h2>
+    <h1>List of Transactions by <span className="blue-text">{type} {typeId}</span></h1>
             {editState?
             <UpdateIndividualTransaction 
                 incomeCategories={incomeCategories}
@@ -147,6 +163,9 @@ const ListAllTransactions = (props) => {
                 fetchData={fetchData}
                 currentUserId={currentUserId}
                 toggleDisplayEditForm={toggleDisplayEditForm}
+                transactionId={currentTransactionId}
+                message={message}
+                setMessage={setMessage}
             />:null}
             <MDBDataTableV5 
                 hover

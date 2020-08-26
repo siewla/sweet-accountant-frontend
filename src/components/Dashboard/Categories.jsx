@@ -99,13 +99,14 @@ const Categories = (props) => {
 
     useEffect(() => {
         fetchData();
+        // eslint-disable-next-line
     }, [])
 
     return (
         <div className="categories card">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                    <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                         aria-selected="true">Expense</a>
                 </li>
                 <li className="nav-item">

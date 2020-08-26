@@ -11,7 +11,7 @@ const TopMenu = (props) => {
         <div className="top-menu">
             <h1>{currentContent}</h1>
             {currentContent!=='All Transactions' &&
-                <AddNewTransaction fetchData={fetchData} currentUser={props.currentUser}/>
+                <AddNewTransaction fetchData={fetchData} currentUser={props.currentUser} changeCurrentContent={props.changeCurrentContent}/>
             }
         </div>
     )

@@ -43,22 +43,19 @@ const AddNewTransaction = (props) => {
         incomeCategories: [],
         expenseCategories: [],
         allAccounts:[],
-        allTransactions: []
     })
 
-    const {incomeCategories, expenseCategories, allAccounts, allTransactions} = initialData
+    const {incomeCategories, expenseCategories, allAccounts} = initialData
 
     const fetchData = async (currentUser) => {
         const incomeResponse = await categoriesService.getAllIncomeCategories()
         const expenseResponse = await categoriesService.getAllExpenseCategories()
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
-        const allTransactionsResponse = await transactions.getAllTransactions(currentUser.id)
-        // console.log(allTransactionsResponse)
+
         setData({
             incomeCategories: incomeResponse,
             expenseCategories: expenseResponse,
             allAccounts: allAccountsResponse,
-            allTransactions: allTransactionsResponse
         })
     }
 
@@ -89,7 +86,7 @@ const AddNewTransaction = (props) => {
             })
             setModalIsOpen(!modalIsOpen)
         }
-        
+        props.changeCurrentContent('All Transactions')
         history.push('/transactions')
         // console.log(props.currentUser)
         props.fetchData(props.currentUser)
