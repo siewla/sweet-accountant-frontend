@@ -7,6 +7,8 @@ import authentication from '../../services/authentication'
 import { MDBDataTableV5 } from 'mdbreact';
 import Moment from 'react-moment';
 import AddNewTransaction from './AddNewTransaction';
+import {trackPromise} from 'react-promise-tracker'
+import Loader from '../Loader';
 
 
 const Transactions = (props) => {
@@ -15,7 +17,7 @@ const Transactions = (props) => {
 
     // check authentication
     const checkAuthentication = async () => {
-        const response = await authentication.checkAuthentication();
+        const response = await trackPromise(authentication.checkAuthentication())
         if(response.message) {
             return []
         } else {
@@ -72,11 +74,11 @@ const Transactions = (props) => {
         ]
     
     const fetchData= async (currentUser) => {
-        const allTransactionsResponse = await transactions.getAllTransactions(currentUser.id)
-        const incomeResponse = await categoriesService.getAllIncomeCategories()
-        const expenseResponse = await categoriesService.getAllExpenseCategories()
+        const allTransactionsResponse = await trackPromise( transactions.getAllTransactions(currentUser.id))
+        const incomeResponse = await trackPromise( categoriesService.getAllIncomeCategories())
+        const expenseResponse = await trackPromise( categoriesService.getAllExpenseCategories())
         const allCategories = [...incomeResponse, ...expenseResponse]
-        const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
+        const allAccountsResponse = await trackPromise( usersService.getAllAccounts(currentUser.id))
         const amendedTransactions = allTransactionsResponse.map((transaction,index) =>
         {
             allAccountsResponse.filter( account=>{ 
@@ -166,7 +168,7 @@ const Transactions = (props) => {
 
     useEffect(() => {
         async function fetchCurrentUser (){
-            const data = await checkAuthentication();
+            const data = await trackPromise(checkAuthentication())
             setCurrentUser(data)
             fetchData(data)
         }
@@ -175,6 +177,7 @@ const Transactions = (props) => {
 
     return (
         <div>
+            <Loader>
             <AddNewTransaction currentUser={currentUser} fetchData={fetchData} currentContent={props.currentContent} changeCurrentContent={props.changeCurrentContent}/>
             <div className="statistic-box">
                 <h4>Total Transactions: <strong className="grey-text">0.00</strong></h4>
@@ -213,7 +216,9 @@ const Transactions = (props) => {
                     rows: tableTransactions
                 }}
             />
+            </Loader>
         </div>
+        
     )
 }
 
