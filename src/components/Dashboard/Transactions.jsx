@@ -9,7 +9,7 @@ import Moment from 'react-moment';
 import AddNewTransaction from './AddNewTransaction';
 
 
-const Transactions = () => {
+const Transactions = (props) => {
     const history = useHistory();
     const [currentUser, setCurrentUser] = useState({});
 
@@ -175,7 +175,7 @@ const Transactions = () => {
 
     return (
         <div>
-            <AddNewTransaction currentUser={currentUser} fetchData={fetchData}/>
+            <AddNewTransaction currentUser={currentUser} fetchData={fetchData} currentContent={props.currentContent} changeCurrentContent={props.changeCurrentContent}/>
             <div className="statistic-box">
                 <h4>Total Transactions: <strong className="grey-text">0.00</strong></h4>
                 <h4>Total Income: <strong className="grey-text">0.00</strong></h4>

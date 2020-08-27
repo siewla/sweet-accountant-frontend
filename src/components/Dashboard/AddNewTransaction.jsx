@@ -75,6 +75,8 @@ const AddNewTransaction = (props) => {
             transactionsData.amount = parseInt(transactionsData.amount*100)
             transactionsData.accountId = parseInt(transactionsData.accountId)
             transactionsData.categoryId = parseInt(transactionsData.categoryId)
+            transactionsData.paidAt = transactionDate
+            
             await transactions.create(transactionsData)
             // console.log(response)
             setFormData({
@@ -86,7 +88,8 @@ const AddNewTransaction = (props) => {
             })
             setModalIsOpen(!modalIsOpen)
         }
-        props.changeCurrentContent('All Transactions')
+    
+        if(props.currentContent !== 'All Transactions') props.changeCurrentContent('All Transactions')
         history.push('/transactions')
         // console.log(props.currentUser)
         props.fetchData(props.currentUser)

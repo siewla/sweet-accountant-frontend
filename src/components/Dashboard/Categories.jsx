@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { MDBDataTableV5 } from 'mdbreact';
 import CategoriesService from '../../services/categories';
 import authentication from '../../services/authentication';
+import { useHistory } from 'react-router-dom';
+import { LineChart, PieChart } from 'react-chartkick';
+import 'chart.js';
 
 const Categories = (props) => {
+    const history = useHistory();
+    const [dataChartIncome, setDataChartIncome] = useState([]);
+    const [dataChartExpense, setDataChartExpense] = useState([]);
+
     const [datatableIncome, setDatatableIncome] = React.useState({
         columns: [
             {
@@ -17,10 +24,6 @@ const Categories = (props) => {
             {
                 label: 'Total',
                 field: 'total',
-            },
-            {
-                label: 'Action',
-                field: 'action',
             }
         ],
         rows: [
@@ -40,10 +43,6 @@ const Categories = (props) => {
             {
                 label: 'Total',
                 field: 'total',
-            },
-            {
-                label: 'Action',
-                field: 'action',
             }
         ],
         rows: [
@@ -62,18 +61,30 @@ const Categories = (props) => {
         }
     }
 
+    const routeChange = (categoryId) => {
+        let path = `listalltransactions/category/${categoryId}`;
+        history.push(path);
+    }
+
+
+    const handleAccount = (e) => {
+        routeChange(e)
+    }
+
     const createRow = async (detail) => {
         const content = [];
+        const dataChart = [];
         for (let i = 0; i < detail.length; i++) {
             const category = await CategoriesService.getOne(detail[i].categoryId);
             content.push({
                 type: category.type,
-                name: category.name,
-                total: detail[i].total,
-                action: <div><button>Edit</button><button>Show</button></div>
-            })
+                name: <a onClick={() => handleAccount(category.id)}>{category.name}</a>,
+                total: detail[i].total
+            });
+            dataChart.push([category.name, detail[i].total]);
         }
-        return content;
+        const result = { content, dataChart }
+        return result;
     }
     const fetchData = async () => {
         const currentUser = await checkAuthentication();
@@ -84,14 +95,19 @@ const Categories = (props) => {
             const incomeContent = await createRow(inComeDetail);
             const expenseContent = await createRow(expenseDetail);
 
+            // set data table
             setDatatableIncome({
                 ...datatableIncome,
-                rows: incomeContent
+                rows: incomeContent.content
             });
             setDatatableExpense({
                 ...datatableExpense,
-                rows: expenseContent
+                rows: expenseContent.content
             })
+
+            // set data chart
+            setDataChartIncome(incomeContent.dataChart);
+            setDataChartExpense(expenseContent.dataChart);
         } else {
 
         }
@@ -116,17 +132,25 @@ const Categories = (props) => {
             </ul>
             <div className="tab-content" id="myTabContent">
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                    {/* Chart */}
+                    <PieChart data={dataChartExpense} />
+
+                    {/* Table */}
                     <MDBDataTableV5 hover
                         entriesOptions={[5, 10, 20]}
                         entries={5}
                         data={datatableExpense} />
-    </div>
+                </div>
                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    {/* Chart */}
+                    <PieChart data={dataChartIncome} />
+                    {/* Table */}
                     <MDBDataTableV5 hover
                         entriesOptions={[5, 10, 20]}
                         entries={5}
                         data={datatableIncome} />
-                  </div>
+                </div>
             </div>
 
         </div>
