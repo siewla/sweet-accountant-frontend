@@ -48,6 +48,7 @@ const UpdateIndividualTransaction = (props) => {
             transactionsData.amount = parseInt(transactionsData.amount*100)
             transactionsData.accountId = parseInt(transactionsData.accountId)
             transactionsData.categoryId = parseInt(transactionsData.categoryId)
+            transactionsData.paidAt = transactionDate
             const response = await transactions.update(props.transactionId,transactionsData)
             props.fetchData(props.currentUserId)
             props.toggleDisplayEditForm(false)

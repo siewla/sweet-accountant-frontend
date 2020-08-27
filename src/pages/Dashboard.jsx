@@ -62,6 +62,8 @@ const Dashboard = (props) => {
                                     render={(props) =>
                                         <Transactions
                                             currentUser={currentUser}
+                                            currentContent={currentContent}
+                                            changeCurrentContent={changeCurrentContent}
                                             {...props} />}
                                 />
                             </Switch>
