@@ -65,7 +65,7 @@ const AccountsDetail = (props) => {
         const amendedAccounts = allAccountsResponse.map((accountMain,index) =>{
             allAccountsBalance.filter( account=>{ 
                 if( account.accountId === accountMain.id){
-                    accountMain.balance = parseFloat(account.balance)/100
+                    accountMain.balance = (parseFloat(account.balance)/100).toFixed(2)
                     return accountMain
                 } else
                     return null
@@ -106,9 +106,9 @@ const AccountsDetail = (props) => {
         <div className="accounts">
             <div className="d-flex justify-content-center align-items-center">
                 <div className="accounts-details-container">
-                    <h4>Credit: <strong className="grey-text">{parseFloat(allAccountsStatistic.totalExpense)/100}</strong></h4>
-                    <h4>Debit: <strong className="grey-text">{parseFloat(allAccountsStatistic.totalIncome)/100}</strong></h4>
-                    <h4>Balance: <strong className="grey-text">{parseFloat(allAccountsStatistic.balance)/100}</strong></h4>
+                    <h4>Credit: <strong className="grey-text">{(parseFloat(allAccountsStatistic.totalExpense)/100).toFixed(2)}</strong></h4>
+                    <h4>Debit: <strong className="grey-text">{(parseFloat(allAccountsStatistic.totalIncome)/100).toFixed(2)}</strong></h4>
+                    <h4>Balance: <strong className="grey-text">{(parseFloat(allAccountsStatistic.balance)/10).toFixed(2)}</strong></h4>
                 </div>
                 <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
             </div>

@@ -89,7 +89,7 @@ const ListAllTransactions = (props) => {
                 transactionsResponse = await transactions.getAllTransactionsByAccountId(typeId)
                 break
             case 'category':
-                transactionsResponse = await transactions.getAllTransactionsByCategoriesId(typeId)
+                transactionsResponse = await transactions.getAllTransactionsByCategoryId(typeId)
                 break
             default:
                 transactionsResponse =[]
@@ -128,7 +128,7 @@ const ListAllTransactions = (props) => {
             };
 
             transaction.paidAt = <Moment calendar={calendarStrings}>{transaction.paidAt}</Moment>
-            transaction.amount = parseFloat(transaction.amount)/100
+            transaction.amount = (parseFloat(transaction.amount)/100).toFixed(2)
             const idForTransaction = transaction.id
             transaction.actions = <div><button onClick={()=>handleEdit(idForTransaction)}>Edit</button><button onClick={()=>handleDelete(idForTransaction)}>Delete</button></div>
             return transaction

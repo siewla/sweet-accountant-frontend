@@ -54,7 +54,7 @@ export default {
         return response.data;
     },
 
-    async getAllTransactionsByCategoriesId (id) {
+    async getAllTransactionsByCategoryId (id) {
         try {
             const response = await apiUtil.get(buildUrl(`/transactions/categories/${id}`));
             return response.data;

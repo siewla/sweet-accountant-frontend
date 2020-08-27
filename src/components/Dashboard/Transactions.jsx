@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import transactions from '../../services/transactions'
+import accounts from '../../services/accounts'
 import categoriesService from '../../services/categories'
 import usersService from '../../services/usersService'
 import { useHistory } from 'react-router-dom';
@@ -30,10 +31,16 @@ const Transactions = (props) => {
         expenseCategories: [],
         allAccounts:[],
         allTransactions: [],
-        tableTransactions: []
+        tableTransactions: [],
+        allAccountsStatistic:{
+            totalTransactions: 0,
+            totalIncome: 0.00,
+            totalExpense: 0.00,
+            balance: 0.00
+        }
     })
 
-    const {incomeCategories, expenseCategories, allAccounts, allTransactions, tableTransactions, categoryFilterName, accountFilterName} = initialData
+    const {incomeCategories, expenseCategories, allAccounts, allTransactions, tableTransactions, categoryFilterName, accountFilterName, allAccountsStatistic} = initialData
 
     const [filterMsg, setfilterMsg] = useState('none')
     
@@ -74,6 +81,7 @@ const Transactions = (props) => {
         ]
     
     const fetchData= async (currentUser) => {
+        const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
         const allTransactionsResponse = await trackPromise( transactions.getAllTransactions(currentUser.id))
         const incomeResponse = await trackPromise( categoriesService.getAllIncomeCategories())
         const expenseResponse = await trackPromise( categoriesService.getAllExpenseCategories())
@@ -106,16 +114,18 @@ const Transactions = (props) => {
             };
 
             transaction.paidAt = <Moment calendar={calendarStrings}>{transaction.paidAt}</Moment>
-            transaction.amount = parseFloat(transaction.amount)/100
+            transaction.amount = (parseFloat(transaction.amount)/100).toFixed(2)
             return transaction
         }) 
+        allAccountsStatisticResponse.totalTransactions = allTransactionsResponse.length
 
         setData({
             incomeCategories: incomeResponse,
             expenseCategories: expenseResponse,
             allAccounts: allAccountsResponse,
             allTransactions: amendedTransactions,
-            tableTransactions: amendedTransactions
+            tableTransactions: amendedTransactions,
+            allAccountsStatistic: allAccountsStatisticResponse
         })
     }
 
@@ -179,10 +189,10 @@ const Transactions = (props) => {
         <div>
             <AddNewTransaction currentUser={currentUser} fetchData={fetchData} currentContent={props.currentContent} changeCurrentContent={props.changeCurrentContent}/>
             <div className="statistic-box">
-                <h4>Total Transactions: <strong className="grey-text">0.00</strong></h4>
-                <h4>Total Income: <strong className="grey-text">0.00</strong></h4>
-                <h4>Total Expense: <strong className="grey-text">0.00</strong></h4>
-                <h4>Total Balance: <strong className="grey-text">0.00</strong></h4>
+                <h4>Total Transactions: <strong className="grey-text">{allAccountsStatistic.totalTransactions}</strong></h4>
+                <h4>Credit: <strong className="grey-text">{(parseFloat(allAccountsStatistic.totalExpense)/100).toFixed(2)}</strong></h4>
+                    <h4>Debit: <strong className="grey-text">{(parseFloat(allAccountsStatistic.totalIncome)/100).toFixed(2)}</strong></h4>
+                    <h4>Balance: <strong className="grey-text">{(parseFloat(allAccountsStatistic.balance)/10).toFixed(2)}</strong></h4>
             </div>
             <h1>Filters</h1>
             <button onClick={()=>handleFilter('clear', null)}>Clear Filter</button>
