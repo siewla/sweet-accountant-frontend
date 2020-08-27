@@ -6,10 +6,9 @@ export default function Loader(props) {
     const { promiseInProgress } = usePromiseTracker()
     return (
         promiseInProgress ? <ReactLoading 
-            type={'Spinning Bubbles'} 
-            color={'grey'} 
-            width={'100%'} 
-            height={'100%'}/> :
+            type={'spokes'} 
+            color={'grey'}
+            /> :
         <div>{props.children}</div>
     )
 }

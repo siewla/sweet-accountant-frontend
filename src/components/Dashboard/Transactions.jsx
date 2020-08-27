@@ -177,7 +177,6 @@ const Transactions = (props) => {
 
     return (
         <div>
-            <Loader>
             <AddNewTransaction currentUser={currentUser} fetchData={fetchData} currentContent={props.currentContent} changeCurrentContent={props.changeCurrentContent}/>
             <div className="statistic-box">
                 <h4>Total Transactions: <strong className="grey-text">0.00</strong></h4>
@@ -207,7 +206,8 @@ const Transactions = (props) => {
             </select>
             <h5>Filtered by {filterMsg}</h5>
             <h1>Transactions List</h1>
-            <MDBDataTableV5 
+            <Loader>
+                <MDBDataTableV5 
                 hover
                 entriesOptions = {[5, 10, 25, 50]}
                 entries = {5}
@@ -215,10 +215,10 @@ const Transactions = (props) => {
                     columns: dataColumn,
                     rows: tableTransactions
                 }}
-            />
+                />
             </Loader>
-        </div>
-        
+            
+    </div>
     )
 }
 
