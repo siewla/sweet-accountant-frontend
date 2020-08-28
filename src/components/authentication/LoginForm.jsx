@@ -34,7 +34,7 @@ const LoginForm = (props) => {
                     </div>
                     {/* Show error */}
                     {err ?
-                        <div class="alert alert-danger text-center" role="alert">
+                        <div className="alert alert-danger text-center" role="alert">
                             {err}
                         </div> : ''}
 
@@ -42,7 +42,7 @@ const LoginForm = (props) => {
                     <div className="inline-ul text-center">
                         <div className="d-flex justify-content-center white-text">
                             {/* <FacebookLogin login={login} showErr={showErr}/> */}
-                            {/* <Googlelogin login={login} showErr={showErr}/> */}
+                            <Googlelogin login={login} showErr={showErr}/>
                         </div>
                         <a href="/" className="p-2 m-2 ins-ic">
                             Forget password?

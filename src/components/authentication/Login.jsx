@@ -38,6 +38,7 @@ const Login = (props) => {
                 password: ''
             });
             login(currentUser);
+            // console.log(currentUser)
         } else {
             setErr(currentUser.err)
         }

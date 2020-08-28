@@ -91,7 +91,7 @@ const AddNewTransaction = (props) => {
     
         if(props.currentContent !== 'All Transactions') props.changeCurrentContent('All Transactions')
         history.push('/transactions')
-        // console.log(props.currentUser)
+        console.log(props.currentUser)
         props.fetchData(props.currentUser)
     }
         

@@ -12,6 +12,7 @@ function App(props) {
 
   //log in
   const login = (currentUser) => {
+    console.log('Current User from App.js',currentUser)
     setCurrentUser(currentUser);
     setIsLogin(true);
   }
