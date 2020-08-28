@@ -33,9 +33,10 @@ const SideBar = (props) => {
                             <i className="fas fa-wallet mr-3"></i><span>Accounts</span></button>
                     </Link>
 
+                    <Link to="/report">
                     <button className="sidebar-buttons" onClick={() => {changeCurrentContent('Reports')}}>
                         <i className="far fa-chart-bar mr-3"></i><span>Reports</span></button>
-
+                    </Link>
                     <button className="sidebar-buttons" onClick={() => {changeCurrentContent('Import')}}>
                         <i className="fas fa-file-import mr-3"></i><span>Import</span></button>
                         

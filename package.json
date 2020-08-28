@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
+    "highcharts": "^8.2.0",
     "mdbootstrap": "^4.19.1",
     "mdbreact": "^4.27.0",
     "react": "^16.13.1",
