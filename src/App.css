@@ -183,6 +183,9 @@
   margin-top: 5%;
 }
 
+.tab-pane {
+  padding-top: 2%;
+}
 /* List All Transactions */
 .edit-transaction-form{
   margin: auto;

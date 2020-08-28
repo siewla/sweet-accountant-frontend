@@ -7,7 +7,7 @@ import TopMenu from '../components/Dashboard/TopMenu';
 import Categories from '../components/Dashboard/Categories'
 import Transactions from '../components/Dashboard/Transactions';
 import ListAllTransactions from '../components/Dashboard/ListAllTransactions';
-
+import Report from '../components/Dashboard/Report';
 
 const Dashboard = (props) => {
     const currentUser = props.currentUser;
@@ -65,6 +65,11 @@ const Dashboard = (props) => {
                                             currentContent={currentContent}
                                             changeCurrentContent={changeCurrentContent}
                                             {...props} />}
+                                />
+                                 <Route path="/report"
+                                    render={() =>
+                                        <Report
+                                        />}
                                 />
                             </Switch>
                         </div>

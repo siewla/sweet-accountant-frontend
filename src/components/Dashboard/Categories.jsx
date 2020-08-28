@@ -88,29 +88,27 @@ const Categories = (props) => {
     }
     const fetchData = async () => {
         const currentUser = await checkAuthentication();
-        if (currentUser) {
-            const inComeDetail = await CategoriesService.getIncomeDetail(currentUser.id);
-            const expenseDetail = await CategoriesService.getExpenseDetail(currentUser.id);
 
-            const incomeContent = await createRow(inComeDetail);
-            const expenseContent = await createRow(expenseDetail);
+        const inComeDetail = await CategoriesService.getIncomeDetail(currentUser.id);
+        const expenseDetail = await CategoriesService.getExpenseDetail(currentUser.id);
 
-            // set data table
-            setDatatableIncome({
-                ...datatableIncome,
-                rows: incomeContent.content
-            });
-            setDatatableExpense({
-                ...datatableExpense,
-                rows: expenseContent.content
-            })
+        const incomeContent = await createRow(inComeDetail);
+        const expenseContent = await createRow(expenseDetail);
 
-            // set data chart
-            setDataChartIncome(incomeContent.dataChart);
-            setDataChartExpense(expenseContent.dataChart);
-        } else {
+        // set data table
+        setDatatableIncome({
+            ...datatableIncome,
+            rows: incomeContent.content
+        });
+        setDatatableExpense({
+            ...datatableExpense,
+            rows: expenseContent.content
+        })
 
-        }
+        // set data chart
+        setDataChartIncome(incomeContent.dataChart);
+        setDataChartExpense(expenseContent.dataChart);
+
     };
 
     useEffect(() => {
@@ -134,7 +132,7 @@ const Categories = (props) => {
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                     {/* Chart */}
-                    <PieChart data={dataChartExpense} />
+                    <PieChart donut={true} data={dataChartExpense} thousands="," prefix="$" decimal="."/>
 
                     {/* Table */}
                     <MDBDataTableV5 hover
@@ -144,7 +142,7 @@ const Categories = (props) => {
                 </div>
                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     {/* Chart */}
-                    <PieChart data={dataChartIncome} />
+                    <PieChart donut={true} data={dataChartIncome} thousands="," prefix="$" decimal="."/>
                     {/* Table */}
                     <MDBDataTableV5 hover
                         entriesOptions={[5, 10, 20]}
