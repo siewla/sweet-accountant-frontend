@@ -66,7 +66,7 @@ const Dashboard = (props) => {
                                             changeCurrentContent={changeCurrentContent}
                                             {...props} />}
                                 />
-                                 <Route path="/report"
+                                <Route path="/report"
                                     render={() =>
                                         <Report
                                         />}
