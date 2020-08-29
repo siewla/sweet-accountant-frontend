@@ -4,7 +4,7 @@ import LandingBoilerPlate from '../components/landing/LandingBoilerPlate';
 const Landing = (props) => {
     const login = props.login
     return (
-        <LandingBoilerPlate login={login}/>
+        <LandingBoilerPlate login={login} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}/>
     )
 }
 

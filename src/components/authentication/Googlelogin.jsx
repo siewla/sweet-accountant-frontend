@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { GoogleLogin } from 'react-google-login'
-import authentication from '../../services/authentication'
 
 class Googlelogin extends Component{
     // send google token
-    sendGoogleToken = async tokenId => {
+    sendGoogleToken = tokenId => {
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/googlelogin`,{
             idToken: tokenId
         })
         .then(res =>{
+            this.props.setCurrentUser(res.data.data);
             this.props.login(res.data.data);
         })
         .catch(err =>{

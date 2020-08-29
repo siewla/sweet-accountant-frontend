@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AddNewAccount from './AddNewAccount'
 import { MDBDataTableV5 } from 'mdbreact';
-import { useHistory } from 'react-router-dom';
 import usersService from '../../services/usersService'
 import accounts from '../../services/accounts'
 import { Link } from 'react-router-dom';
@@ -10,7 +9,6 @@ import authentication from '../../services/authentication';
 
 
 const AccountsDetail = (props) => {
-    const history = useHistory();
     const [currentUser, setCurrentUser] = useState({});
 
     // check authentication
@@ -82,13 +80,13 @@ const AccountsDetail = (props) => {
         })
     }
 
-    const handleDelete = (e) =>{
-        console.log('handle delete')
-    }
+    // const handleDelete = (e) =>{
+    //     console.log('handle delete')
+    // }
 
-    const handleEdit = (e) =>{
-        console.log('handle edit')
-    }
+    // const handleEdit = (e) =>{
+    //     console.log('handle edit')
+    // }
 
     useEffect(() => {
         async function fetchCurrentUser (){

@@ -3,7 +3,6 @@ import transactions from '../../services/transactions'
 import accounts from '../../services/accounts'
 import categoriesService from '../../services/categories'
 import usersService from '../../services/usersService'
-import { useHistory } from 'react-router-dom';
 import authentication from '../../services/authentication'
 import { MDBDataTableV5 } from 'mdbreact';
 import Moment from 'react-moment';
@@ -13,7 +12,6 @@ import Loader from '../Loader';
 
 
 const Transactions = (props) => {
-    const history = useHistory();
     const [currentUser, setCurrentUser] = useState({});
 
     // check authentication
@@ -129,23 +127,23 @@ const Transactions = (props) => {
         })
     }
 
-    const routeChange =(accountId)=> {
-        let path = `/accounts/${accountId}`;
-        history.push(path);
-    }
+    // const routeChange =(accountId)=> {
+    //     let path = `/accounts/${accountId}`;
+    //     history.push(path);
+    // }
     
 
-    const handleAccount = (e) =>{
-        routeChange(e)
-    }
+    // const handleAccount = (e) =>{
+    //     routeChange(e)
+    // }
 
-    const handleDelete = (e) =>{
-        console.log('handle delete')
-    }
+    // const handleDelete = (e) =>{
+    //     console.log('handle delete')
+    // }
 
-    const handleEdit = (e) =>{
-        console.log('handle edit')
-    }
+    // const handleEdit = (e) =>{
+    //     console.log('handle edit')
+    // }
 
     const handleFilter = (filterString, filterType) => {
         let filteredTransactions;

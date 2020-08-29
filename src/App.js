@@ -13,7 +13,6 @@ function App(props) {
   //log in
   const login = (currentUser) => {
     console.log('Current User from App.js',currentUser)
-    setCurrentUser(currentUser);
     setIsLogin(true);
   }
   // Log out
@@ -40,7 +39,7 @@ function App(props) {
   // 
   useEffect(() => {
     checkAuthentication();
-  }, [])
+  }, [setCurrentUser])
 
   // update currentUser
   const updateCurrentUser = (updatedUser) => {
@@ -49,7 +48,7 @@ function App(props) {
   return (
     <Fragment>
       {!isLogin ?
-        <Landing login={login} /> :
+        <Landing login={login} currentUser={currentUser} setCurrentUser={setCurrentUser} /> :
         <Dashboard currentUser={currentUser}
         logout={logout} 
         updateCurrentUser={updateCurrentUser}

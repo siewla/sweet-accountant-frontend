@@ -3,7 +3,7 @@ import { MDBDataTableV5 } from 'mdbreact';
 import CategoriesService from '../../services/categories';
 import authentication from '../../services/authentication';
 import { useHistory } from 'react-router-dom';
-import { LineChart, PieChart } from 'react-chartkick';
+import { PieChart } from 'react-chartkick';
 import 'chart.js';
 
 const Categories = (props) => {
@@ -78,7 +78,7 @@ const Categories = (props) => {
             const category = await CategoriesService.getOne(detail[i].categoryId);
             content.push({
                 type: category.type,
-                name: <a onClick={() => handleAccount(category.id)}>{category.name}</a>,
+                name: <p onClick={() => handleAccount(category.id)}>{category.name}</p>,
                 total: detail[i].total
             });
             dataChart.push([category.name, detail[i].total]);

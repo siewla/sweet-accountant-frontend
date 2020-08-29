@@ -44,7 +44,7 @@ const LoginForm = (props) => {
                     <div className="inline-ul text-center">
                         <div className="d-flex justify-content-center white-text">
                             {/* <FacebookLogin login={login} showErr={showErr}/> */}
-                            <Googlelogin login={login} showErr={showErr} setErr={setErr}/>
+                            <Googlelogin login={login} showErr={showErr} setErr={setErr} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}/>
                         </div>
                         <a href="/" className="p-2 m-2 ins-ic">
                             Forget password?

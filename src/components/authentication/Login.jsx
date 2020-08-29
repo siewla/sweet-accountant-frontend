@@ -37,6 +37,7 @@ const Login = (props) => {
                 email: '',
                 password: ''
             });
+            props.setCurrentUser(currentUser)
             login(currentUser);
             // console.log(currentUser)
         } else {
@@ -64,6 +65,8 @@ const Login = (props) => {
                             login={login} 
                             showErr={showErr}
                             setErr={setErr}
+                            currentUser={props.currentUser} 
+                            setCurrentUser={props.setCurrentUser}
                         />
                     </div>
                 </div>

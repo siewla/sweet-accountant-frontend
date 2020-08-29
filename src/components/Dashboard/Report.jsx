@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import authentication from '../../services/authentication';
 import reportService from '../../services/report';
-import { LineChart, PieChart, ColumnChart } from 'react-chartkick';
+import { LineChart, ColumnChart } from 'react-chartkick';
 import 'chart.js';
 import categoriesService from '../../services/categories';
 
@@ -58,7 +58,7 @@ const Report = (props) => {
         const expenseResult = await changeData(expenseCat, "expense");
 
         setDataCategorie([...inComeResult, ...expenseResult]);
-        console.log([...inComeResult, ...expenseResult]);
+        // console.log([...inComeResult, ...expenseResult]);
     }
 
     useEffect(() => {
