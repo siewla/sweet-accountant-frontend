@@ -9,6 +9,8 @@ const LoginForm = (props) => {
     const err = props.err;
     const login = props.login;
     const showErr = props.showErr;
+    const setErr = props.setErr;
+    
     return (
         <div className="col-md-6 col-xl-5 mb-4">
             <form className="login z-depth-2 rounded" onSubmit={handleSubmit}>
@@ -42,7 +44,7 @@ const LoginForm = (props) => {
                     <div className="inline-ul text-center">
                         <div className="d-flex justify-content-center white-text">
                             {/* <FacebookLogin login={login} showErr={showErr}/> */}
-                            <Googlelogin login={login} showErr={showErr}/>
+                            <Googlelogin login={login} showErr={showErr} setErr={setErr}/>
                         </div>
                         <a href="/" className="p-2 m-2 ins-ic">
                             Forget password?

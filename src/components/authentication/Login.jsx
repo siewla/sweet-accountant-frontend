@@ -63,6 +63,7 @@ const Login = (props) => {
                             err={err}
                             login={login} 
                             showErr={showErr}
+                            setErr={setErr}
                         />
                     </div>
                 </div>

@@ -53,7 +53,8 @@ export default {
         try {
             console.log(idToken);
             const response = await apiUtil.post(buildUrl('/users/googlelogin'), idToken);
-            return response
+            console.log(response);
+            return response.data.data
         } catch (err) {
             console.log(err)
         }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { GoogleLogin } from 'react-google-login'
+import authentication from '../../services/authentication'
 
 class Googlelogin extends Component{
     // send google token
-    sendGoogleToken = tokenId => {
+    sendGoogleToken = async tokenId => {
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/googlelogin`,{
             idToken: tokenId
         })
@@ -14,6 +15,12 @@ class Googlelogin extends Component{
         .catch(err =>{
             console.log(err)
         })
+        // const currentUser = await authentication.logInWithGoogle(tokenId)
+        // if (currentUser){
+        //     this.props.login(currentUser)
+        // } else{
+        //     this.props.setErr('Failed to Fetch')
+        // }
     }
 
     //get response from google 
