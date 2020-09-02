@@ -5,10 +5,10 @@ import accounts from '../../services/accounts';
 
 const UpdateAccount = (props) => {
     const [formData, setFormData] = useState({
-        accountName: props.accountName
+        name: props.accountName
     })
 
-    const { accountName } = formData
+    const { name } = formData
 
     const handleChange = text => event => {
         setFormData({...formData,[text]:event.target.value})
@@ -18,7 +18,8 @@ const UpdateAccount = (props) => {
         event.preventDefault();
         // await accountsServices.create(accountName, props.currentUser.id);
         console.log(props.accountId)
-        const response = await accounts.updateById(props.accountId)
+        console.log(formData)
+        const response = await accounts.updateById(props.accountId, formData)
         console.log(response)
         props.fetchData(props.currentUser)
     }
@@ -29,12 +30,12 @@ const UpdateAccount = (props) => {
                     <MDBInput 
                         label="New Account Name" 
                         type="text" 
-                        onChange={handleChange('accountName')}
-                        value={accountName}
+                        onChange={handleChange('name')}
+                        value={name}
                         required
                     />
                     <div className="text-center">
-                        <MDBBtn type="submit">Add</MDBBtn>
+                        <MDBBtn type="submit">Update</MDBBtn>
                     </div>
                 </form>
         </div>
