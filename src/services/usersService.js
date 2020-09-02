@@ -39,5 +39,14 @@ export default {
         } catch(err) {
             console.log(err);
         }
+    },
+    async importStatement (file) {
+        try {
+            console.log(file);
+            const response = await apiUtil.post(buildUrl('/users/import'), file);
+            return response.data;
+        } catch (err) {
+            console.log(err);
+        }
     }
 }
