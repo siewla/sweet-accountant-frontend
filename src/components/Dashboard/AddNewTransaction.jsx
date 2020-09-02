@@ -60,11 +60,17 @@ const AddNewTransaction = (props) => {
     }
 
     useEffect(() => {
+        let mounted = true
         async function fetchCurrentUser (){
-            const currentUser = await checkAuthentication();
-            fetchData(currentUser)
+            if (mounted){
+                const currentUser = await checkAuthentication();
+                fetchData(currentUser)
+            }
         }
         fetchCurrentUser()  
+        return function cleanup() {
+            mounted = false
+        }
         // eslint-disable-next-line   
     }, [])
 
@@ -91,7 +97,7 @@ const AddNewTransaction = (props) => {
     
         if(props.currentContent !== 'All Transactions') props.changeCurrentContent('All Transactions')
         history.push('/transactions')
-        console.log(props.currentUser)
+        // console.log(props.currentUser)
         props.fetchData(props.currentUser)
     }
         

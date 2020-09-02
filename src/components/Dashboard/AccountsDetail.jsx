@@ -76,7 +76,7 @@ const AccountsDetail = (props) => {
 
 
     const handleEdit = (id) =>{
-        console.log(id)
+        // console.log(id)
         toggleDisplayEditForm(true)
         setCurrentAccount({
             currentAccountId: id,

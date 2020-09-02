@@ -15,6 +15,15 @@ export default {
         }
     },
 
+    async getOne(id) {
+        try {
+            const response = await apiUtil.get(buildUrl(`/accounts/${id}`));
+            return response.data;
+        } catch(err) {
+            console.log(err);
+        }
+    },
+
     async create (name) {
         const response = await apiUtil.post(buildUrl('/accounts/new'), { name });
         return response.data;

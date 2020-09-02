@@ -151,24 +151,6 @@ const Transactions = (props) => {
         })
     }
 
-    // const routeChange =(accountId)=> {
-    //     let path = `/accounts/${accountId}`;
-    //     history.push(path);
-    // }
-    
-
-    // const handleAccount = (e) =>{
-    //     routeChange(e)
-    // }
-
-    // const handleDelete = (e) =>{
-    //     console.log('handle delete')
-    // }
-
-    // const handleEdit = (e) =>{
-    //     console.log('handle edit')
-    // }
-
     const handleFilter = (filterString, filterType) => {
         let filteredTransactions;
         if (filterType===null){
@@ -206,7 +188,7 @@ const Transactions = (props) => {
         }
         fetchCurrentUser() 
         // eslint-disable-next-line
-    }, [])
+    }, [AddNewTransaction])
 
     return (
         <div>

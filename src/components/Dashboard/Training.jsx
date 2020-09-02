@@ -21,19 +21,19 @@ const Traning = (props) => {
     return (
         <div className="categories card">
 
-            <form class="text-center border border-light p-5" onSubmit={handleSubmit} encType="multipart/form-data">
+            <form className="text-center border border-light p-5" onSubmit={handleSubmit} encType="multipart/form-data">
 
-                <p class="h4 mb-4">Import your data</p>
+                <p className="h4 mb-4">Import your data</p>
 
                 <p>Just accept .csv file. This app can learn more in order to support you in importing statements</p>
 
-                <input type="file" name="file" class="form-control mb-4" onChange={handleChange} />
+                <input type="file" name="file" className="form-control mb-4" onChange={handleChange} />
 
-                <button class="btn btn-info btn-block" type="submit">Submit</button>
+                <button className="btn btn-info btn-block" type="submit">Submit</button>
 
             </form>
             {alert ?
-                < div class="alert alert-success" role="alert">
+                < div className="alert alert-success" role="alert">
                     {alert}
                 </div> : ''
             }

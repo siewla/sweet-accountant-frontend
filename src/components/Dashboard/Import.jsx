@@ -53,13 +53,13 @@ const Import = (props) => {
     return (
         <div className="categories card">
 
-            <form class="text-center border border-light p-5" onSubmit={handleSubmit} encType="multipart/form-data">
+            <form className="text-center border border-light p-5" onSubmit={handleSubmit} encType="multipart/form-data">
 
-                <p class="h4 mb-4">Import your statement</p>
+                <p className="h4 mb-4">Import your statement</p>
 
                 <p>Just accept .csv file</p>
 
-                <input type="file" name="file" class="form-control mb-4" onChange={handleChange} />
+                <input type="file" name="file" className="form-control mb-4" onChange={handleChange} />
 
                 <select className="browser-default custom-select" value={accountId} onChange={handleChangeAccount} >
                     <option>Account</option>
@@ -68,11 +68,11 @@ const Import = (props) => {
                     })}
                 </select>
 
-                <button class="btn btn-info btn-block" type="submit">Submit</button>
+                <button className="btn btn-info btn-block" type="submit">Submit</button>
 
             </form>
             {alert ?
-                < div class="alert alert-success" role="alert">
+                < div className="alert alert-success" role="alert">
                     {alert}
                 </div> : ''
             }

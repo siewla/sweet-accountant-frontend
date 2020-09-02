@@ -1,14 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { MDBBtn, MDBInput } from 'mdbreact';
 import accounts from '../../services/accounts';
 
 
 const UpdateAccount = (props) => {
     const [formData, setFormData] = useState({
-        name: props.accountName
+        name: ''
     })
 
     const { name } = formData
+
+    const fetchCurrentAccount = async() =>{
+        const account = await accounts.getOne(props.accountId)
+        setFormData({
+            name: account.name
+        })
+    }
 
     const handleChange = text => event => {
         setFormData({...formData,[text]:event.target.value})
@@ -17,12 +24,20 @@ const UpdateAccount = (props) => {
     const handleSubmit = async event =>{
         event.preventDefault();
         // await accountsServices.create(accountName, props.currentUser.id);
-        console.log(props.accountId)
-        console.log(formData)
+        // console.log(props.accountId)
+        // console.log(formData)
         const response = await accounts.updateById(props.accountId, formData)
-        console.log(response)
+        // console.log(response)
         props.fetchData(props.currentUser)
     }
+
+    useEffect(() => {
+        async function fetchAccount (){
+            fetchCurrentAccount()
+        }
+        fetchAccount()
+        //eslint-disable-next-line
+    }, [props.accountId])
 
     return (
         <div>
