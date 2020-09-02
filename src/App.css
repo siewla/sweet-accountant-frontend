@@ -198,23 +198,30 @@
 /* Information */
 .bill {
   width: 30%;
+  border-radius: 10%;
 }
 
 .chart {
   width: 40%;
+  border-radius: 10%;
 }
 .information {
   margin-top: 8%;
   width: 100%;
-  background-color:#1d2636;
+background-image: url('https://cdn.pixabay.com/photo/2020/05/31/15/31/migratory-birds-5242969_960_720.jpg');
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
   color: #68ede6;
+  padding: 2%;
+  border-radius: 10px;
 }
 .bill-content, .chart-content {
   width: 50%;
   padding: 10%;
+  background-color: #24364d;
+  border-radius: 5%;
+
 }
 .bill-content:hover {
 	-webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
