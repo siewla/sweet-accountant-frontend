@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AddNewAccount from './AddNewAccount'
+import UpdateAccount from './UpdateAccount'
 import { MDBDataTableV5 } from 'mdbreact';
 import usersService from '../../services/usersService'
 import accounts from '../../services/accounts'
@@ -54,6 +55,34 @@ const AccountsDetail = (props) => {
 
     const { allAccounts, tableAccounts, allAccountsStatistic} = initialData
 
+    const handleDelete = async (id) =>{
+        try{
+            await accounts.deleteById(id)
+            window.location.reload()
+        }catch(err){
+            console.log(err)
+        }
+    // console.log('handle delete', transactionId)
+    }
+
+    const [editState, toggleDisplayEditForm] = useState(false)
+
+    const [currentAccount, setCurrentAccount] =useState({
+        currentAccountId: '',
+        currentAccountName: ''
+    })
+
+    const {currentAccountId, currentAccountName} = currentAccount
+
+
+    const handleEdit = (id) =>{
+        console.log(id)
+        toggleDisplayEditForm(true)
+        setCurrentAccount({
+            currentAccountId: id,
+        })
+    }
+
     // eslint-disable-next-line 
     const fetchData= async (currentUser) => {
         const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
@@ -70,6 +99,7 @@ const AccountsDetail = (props) => {
             })
             const path =`/listalltransactions/account/${accountMain.id}`
             accountMain.name = <Link to={path}><p>{accountMain.name}</p></Link>
+            accountMain.actions = <div><button onClick={()=>handleEdit(accountMain.id)}>Edit</button><button onClick={()=>handleDelete(accountMain.id)}>Delete</button></div>
             return accountMain
         }
         )
@@ -79,14 +109,6 @@ const AccountsDetail = (props) => {
             allAccountsStatistic: allAccountsStatisticResponse
         })
     }
-
-    // const handleDelete = (e) =>{
-    //     console.log('handle delete')
-    // }
-
-    // const handleEdit = (e) =>{
-    //     console.log('handle edit')
-    // }
 
     useEffect(() => {
         async function fetchCurrentUser (){
@@ -98,7 +120,6 @@ const AccountsDetail = (props) => {
     // eslint-disable-next-line   
     }, [])
 
-    // console.log(allAccounts)
 
     return (
         <div className="accounts">
@@ -110,6 +131,13 @@ const AccountsDetail = (props) => {
                 </div>
                 <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
             </div>
+            {editState?
+            <UpdateAccount 
+                fetchData={fetchData}
+                currentUser={currentUser}
+                toggleDisplayEditForm={toggleDisplayEditForm}
+                accountId={currentAccountId}
+            />:null}
             <MDBDataTableV5 
                 hover
                 entriesOptions = {[5, 10, 25, 50]}

@@ -20,14 +20,14 @@ export default {
         return response.data;
     },
 
-    async update (id, updateContent) {
+    async updateById (id, updateContent) {
         const response = await apiUtil.update(buildUrl(`/accounts/${id}`),
             updateContent,
         );
         return response.data;
     },
 
-    async delete (id) {
+    async deleteById (id) {
         const response = await apiUtil.delete(buildUrl(`/accounts/${id}`));
         return response.data;
     },

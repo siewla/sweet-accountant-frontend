@@ -9,14 +9,16 @@ import Moment from 'react-moment';
 import AddNewTransaction from './AddNewTransaction';
 import {trackPromise} from 'react-promise-tracker'
 import Loader from '../Loader';
+import UpdateIndividualTransactionInMain from './UpdateIndividualTransactionInMain';
+
 
 
 const Transactions = (props) => {
     const [currentUser, setCurrentUser] = useState({});
 
-    // check authentication
+     // check authentication
     const checkAuthentication = async () => {
-        const response = await trackPromise(authentication.checkAuthentication())
+        const response = await authentication.checkAuthentication();
         if(response.message) {
             return []
         } else {
@@ -77,6 +79,26 @@ const Transactions = (props) => {
                 sort: 'disabled'
             }
         ]
+    const handleDelete = async (transactionId) =>{
+        try{
+            await transactions.deleteTransactionById(transactionId)
+            window.location.reload()
+        }catch(err){
+            console.log(err)
+        }
+    // console.log('handle delete', transactionId)
+    }
+
+    const [editState, toggleDisplayEditForm] = useState(false)
+
+    const [currentTransactionId, setCurrentTransactionId] =useState(null)
+
+
+    const handleEdit = (transactionId) =>{
+        toggleDisplayEditForm(true)
+        setCurrentTransactionId(transactionId)
+    }
+    
     
     const fetchData= async (currentUser) => {
         const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
@@ -113,6 +135,8 @@ const Transactions = (props) => {
 
             transaction.paidAt = <Moment calendar={calendarStrings}>{transaction.paidAt}</Moment>
             transaction.amount = (parseFloat(transaction.amount)/100).toFixed(2)
+            const idForTransaction = transaction.id
+            transaction.actions = <div><button onClick={()=>handleEdit(idForTransaction)}>Edit</button><button onClick={()=>handleDelete(idForTransaction)}>Delete</button></div>
             return transaction
         }) 
         allAccountsStatisticResponse.totalTransactions = allTransactionsResponse.length
@@ -181,6 +205,7 @@ const Transactions = (props) => {
             fetchData(data)
         }
         fetchCurrentUser() 
+        // eslint-disable-next-line
     }, [])
 
     return (
@@ -215,6 +240,16 @@ const Transactions = (props) => {
             <h5>Filtered by {filterMsg}</h5>
             <h1>Transactions List</h1>
             <Loader>
+            {editState?
+            <UpdateIndividualTransactionInMain
+                incomeCategories={incomeCategories}
+                expenseCategories={expenseCategories}
+                allAccounts={allAccounts}
+                fetchData={fetchData}
+                currentUser={currentUser}
+                toggleDisplayEditForm={toggleDisplayEditForm}
+                transactionId={currentTransactionId}
+            />:null}
                 <MDBDataTableV5 
                 hover
                 entriesOptions = {[5, 10, 25, 50]}
@@ -225,6 +260,7 @@ const Transactions = (props) => {
                 }}
                 />
             </Loader>
+
             
     </div>
     )
