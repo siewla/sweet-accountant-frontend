@@ -8,6 +8,8 @@ import Categories from '../components/Dashboard/Categories'
 import Transactions from '../components/Dashboard/Transactions';
 import ListAllTransactions from '../components/Dashboard/ListAllTransactions';
 import Report from '../components/Dashboard/Report';
+import Import from '../components/Dashboard/Import';
+import Training from '../components/Dashboard/Training';
 
 const Dashboard = (props) => {
     const currentUser = props.currentUser;
@@ -29,7 +31,7 @@ const Dashboard = (props) => {
                 <div className="dashboard">
                     <SideBar changeCurrentContent={changeCurrentContent} />
                     <div className="main-content">
-                        <TopMenu currentContent={currentContent} currentUser={currentUser} changeCurrentContent={changeCurrentContent}/>
+                        <TopMenu currentContent={currentContent} currentUser={currentUser} changeCurrentContent={changeCurrentContent} />
                         <div className="content">
                             <Switch>
                                 <Route path="/login"
@@ -69,6 +71,17 @@ const Dashboard = (props) => {
                                 <Route path="/report"
                                     render={() =>
                                         <Report
+                                        />}
+                                />
+                                <Route path="/import"
+                                    render={() =>
+                                        <Import
+                                        />}
+                                />
+
+                                <Route path="/training"
+                                    render={() =>
+                                        <Training
                                         />}
                                 />
                             </Switch>
