@@ -51,7 +51,7 @@ const Login = (props) => {
             <div className="mask rgba-gradient align-items-center">
                 <div className="container">
                     <div className="row mt-5">
-                        <div className="col-md-6 mb-5 mt-md-0 mt-5 white-text text-center text-md-left">
+                        <div className="col-md-6 mb-5 mt-md-0 mt-5 white-text text-center text-md-left text-shadow">
                             <h1 className="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Log in right now! </h1>
                             <hr className="hr-light wow fadeInLeft" data-wow-delay="0.3s" />
                             <h6 className="mb-3 wow fadeInLeft" data-wow-delay="0.3s">Track your cash flow</h6>
