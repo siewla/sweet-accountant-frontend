@@ -12,7 +12,7 @@ const LoginForm = (props) => {
     const setErr = props.setErr;
     
     return (
-        <div className="col-md-6 col-xl-5 mb-4">
+        <div className="col-md-6 col-xl-5 mb-4" id="login">
             <form className="login z-depth-2 rounded" onSubmit={handleSubmit}>
                 <div className="login-content">
                     <div className="h4 text-center py-4 label">
