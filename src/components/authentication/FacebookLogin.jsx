@@ -1,27 +1,28 @@
 import React from 'react'
 import authentication from '../../services/authentication';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import usersService from '../../services/usersService';
 
 const Facebooklogin = (props) => {
     const responseFacebook = async (response) => {
-        const data = await authentication.getDataFacebook({ accessToken: response.accessToken})
-        console.log(data);
-        const currentUser = await authentication.logInWithFbOrGoogle({email: data.email});
-        if(!currentUser.err) {
-            props.login(currentUser);
+        const currentUser = await authentication.getDataFacebook({ accessToken: response.accessToken })
+        console.log(currentUser);
+        if (!currentUser.err) {
+            props.setCurrentUser(currentUser);
+            props.login(currentUser)
         } else {
             props.showErr(currentUser.err);
-        }  
+        }
     }
 
     return (
         <FacebookLogin
-            appId="577117482961429"
+            appId="2397031347257750"
             callback={responseFacebook}
             fields="email"
             scope="public_profile,email"
             render={renderProps => (
-                <h3 onClick={renderProps.onClick}><i className="fab fa-facebook p-2"></i></h3>
+                <h5 onClick={renderProps.onClick}><i className="fab fa-facebook p-2 fa-lg"> Sign in with Facebook</i></h5>
             )}
         />
     )

@@ -10,7 +10,7 @@ const LoginForm = (props) => {
     const login = props.login;
     const showErr = props.showErr;
     const setErr = props.setErr;
-    
+
     return (
         <div className="col-md-6 col-xl-5 mb-4" id="login">
             <form className="login z-depth-2 rounded" onSubmit={handleSubmit}>
@@ -24,7 +24,7 @@ const LoginForm = (props) => {
                         <input type="email" id="email" className="white-text form-control" value={email} required onChange={handleChange} autoComplete="username" />
                         <label htmlFor="email" className="active white-text font-weight-light">Your email</label>
                     </div>
-                    
+
                     <div className="md-form">
                         <i className="fa fa-lock prefix white-text"></i>
                         <input type="password" id="password" className="white-text form-control" value={password} required onChange={handleChange} autoComplete="current-password" />
@@ -42,9 +42,12 @@ const LoginForm = (props) => {
 
                     {/* end error */}
                     <div className="inline-ul text-center">
-                        <div className="d-flex justify-content-center white-text">
-                            {/* <FacebookLogin login={login} showErr={showErr}/> */}
-                            <Googlelogin login={login} showErr={showErr} setErr={setErr} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser}/>
+                        <div className="white-text">
+                          
+                                <FacebookLogin login={login} showErr={showErr} setCurrentUser={props.setCurrentUser}/>
+                          
+
+                            <Googlelogin login={login} showErr={showErr} setErr={setErr} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} />
                         </div>
                         <a href="/" className="p-2 m-2 ins-ic">
                             Forget password?
