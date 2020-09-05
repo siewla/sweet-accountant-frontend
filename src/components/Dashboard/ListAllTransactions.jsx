@@ -3,6 +3,7 @@ import transactions from '../../services/transactions'
 import { MDBDataTableV5 } from 'mdbreact';
 import categoriesService from '../../services/categories'
 import usersService from '../../services/usersService'
+import accounts from '../../services/accounts';
 import Moment from 'react-moment';
 import authentication from '../../services/authentication'
 
@@ -77,19 +78,23 @@ const ListAllTransactions = (props) => {
         incomeCategories: [],
         expenseCategories: [],
         allAccounts:[],
-        allTransactions: []
+        allTransactions: [],
+        typeName: ''
     })
 
-    const { incomeCategories, expenseCategories, allAccounts, allTransactions } = initialData
+    const { incomeCategories, expenseCategories, allAccounts, allTransactions, typeName} = initialData
 
     const fetchData = async(userId) =>{
         let transactionsResponse;
+        let name
         switch (type){
             case 'account':
                 transactionsResponse = await transactions.getAllTransactionsByAccountId(typeId)
+                name = await accounts.getOne(typeId)
                 break
             case 'category':
                 transactionsResponse = await transactions.getAllTransactionsByCategoryId(typeId)
+                name = await categoriesService.getOne(typeId)
                 break
             default:
                 transactionsResponse =[]
@@ -137,7 +142,8 @@ const ListAllTransactions = (props) => {
             incomeCategories: incomeResponse,
             expenseCategories: expenseResponse,
             allAccounts: allAccountsResponse,
-            allTransactions: amendedTransactions
+            allTransactions: amendedTransactions,
+            typeName: name.name
         })
     }
 
@@ -163,7 +169,7 @@ const ListAllTransactions = (props) => {
                 <IndividualCategoryStatisticBox />}
             </div>
             <h2>{message}</h2>
-            <h1>List of Transactions by <span className="blue-text">{type} {typeId}</span></h1>
+            <h1>List of Transactions by <span className="blue-text">{type} {typeName}</span></h1>
             {editState?
             <UpdateIndividualTransaction 
                 incomeCategories={incomeCategories}
