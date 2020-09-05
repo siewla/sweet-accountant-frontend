@@ -67,6 +67,7 @@ const Login = (props) => {
                             setErr={setErr}
                             currentUser={props.currentUser} 
                             setCurrentUser={props.setCurrentUser}
+                            checkAuthentication={props.checkAuthentication}
                         />
                     </div>
                 </div>

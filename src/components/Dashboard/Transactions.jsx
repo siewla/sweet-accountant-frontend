@@ -107,7 +107,7 @@ const Transactions = (props) => {
     
     const fetchData= async (currentUser) => {
         const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
-        const allTransactionsResponse = await trackPromise( transactions.getAllTransactionsByRange(new Date(), new Date()))
+        const allTransactionsResponse = await trackPromise( transactions.getAllTransactionsByRange(new Date()-7*24*3600*1000, new Date()))
         // const allTransactionsResponse = await trackPromise( transactions.getAllTransactions(currentUser.id))
     
         const incomeResponse = await trackPromise( categoriesService.getAllIncomeCategories())

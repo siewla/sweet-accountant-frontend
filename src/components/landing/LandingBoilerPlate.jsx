@@ -24,7 +24,7 @@ const Landing = (props) => {
                 <Switch>
                     <Route path="/" exact component={Introduction} />
                     <Route path="/signup" component={Signup} />
-                    <Route path="/login" render={() => <Login login={login} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} />} />
+                    <Route path="/login" render={() => <Login login={login} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} checkAuthentication={props.checkAuthentication}/>} />
                 </Switch>
                 <Information />
                 <PageFooter />

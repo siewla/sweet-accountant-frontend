@@ -47,7 +47,7 @@ const LoginForm = (props) => {
                                 <FacebookLogin login={login} showErr={showErr} setCurrentUser={props.setCurrentUser}/>
                           
 
-                            <Googlelogin login={login} showErr={showErr} setErr={setErr} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} />
+                            <Googlelogin login={login} showErr={showErr} setErr={setErr} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} checkAuthentication={props.checkAuthentication}/>
                         </div>
                         <a href="/" className="p-2 m-2 ins-ic">
                             Forget password?

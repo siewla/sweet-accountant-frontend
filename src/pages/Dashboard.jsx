@@ -40,6 +40,7 @@ const Dashboard = (props) => {
                                             currentUser={currentUser}
                                             logout={logout}
                                             updateCurrentUser={updateCurrentUser}
+                                            checkAuthentication={props.checkAuthentication}
                                         />}
                                 />
                                 <Route exact path="/accounts"

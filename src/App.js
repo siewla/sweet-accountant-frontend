@@ -11,8 +11,9 @@ function App(props) {
   const [currentUser, setCurrentUser] = useState({});
 
   //log in
-  const login = (currentUser) => {
-    console.log('Current User from App.js',currentUser)
+  const login = (currentUserData) => {
+    // console.log('Current User from App.js',currentUserData)
+    // checkAuthentication()
     setIsLogin(true);
   }
   // Log out
@@ -26,7 +27,7 @@ function App(props) {
   // check authentication
   const checkAuthentication = async () => {
     const response = await authentication.checkAuthentication();
-
+    // console.log('from check authenciation', response)
     if(response.message) {
       setIsLogin(false);
       setCurrentUser({});
@@ -38,8 +39,9 @@ function App(props) {
 
   // 
   useEffect(() => {
+    // console.log('check-authenciation')
     checkAuthentication();
-  }, [setCurrentUser])
+  }, [])
 
   // update currentUser
   const updateCurrentUser = (updatedUser) => {
@@ -48,10 +50,11 @@ function App(props) {
   return (
     <Fragment>
       {!isLogin ?
-        <Landing login={login} currentUser={currentUser} setCurrentUser={setCurrentUser} /> :
+        <Landing login={login} currentUser={currentUser} setCurrentUser={setCurrentUser} checkAuthentication={checkAuthentication}/> :
         <Dashboard currentUser={currentUser}
         logout={logout} 
         updateCurrentUser={updateCurrentUser}
+        checkAuthentication={checkAuthentication}
         />
       }
     </Fragment>
