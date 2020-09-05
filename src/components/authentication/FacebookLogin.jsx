@@ -1,7 +1,6 @@
 import React from 'react'
 import authentication from '../../services/authentication';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import usersService from '../../services/usersService';
 
 const Facebooklogin = (props) => {
     const responseFacebook = async (response) => {
