@@ -27,7 +27,7 @@ export default {
     },
 
     async create (newData) {
-        // console.log(newData)
+        console.log(newData)
         const response = await apiUtil.post(buildUrl('/transactions/new'), newData);
         return response.data;
     },
@@ -66,8 +66,12 @@ export default {
 
     async getAllTransactionsByRange (startDate, endDate){
         try {
-            console.log(startDate, endDate)
-            const response = await apiUtil.get(buildUrl(`/transactions/filter`));
+            const data = {
+                startDate: startDate,
+                endDate: endDate
+            }
+            console.log(data)
+            const response = await apiUtil.post(buildUrl(`/transactions/filter`), data);
             console.log('transaction', response)
             return response.data;
         } catch (err) {
