@@ -10,11 +10,16 @@ import AddNewTransaction from './AddNewTransaction';
 import {trackPromise} from 'react-promise-tracker'
 import Loader from '../Loader';
 import UpdateIndividualTransactionInMain from './UpdateIndividualTransactionInMain';
+import DatePicker from "react-datepicker";
 
 
 
 const Transactions = (props) => {
     const [currentUser, setCurrentUser] = useState({});
+
+    const [startDate, setStartDate] = useState(new Date()-7*24*3600*1000); //1 week ago
+    const [endDate, setEndDate] = useState(new Date());
+
 
      // check authentication
     const checkAuthentication = async () => {
@@ -98,11 +103,13 @@ const Transactions = (props) => {
         toggleDisplayEditForm(true)
         setCurrentTransactionId(transactionId)
     }
-    
+
     
     const fetchData= async (currentUser) => {
         const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
-        const allTransactionsResponse = await trackPromise( transactions.getAllTransactions(currentUser.id))
+        const allTransactionsResponse = await trackPromise( transactions.getAllTransactionsByRange(new Date(), new Date()))
+        // const allTransactionsResponse = await trackPromise( transactions.getAllTransactions(currentUser.id))
+    
         const incomeResponse = await trackPromise( categoriesService.getAllIncomeCategories())
         const expenseResponse = await trackPromise( categoriesService.getAllExpenseCategories())
         const allCategories = [...incomeResponse, ...expenseResponse]
@@ -160,7 +167,6 @@ const Transactions = (props) => {
             if( filterType === 'byAccount' && transaction.accountName === filterString){
                 return transaction
             } else if( filterType === 'byCategory' && transaction.categoryName === filterString){
-
                 return transaction
             } else return null
         })
@@ -219,6 +225,29 @@ const Transactions = (props) => {
                     return <option value={account.name} key={account.id}>{account.name}</option>
                 })}
             </select>
+            <div>
+                <h6>From </h6>
+                <DatePicker
+                    selected={startDate}
+                    onChange={date => setStartDate(date)}
+                    selectsStart
+                    startDate={startDate}
+                    endDate={endDate}
+                    maxDate={new Date()}
+                />
+                <h6>To </h6>
+                <DatePicker
+                    selected={endDate}
+                    onChange={date => setEndDate(date)}
+                    selectsEnd
+                    startDate={startDate}
+                    endDate={endDate}
+                    maxDate={new Date()}
+                />
+                <button onClick={()=>console.log('hi')}>Submit</button>
+            </div>
+            
+
             <h5>Filtered by {filterMsg}</h5>
             <h1>Transactions List</h1>
             <Loader>

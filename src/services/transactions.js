@@ -64,4 +64,16 @@ export default {
         }
     },
 
+    async getAllTransactionsByRange (startDate, endDate){
+        try {
+            console.log(startDate, endDate)
+            const response = await apiUtil.get(buildUrl(`/transactions/filter`));
+            console.log('transaction', response)
+            return response.data;
+        } catch (err) {
+            console.log(err);   
+            return [];
+        }
+    }
+
 }

@@ -132,7 +132,6 @@ const AddNewTransaction = (props) => {
                         value={paidAt}
                         onChange={date => setTransactionDate(date)} 
                         maxDate={today}
-                        showTimeSelect
                         />
                     </div>
                     
