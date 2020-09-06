@@ -49,13 +49,9 @@ const UpdateIndividualTransaction = (props) => {
             transactionsData.accountId = parseInt(transactionsData.accountId)
             transactionsData.categoryId = parseInt(transactionsData.categoryId)
             transactionsData.paidAt = transactionDate
-            const response = await transactions.update(props.transactionId,transactionsData)
-            props.fetchData(props.currentUserId)
+            await transactions.update(props.transactionId,transactionsData)
+            props.setTriggerEffect(!props.triggerEffect)
             props.toggleDisplayEditForm(false)
-            // console.log(response)
-            props.setMessage({
-                message: response.message
-            })
         }
     }
 

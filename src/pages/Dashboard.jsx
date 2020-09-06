@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AccountsDetail from '../components/Dashboard/AccountsDetail';
 import TopMenu from '../components/Dashboard/TopMenu';
 import Categories from '../components/Dashboard/Categories'
-import Transactions from '../components/Dashboard/Transactions';
+import Transactions from '../components/Dashboard/Transactions'
 import ListAllTransactions from '../components/Dashboard/ListAllTransactions';
 import Report from '../components/Dashboard/Report';
 import Import from '../components/Dashboard/Import';
