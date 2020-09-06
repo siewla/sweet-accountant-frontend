@@ -109,19 +109,19 @@ const Transactions = (props) => {
             <div className="filters-container">
                 <h4>Filters</h4>
                 <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value, 'category')}>
-                    <option>Filter by Income Categories</option>
+                    <option>Filtered by Income Categories</option>
                     {incomeCategories.map(category => {
                         return <option value={category.id} value2={category.name} key={category.id}>{category.name}</option>
                     })}
                 </select>
                 <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value, 'category')}>
-                    <option>Filter by Expense Categories</option>
+                    <option>Filtered by Expense Categories</option>
                     {expenseCategories.map(category => {
                         return <option value={category.id} name={category.name} key={category.id}>{category.name}</option>
                     })}
                 </select>
                 <select className="browser-default custom-select" value={accountFilterName} onChange={(e)=>handleFilter(e.target.value, 'account')}>
-                    <option>Filter by Account</option>
+                    <option>Filtered by Account</option>
                     {allAccounts.map(account => {
                         return <option value={account.id} name={account.name} key={account.id}>{account.name}</option>
                     })}
