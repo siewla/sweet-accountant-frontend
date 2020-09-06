@@ -100,6 +100,7 @@ const TransactionsList = (props) => {
             allCategories.filter ( category =>{
                 if ( category.id === transaction.categoryId){
                     transaction.categoryName = category.name
+                    console.log('hi')
                     return transaction
                 } else
                     return null
@@ -145,7 +146,7 @@ const TransactionsList = (props) => {
             const expenseResponse = await categoriesService.getAllExpenseCategories()
             const allCategoriesResponse = [...incomeResponse, ...expenseResponse]
             const allAccountsResponse = await usersService.getAllAccounts(user.id)
-            const amendedTransactions = amendTransactions(transactionsResponse, allAccountsResponse, allCategories)
+            const amendedTransactions = amendTransactions(transactionsResponse, allAccountsResponse, allCategoriesResponse)
             setData({
                 incomeCategories: incomeResponse,
                 expenseCategories: expenseResponse,
