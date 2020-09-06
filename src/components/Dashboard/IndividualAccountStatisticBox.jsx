@@ -1,7 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import accounts from '../../services/accounts'
-import authentication from '../../services/authentication'
-import {trackPromise} from 'react-promise-tracker'
 import StatisticBox from '../StatisticBox'
 
 const IndividualAccountStatisticBox = (props) => {

@@ -26,7 +26,7 @@ const UpdateAccount = (props) => {
         // await accountsServices.create(accountName, props.currentUser.id);
         // console.log(props.accountId)
         // console.log(formData)
-        const response = await accounts.updateById(props.accountId, formData)
+        await accounts.updateById(props.accountId, formData)
         // console.log(response)
         props.fetchData(props.currentUser)
     }

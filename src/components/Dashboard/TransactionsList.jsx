@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import transactions from '../../services/transactions'
-import accounts from '../../services/accounts'
 import categoriesService from '../../services/categories'
 import usersService from '../../services/usersService'
 import authentication from '../../services/authentication'
-import { MDBDataTableV5 } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn } from 'mdbreact';
 import dataColumn from './transactionsTableDataColumn'
 import Moment from 'react-moment';
 import UpdateIndividualTransaction from './UpdateIndividualTransaction';
@@ -57,25 +56,25 @@ const TransactionsList = (props) => {
         // console.log('handle delete', transactionId)
     }
 
-    const getCommon = (arr1, arr2) =>{
-        const common = [];
-        let i = 0, j = 0;       
-        while(i<arr1.length && j<arr2.length) {
-            if(arr1[i].id === arr2[j].id) {        // If both are same, add it to result
-                common.push(arr1[i]);
-                i++;
-                j++;
-            }
-            else if(arr1[i] < arr2[j]) {  // Increment the smaller value so that
-                i++;                        // it could be matched with the larger
-            }                             // element
-            else {
-                j++;
-            }
-          }          // i points to arr1 and j to arr2
+    // const getCommon = (arr1, arr2) =>{
+    //     const common = [];
+    //     let i = 0, j = 0;       
+    //     while(i<arr1.length && j<arr2.length) {
+    //         if(arr1[i].id === arr2[j].id) {        // If both are same, add it to result
+    //             common.push(arr1[i]);
+    //             i++;
+    //             j++;
+    //         }
+    //         else if(arr1[i] < arr2[j]) {  // Increment the smaller value so that
+    //             i++;                        // it could be matched with the larger
+    //         }                             // element
+    //         else {
+    //             j++;
+    //         }
+    //       }          // i points to arr1 and j to arr2
 
-        return common;
-    }
+    //     return common;
+    // }
 
     const handleDateSubmit = async() =>{
         props.setFilterMsg('date')
@@ -129,7 +128,7 @@ const TransactionsList = (props) => {
             transaction.paidAt = <Moment calendar={calendarStrings}>{transaction.paidAt}</Moment>
             transaction.amount = (parseFloat(transaction.amount)/100).toFixed(2)
             const idForTransaction = transaction.id
-            transaction.actions = <div><button onClick={()=>handleEdit(idForTransaction)}>Edit</button><button onClick={()=>handleDelete(idForTransaction)}>Delete</button></div>
+            transaction.actions = <div><MDBBtn color="primary" size="sm" onClick={()=>handleEdit(idForTransaction)}>Edit</MDBBtn><MDBBtn color="red" size="sm" onClick={()=>handleDelete(idForTransaction)}>Delete</MDBBtn></div>
             return transaction
         })
         return transactions 
@@ -185,6 +184,37 @@ const TransactionsList = (props) => {
 
     return (
         <div>
+            
+            {props.filterMsg!=='disabled' ? <div>
+                <div className="date-filter-container">
+                    <h5>Filtered by Date</h5>
+                    <div className="date-filter-container-column">
+                        <h6>From </h6>
+                        <DatePicker
+                            selected={startDate}
+                            onChange={date => setStartDate(date)}
+                            selectsStart
+                            startDate={startDate}
+                            endDate={endDate}
+                            maxDate={new Date()}
+                        />
+                    </div>
+                    <div className="date-filter-container-column">
+                        <h6>To </h6>
+                        <DatePicker
+                            selected={endDate}
+                            onChange={date => setEndDate(date)}
+                            selectsEnd
+                            startDate={startDate}
+                            endDate={endDate}
+                            maxDate={new Date()}
+                        />
+                    </div>
+                    <MDBBtn className="float-right" color="primary" size="sm" onClick={()=>handleDateSubmit()}>Submit</MDBBtn>
+                </div>
+                <h5>Filtered by {props.filterMsg}</h5>
+                <MDBBtn color="unique" onClick={()=>handleClear()}>Clear Filter</MDBBtn>
+            </div>: null}
             {editState?
             <UpdateIndividualTransaction 
                 incomeCategories={incomeCategories}
@@ -196,32 +226,6 @@ const TransactionsList = (props) => {
                 toggleDisplayEditForm={toggleDisplayEditForm}
                 transactionId={currentTransactionId}
             />:null}
-            {props.filterMsg!=='disabled' ? <div>
-                <div>
-                    <h6>From </h6>
-                    <DatePicker
-                        selected={startDate}
-                        onChange={date => setStartDate(date)}
-                        selectsStart
-                        startDate={startDate}
-                        endDate={endDate}
-                        maxDate={new Date()}
-                    />
-                    <h6>To </h6>
-                    <DatePicker
-                        selected={endDate}
-                        onChange={date => setEndDate(date)}
-                        selectsEnd
-                        startDate={startDate}
-                        endDate={endDate}
-                        maxDate={new Date()}
-                    />
-                    <button onClick={()=>handleDateSubmit()}>Submit</button>
-                </div>
-                <h5>Filtered by {props.filterMsg}</h5>
-                <button onClick={()=>handleClear()}>Clear Filter</button>
-            </div>: null}
-            
             <MDBDataTableV5 
                 hover
                 entriesOptions = {[5, 10, 25, 50]}

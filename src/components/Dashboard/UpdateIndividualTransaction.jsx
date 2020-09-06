@@ -114,8 +114,8 @@ const UpdateIndividualTransaction = (props) => {
                             })}
                         </select>
                         <div className="text-center">
-                            <MDBBtn type="submit">Edit</MDBBtn>
-                            <MDBBtn onClick={()=>props.toggleDisplayEditForm(false)}>Cancel</MDBBtn>
+                            <MDBBtn color="primary" type="submit">Edit</MDBBtn>
+                            <MDBBtn color="default" onClick={()=>props.toggleDisplayEditForm(false)}>Cancel</MDBBtn>
                         </div>
                     </form>
             </div>
@@ -124,3 +124,5 @@ const UpdateIndividualTransaction = (props) => {
 }
 
 export default UpdateIndividualTransaction
+
+

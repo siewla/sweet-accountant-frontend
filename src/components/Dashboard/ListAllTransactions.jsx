@@ -47,19 +47,20 @@ const ListAllTransactions = (props) => {
             const data = await checkAuthentication()
             setCurrentUser(data)
         } 
-    props.changeCurrentContent(type)
+    props.changeCurrentContent(`${type} ${typeName}`)
         setName()
         if (!currentUser.id){
             fetchCurrentUser()
         } 
         // eslint-disable-next-line
-    }, [currentUser])
+    }, [currentUser, typeName])
 
     return (
         <div>
             {
                 type ==='account'?<IndividualAccountStatisticBox currentUser={currentUser} typeId={typeId}/>: null
             }
+            
             <TransactionsList 
                 type={type}
                 typeId={typeId}

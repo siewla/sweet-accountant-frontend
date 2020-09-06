@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import AddNewAccount from './AddNewAccount'
 import UpdateAccount from './UpdateAccount'
-import { MDBDataTableV5 } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn } from 'mdbreact';
 import usersService from '../../services/usersService'
 import accounts from '../../services/accounts'
 import { Link } from 'react-router-dom';
@@ -88,7 +88,6 @@ const AccountsDetail = (props) => {
         const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
         const allAccountsBalance = await accounts.getEachAccountStatistic(currentUser.id)
-        console.log(allAccountsBalance)
         const amendedAccounts = allAccountsResponse.map((accountMain,index) =>{
             allAccountsBalance.filter( account=>{ 
                 if( account.accountId === accountMain.id){
@@ -99,7 +98,7 @@ const AccountsDetail = (props) => {
             })
             const path =`/listalltransactions/account/${accountMain.id}`
             accountMain.name = <Link to={path}><p>{accountMain.name}</p></Link>
-            accountMain.actions = <div><button onClick={()=>handleEdit(accountMain.id)}>Edit</button><button onClick={()=>handleDelete(accountMain.id)}>Delete</button></div>
+            accountMain.actions = <div><MDBBtn color="primary" size="sm" onClick={()=>handleEdit(accountMain.id)}>Edit</MDBBtn><MDBBtn color="red" size="sm" onClick={()=>handleDelete(accountMain.id)}>Delete</MDBBtn></div>
             return accountMain
         }
         )

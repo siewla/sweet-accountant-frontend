@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBInput} from 'mdbreact';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";

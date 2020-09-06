@@ -8,6 +8,7 @@ import authentication from '../../services/authentication'
 import {trackPromise} from 'react-promise-tracker'
 import TransactionsList from './TransactionsList'
 
+
 const Transactions = (props) => {
     const [currentUser, setCurrentUser]= useState(props.currentUser)
 
@@ -105,8 +106,8 @@ const Transactions = (props) => {
     return (
         <div>
             <StatisticBox statistic={allAccountsStatistic}/>
-            <div>
-                <h2>Filters</h2>
+            <div className="filters-container">
+                <h4>Filters</h4>
                 <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value, 'category')}>
                     <option>Filter by Income Categories</option>
                     {incomeCategories.map(category => {

@@ -19,7 +19,8 @@ import { lightTheme, darkTheme } from "../components/Theme"
 const Dashboard = (props) => {
     const [theme, setTheme] = useState('light');
    
-    const [isDarkMode, setIsDarkMode] = useState(() => false);
+    const [isDarkMode, setIsDarkMode] = useState(false)
+    
     const setMode = () =>{
         setIsDarkMode(!isDarkMode)
         if (isDarkMode){

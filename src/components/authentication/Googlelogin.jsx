@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { GoogleLogin } from 'react-google-login'
-import authentication from '../../services/authentication'
 
 class Googlelogin extends Component{
     // send google token
