@@ -42,11 +42,11 @@ const Profile = (props) => {
     return (
         <div>
             <div className="profile z-depth-1 card text-center">
-                <h1>Hi, {username}! </h1>
-                <p>{email}</p>
+                <h1 className="black-text">Hi, {username}! </h1>
+                <h2 className="black-text">{email}</h2>
                 <button className="btn btn-default" onClick={()=>setModalIsOpen(true)}>Edit Profile</button>
                 <button className="btn btn-light" onClick={logout}>SIGN OUT</button>
-                <MDBModal isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
+                <MDBModal className="black-text" isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
                     <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>
                         <i className="fa fa-user-circle" aria-hidden="true">Edit Profile</i> 
                     </MDBModalHeader>

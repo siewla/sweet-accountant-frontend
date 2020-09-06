@@ -21,9 +21,14 @@ const IndividualAccountStatisticBox = (props) => {
 
     useEffect(() => {
         async function fetchData (){
-            const accountStatisticResponse = await accounts.getEachAccountStatistic(typeId)
+            const accountStatisticResponse = await accounts.getAccountStatistic(typeId)
             setData({
-                accountStatistic: accountStatisticResponse
+                accountStatistic: {
+                    totalTransactions: null,
+                    totalIncome: accountStatisticResponse.debit,
+                    totalExpense: accountStatisticResponse.credit,
+                    balance: accountStatisticResponse.balance
+                }
             })
         }
         fetchData()

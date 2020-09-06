@@ -88,7 +88,7 @@ const AccountsDetail = (props) => {
         const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
         const allAccountsBalance = await accounts.getEachAccountStatistic(currentUser.id)
-        // console.log(allAccountsBalance)
+        console.log(allAccountsBalance)
         const amendedAccounts = allAccountsResponse.map((accountMain,index) =>{
             allAccountsBalance.filter( account=>{ 
                 if( account.accountId === accountMain.id){

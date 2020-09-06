@@ -9,7 +9,7 @@ const AddNewTransactionForm = (props) => {
     return (
         <div>
             <MDBBtn onClick={()=>props.setModalIsOpen(!props.modalIsOpen)}>Add New Transaction</MDBBtn>
-            <MDBModal isOpen={props.modalIsOpen} toggle={()=>props.setModalIsOpen(!props.modalIsOpen)}>
+            <MDBModal className="black-text" isOpen={props.modalIsOpen} toggle={()=>props.setModalIsOpen(!props.modalIsOpen)}>
                 <MDBModalHeader toggle={()=>props.setModalIsOpen(!props.modalIsOpen)}>Add New Transaction</MDBModalHeader>
                 <MDBModalBody>
                 <form onSubmit={props.handleSubmit}>

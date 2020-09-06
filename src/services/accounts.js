@@ -62,5 +62,15 @@ export default {
         }
     },
 
+    async getAccountStatistic (idAccount){
+        try {
+            const response = await apiUtil.get(buildUrl(`/users/accounts/statistic/${idAccount}`));
+            return response.data;
+        } catch (err) {
+            console.log(err);   
+            return [];
+        }
+    },
+
     
 }

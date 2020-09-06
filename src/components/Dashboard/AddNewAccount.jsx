@@ -27,7 +27,7 @@ const AddNewAccount = (props) => {
     return (
         <div>
             <MDBBtn className="add-new-account-button" onClick={()=>setModalIsOpen(!modalIsOpen)}>Add New Account</MDBBtn>
-            <MDBModal isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
+            <MDBModal className="black-text" isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
                 <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>Add New Account</MDBModalHeader>
                 <MDBModalBody>
                 <form onSubmit={handleSubmit}>        
