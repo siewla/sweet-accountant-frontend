@@ -53,7 +53,6 @@ export default {
     },
 
     async getEachAccountStatistic (idAccount){
-        // console.log(idAccount)
         try {
             const response = await apiUtil.get(buildUrl(`/users/${idAccount}/accounts/statistic/each`));
             return response.data;

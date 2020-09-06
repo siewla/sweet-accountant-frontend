@@ -43,16 +43,16 @@ const Transactions = (props) => {
 
     const {listAllTransactionsId, listAllTransactionsType} = transactionsList
 
-    const [filterMsg, setfilterMsg] = useState('none')
+    const [filterMsg, setFilterMsg] = useState('none')
 
     const handleFilter = async (filterId, filterType) => {
 
         if( filterType === 'account'){
             const name = await accounts.getOne(filterId)
-            setfilterMsg(`Account Name: ${name.name}`)
+            setFilterMsg(`Account Name: ${name.name}`)
         } else if( filterType === 'category'){
             const name = await categoriesService.getOne(filterId)
-            setfilterMsg(`Category Name: ${name.name}`)
+            setFilterMsg(`Category Name: ${name.name}`)
         }
         if (filterType===null){
             setTransactionsList({
@@ -107,7 +107,6 @@ const Transactions = (props) => {
             <StatisticBox statistic={allAccountsStatistic}/>
             <div>
                 <h2>Filters</h2>
-                <button onClick={()=>handleFilter('clear', null)}>Clear Filter</button>
                 <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value, 'category')}>
                     <option>Filter by Income Categories</option>
                     {incomeCategories.map(category => {
@@ -126,12 +125,13 @@ const Transactions = (props) => {
                         return <option value={account.id} name={account.name} key={account.id}>{account.name}</option>
                     })}
                 </select>
-                <h5>Filtered by {filterMsg}</h5>
             </div>
             <TransactionsList 
                 type={listAllTransactionsType}
                 typeId={listAllTransactionsId}
                 currentUser={currentUser}
+                filterMsg={filterMsg}
+                setFilterMsg ={setFilterMsg}
             />
         </div>
     )

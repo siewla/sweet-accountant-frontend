@@ -53,6 +53,7 @@ const Dashboard = (props) => {
                                     render={(props) =>
                                         <ListAllTransactions
                                             currentUser={currentUser}
+                                            changeCurrentContent={changeCurrentContent}
                                             {...props} />}
                                 />
                                 <Route path="/categories"

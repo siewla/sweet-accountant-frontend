@@ -78,9 +78,21 @@ const TransactionsList = (props) => {
     }
 
     const handleDateSubmit = async() =>{
+        props.setFilterMsg('date')
         const allTransactionsRangeResponse = await transactions.getAllTransactionsByRange(startDate, endDate)
         const amendedTransactions = amendTransactions(allTransactionsRangeResponse, allAccounts, allCategories)
         // const matchedTransactions = getCommon(amendedTransactions, allTransactions)
+        setData((prevState) =>({
+            ...prevState,
+            // allTransactions: matchedTransactions
+            allTransactions: amendedTransactions
+        }))
+    }
+
+    const handleClear = async() => {
+        props.setFilterMsg('none')
+        const transactionsResponse = await transactions.getAllTransactions(currentUser.id)
+        const amendedTransactions = amendTransactions(transactionsResponse, allAccounts, allCategories)
         setData((prevState) =>({
             ...prevState,
             allTransactions: amendedTransactions
@@ -100,7 +112,6 @@ const TransactionsList = (props) => {
             allCategories.filter ( category =>{
                 if ( category.id === transaction.categoryId){
                     transaction.categoryName = category.name
-                    console.log('hi')
                     return transaction
                 } else
                     return null
@@ -185,27 +196,32 @@ const TransactionsList = (props) => {
                 toggleDisplayEditForm={toggleDisplayEditForm}
                 transactionId={currentTransactionId}
             />:null}
-            <div>
-                <h6>From </h6>
-                <DatePicker
-                    selected={startDate}
-                    onChange={date => setStartDate(date)}
-                    selectsStart
-                    startDate={startDate}
-                    endDate={endDate}
-                    maxDate={new Date()}
-                />
-                <h6>To </h6>
-                <DatePicker
-                    selected={endDate}
-                    onChange={date => setEndDate(date)}
-                    selectsEnd
-                    startDate={startDate}
-                    endDate={endDate}
-                    maxDate={new Date()}
-                />
-                <button onClick={()=>handleDateSubmit()}>Submit</button>
-            </div>
+            {props.filterMsg!=='disabled' ? <div>
+                <div>
+                    <h6>From </h6>
+                    <DatePicker
+                        selected={startDate}
+                        onChange={date => setStartDate(date)}
+                        selectsStart
+                        startDate={startDate}
+                        endDate={endDate}
+                        maxDate={new Date()}
+                    />
+                    <h6>To </h6>
+                    <DatePicker
+                        selected={endDate}
+                        onChange={date => setEndDate(date)}
+                        selectsEnd
+                        startDate={startDate}
+                        endDate={endDate}
+                        maxDate={new Date()}
+                    />
+                    <button onClick={()=>handleDateSubmit()}>Submit</button>
+                </div>
+                <h5>Filtered by {props.filterMsg}</h5>
+                <button onClick={()=>handleClear()}>Clear Filter</button>
+            </div>: null}
+            
             <MDBDataTableV5 
                 hover
                 entriesOptions = {[5, 10, 25, 50]}

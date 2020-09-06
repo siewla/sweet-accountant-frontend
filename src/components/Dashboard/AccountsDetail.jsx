@@ -5,6 +5,7 @@ import { MDBDataTableV5 } from 'mdbreact';
 import usersService from '../../services/usersService'
 import accounts from '../../services/accounts'
 import { Link } from 'react-router-dom';
+import StatisticBox from '../StatisticBox'
 
 import authentication from '../../services/authentication';
 
@@ -44,16 +45,16 @@ const AccountsDetail = (props) => {
         ]
 
     const [initialData, setData] = useState({
-        allAccounts: [],
         tableAccounts: [],
         allAccountsStatistic:{
+            totalTransactions: null,
             totalIncome: 0.00,
             totalExpense: 0.00,
             balance: 0.00
         }
     })
 
-    const { allAccounts, tableAccounts, allAccountsStatistic} = initialData
+    const { tableAccounts, allAccountsStatistic} = initialData
 
     const handleDelete = async (id) =>{
         try{
@@ -69,10 +70,9 @@ const AccountsDetail = (props) => {
 
     const [currentAccount, setCurrentAccount] =useState({
         currentAccountId: '',
-        currentAccountName: ''
     })
 
-    const {currentAccountId, currentAccountName} = currentAccount
+    const {currentAccountId } = currentAccount
 
 
     const handleEdit = (id) =>{
@@ -104,6 +104,7 @@ const AccountsDetail = (props) => {
         }
         )
         setData({
+            totalTransactions: null,
             allAccounts: amendedAccounts,
             tableAccounts: amendedAccounts,
             allAccountsStatistic: allAccountsStatisticResponse
@@ -122,15 +123,9 @@ const AccountsDetail = (props) => {
 
 
     return (
-        <div className="accounts">
-            <div className="d-flex justify-content-center align-items-center">
-                <div className="accounts-details-container">
-                    <h4>Credit: <strong className="grey-text">{(parseFloat(allAccountsStatistic.totalExpense)/100).toFixed(2)}</strong></h4>
-                    <h4>Debit: <strong className="grey-text">{(parseFloat(allAccountsStatistic.totalIncome)/100).toFixed(2)}</strong></h4>
-                    <h4>Balance: <strong className="grey-text">{(parseFloat(allAccountsStatistic.balance)/10).toFixed(2)}</strong></h4>
-                </div>
-                <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
-            </div>
+        <div>
+            <StatisticBox statistic={allAccountsStatistic}/>
+            <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
             {editState?
             <UpdateAccount 
                 fetchData={fetchData}
@@ -147,10 +142,6 @@ const AccountsDetail = (props) => {
                     rows: tableAccounts
                 }}
             />
-            <h1>Account Name</h1>
-            {allAccounts.length >0 && allAccounts.map(account=>{
-                return <h2 key={account.id}>{account.name}</h2>
-            })}
         </div>
     )
 }
