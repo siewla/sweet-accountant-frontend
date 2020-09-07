@@ -9,8 +9,6 @@ import StatisticBox from '../StatisticBox'
 import authentication from '../../services/authentication';
 import {trackPromise} from 'react-promise-tracker'
 
-
-
 const AccountsDetail = (props) => {
     const [currentUser, setCurrentUser] = useState(props.currentUser);
 
@@ -98,8 +96,12 @@ const AccountsDetail = (props) => {
                     return null
             })
             const path =`/listalltransactions/account/${accountMain.id}`
-            accountMain.name = <Link to={path}><p>{accountMain.name}</p></Link>
-            accountMain.actions = <div><MDBBtn color="primary" size="sm" onClick={()=>handleEdit(accountMain.id)}>Edit</MDBBtn><MDBBtn color="red" size="sm" onClick={()=>handleDelete(accountMain.id)}>Delete</MDBBtn></div>
+            accountMain.actions = <div>
+                    <MDBBtn color="primary" size="sm" onClick={()=>handleEdit(accountMain.id)}>Edit</MDBBtn>
+                    <MDBBtn color="red" size="sm" onClick={()=>handleDelete(accountMain.id)}>Delete</MDBBtn>
+                    <Link to={path}><MDBBtn color="success" size="sm">View</MDBBtn></Link>
+                </div>
+                                
             return accountMain
         }
         )
