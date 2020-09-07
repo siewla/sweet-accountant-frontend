@@ -21,7 +21,7 @@ const Facebooklogin = (props) => {
             fields="email"
             scope="public_profile,email"
             render={renderProps => (
-                <h5 onClick={renderProps.onClick}><i className="fab fa-facebook p-2 fa-lg"> Sign in with Facebook</i></h5>
+                <h5 onClick={renderProps.onClick} className="continue-box"><i className="fab fa-facebook p-2 fa-lg"> Continue with Facebook</i></h5>
             )}
         />
     )

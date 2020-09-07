@@ -1,10 +1,16 @@
 import React from 'react'
+import Googlelogin from './Googlelogin';
+import FacebookLogin from './FacebookLogin';
 
 const SignupForm = (props) => {
     const { username, email, password } = props.signupForm;
     const handleChange = props.handleChange;
     const handleSubmit = props.handleSubmit;
     const err = props.err
+    const login = props.login;
+    const showErr = props.showErr;
+    const setErr = props.setErr;
+
     return (
         <div className="col-md-6 col-xl-5 mb-4">
             <form className="login z-depth-2 rounded" onSubmit={handleSubmit}>
@@ -38,6 +44,12 @@ const SignupForm = (props) => {
                     <div className="text-center mt-4">
                         <button className="btn btn-outline-white wow fadeInDown" type="submit">Sign up</button>
                         <hr className="hr-light mb-3 mt-4" />
+                    </div>
+                    <div className="inline-ul text-center">
+                        <div className="white-text">                          
+                            <FacebookLogin login={login} showErr={showErr} setCurrentUser={props.setCurrentUser}/>
+                            <Googlelogin login={login} showErr={showErr} setErr={setErr} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} checkAuthentication={props.checkAuthentication}/>
+                        </div>
                     </div>
                 </div>
             </form>

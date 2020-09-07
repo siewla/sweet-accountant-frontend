@@ -51,6 +51,20 @@
   text-shadow: 2px 2px 4px #000000;
 }
 
+.continue-box{
+  font-size: 2vh;
+  padding: 0.25vh;
+  border: 1px solid white;
+  width: 75%;
+  margin: 1vh auto;
+}
+
+.continue-box:hover{
+  cursor: pointer;
+  background-color: rgba(121, 139, 121, 0.3) ;
+  border: 1px solid greenyellow;
+}
+
 @media (max-width: 991px) {
   .navbar:not(.top-nav-collapse) {
     background: darkcyan;

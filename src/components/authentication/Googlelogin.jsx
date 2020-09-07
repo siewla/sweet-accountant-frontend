@@ -1,52 +1,48 @@
-import React, { Component } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { GoogleLogin } from 'react-google-login'
+import { useHistory} from 'react-router-dom';
 
-class Googlelogin extends Component{
+
+const Googlelogin =(props)=> {
+    const history = useHistory();
+
     // send google token
-    sendGoogleToken = async tokenId => {
+    const sendGoogleToken = async tokenId => {
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/users/googlelogin`,{
             idToken: tokenId
         },{
             withCredentials: true
         })
         .then(res =>{
-            // console.log('google',res)
-            this.props.setCurrentUser(res.data.data);
-            // this.props.login(res.data.data);
+            props.setCurrentUser(res.data.data);
+            history.push('/login')
         })
         .catch(err =>{
             console.log(err)
         }).finally( () =>{
-            this.props.checkAuthentication()
+            props.checkAuthentication()
         }
         )
-        // const currentUser = await authentication.logInWithGoogle(tokenId)
-        // if (currentUser){
-        //     this.props.login(currentUser)
-        // } else{
-        //     this.props.setErr('Failed to Fetch')
-        // }
     }
 
     //get response from google 
-    responseGoogle = async response =>{
-        this.sendGoogleToken(response.tokenId); 
+    const responseGoogle = async response =>{
+        sendGoogleToken(response.tokenId); 
     }
 
-    render(){
-        return (
-            <GoogleLogin 
-                clientId={`${process.env.REACT_APP_GOOGLE_CLIENT}`}
-                onSuccess={ this.responseGoogle }
-                onFailure={ this.responseGoogle }
-                cookiePolicy = { 'single_host_origin' }
-                render={renderProps => (
-                    <h5 onClick={renderProps.onClick}><i className="fab fa-google p-2 fa-lg"> Sign in with Google</i></h5>
-                )}
-            />
-        )
-    }
+    return (
+        <GoogleLogin 
+            clientId={`${process.env.REACT_APP_GOOGLE_CLIENT}`}
+            onSuccess={responseGoogle }
+            onFailure={ responseGoogle }
+            cookiePolicy = { 'single_host_origin' }
+            render={renderProps => (
+                <h5 onClick={renderProps.onClick} className="continue-box"><i className="fab fa-google p-2 fa-lg"> Continue with Google</i></h5>
+            )}
+        />
+    )
+    
 }
 
 export default Googlelogin
