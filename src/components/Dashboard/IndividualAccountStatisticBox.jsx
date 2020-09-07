@@ -7,7 +7,7 @@ const IndividualAccountStatisticBox = (props) => {
    
     const [initialData, setData] = useState({
         accountStatistic:{
-            totalTransactions: null,
+            totalTransactions: 0,
             totalIncome: 0.00,
             totalExpense: 0.00,
             balance: 0.00
@@ -22,7 +22,7 @@ const IndividualAccountStatisticBox = (props) => {
             const accountStatisticResponse = await accounts.getAccountStatistic(typeId)
             setData({
                 accountStatistic: {
-                    totalTransactions: null,
+                    totalTransactions: accountStatisticResponse.totalTransactions,
                     totalIncome: accountStatisticResponse.debit,
                     totalExpense: accountStatisticResponse.credit,
                     balance: accountStatisticResponse.balance
