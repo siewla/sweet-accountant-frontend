@@ -6,12 +6,13 @@ import usersService from '../../services/usersService'
 import accounts from '../../services/accounts'
 import { Link } from 'react-router-dom';
 import StatisticBox from '../StatisticBox'
-
 import authentication from '../../services/authentication';
+import {trackPromise} from 'react-promise-tracker'
+
 
 
 const AccountsDetail = (props) => {
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setCurrentUser] = useState(props.currentUser);
 
     // check authentication
     const checkAuthentication = async () => {
@@ -112,13 +113,18 @@ const AccountsDetail = (props) => {
 
     useEffect(() => {
         async function fetchCurrentUser (){
-            const data = await checkAuthentication();
+            const data = await trackPromise(checkAuthentication())
             setCurrentUser(data)
             fetchData(data)
         }
-        fetchCurrentUser()   
+
+        if (!currentUser.id){
+            fetchCurrentUser()
+        } else{
+            fetchData(currentUser)
+        } 
     // eslint-disable-next-line   
-    }, [])
+    }, [currentUser])
 
 
     return (

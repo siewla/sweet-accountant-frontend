@@ -128,7 +128,7 @@ const Categories = (props) => {
                         aria-selected="false">Income</a>
                 </li>
             </ul>
-            <div className="tab-content" id="myTabContent">
+            <div className="tab-content black-text" id="myTabContent">
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                     {/* Chart */}
