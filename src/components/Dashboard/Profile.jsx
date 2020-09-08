@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import usersService from '../../services/usersService';
-import { MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact';
+import { MDBModal, MDBModalBody, MDBModalHeader, MDBBtn } from 'mdbreact';
 
 const Profile = (props) => {
     const { username, email, id } = props.currentUser;
@@ -62,7 +62,8 @@ const Profile = (props) => {
                                 <label data-error="wrong" data-success="right" htmlFor="form29" className="ml-0">Password </label>
                             </div>
                             <div className="text-center mt-4">
-                                <button type="submit" className="btn btn-cyan mt-1"> Update and Save</button>
+                            <MDBBtn color="primary" type="submit">Edit</MDBBtn>
+                            <MDBBtn color="grey" onClick={()=>setModalIsOpen(!modalIsOpen)}>Cancel</MDBBtn>
                             </div>
                         </form>
                     </MDBModalBody>

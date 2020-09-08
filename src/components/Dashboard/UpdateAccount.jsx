@@ -48,7 +48,7 @@ const UpdateAccount = (props) => {
                     />
                     <div className="text-center">
                         <MDBBtn color="primary" type="submit">Update</MDBBtn>
-                        <MDBBtn color="default" onClick={()=>props.toggleDisplayEditForm(false)}>Cancel</MDBBtn>
+                        <MDBBtn color="grey" onClick={()=>props.toggleDisplayEditForm(false)}>Cancel</MDBBtn>
                     </div>
                 </form>
         </div>
