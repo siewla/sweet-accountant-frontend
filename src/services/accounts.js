@@ -37,6 +37,7 @@ export default {
     },
 
     async deleteById (id) {
+        await apiUtil.delete(buildUrl(`/transactions/all/${id}`));
         const response = await apiUtil.delete(buildUrl(`/accounts/${id}`));
         return response.data;
     },

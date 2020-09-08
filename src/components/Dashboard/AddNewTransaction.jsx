@@ -63,6 +63,7 @@ const AddNewTransaction = (props) => {
                 accountId: '',
             })
             setModalIsOpen(!modalIsOpen)
+            window.location.reload()
         }
     
     }

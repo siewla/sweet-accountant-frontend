@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import AddNewAccount from './AddNewAccount'
 import UpdateAccount from './UpdateAccount'
-import { MDBDataTableV5, MDBBtn } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn, MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import usersService from '../../services/usersService'
 import accounts from '../../services/accounts'
 import { Link } from 'react-router-dom';
@@ -69,16 +69,26 @@ const AccountsDetail = (props) => {
 
     const [currentAccount, setCurrentAccount] =useState({
         currentAccountId: '',
+        currentAccountName: '',
     })
 
-    const {currentAccountId } = currentAccount
+    const {currentAccountId, currentAccountName } = currentAccount
 
+    const [modalIsOpen, setModalIsOpen] = useState(false)
 
     const handleEdit = (id) =>{
         // console.log(id)
         toggleDisplayEditForm(true)
         setCurrentAccount({
             currentAccountId: id,
+        })
+    }
+
+    const handlePreDelete = (id, name) =>{
+        setModalIsOpen(!modalIsOpen)
+        setCurrentAccount({
+            currentAccountId: id,
+            currentAccountName: name
         })
     }
 
@@ -98,7 +108,7 @@ const AccountsDetail = (props) => {
             const path =`/listalltransactions/account/${accountMain.id}`
             accountMain.actions = <div>
                     <MDBBtn color="primary" size="sm" onClick={()=>handleEdit(accountMain.id)}>Edit</MDBBtn>
-                    <MDBBtn color="red" size="sm" onClick={()=>handleDelete(accountMain.id)}>Delete</MDBBtn>
+                    <MDBBtn color="red" size="sm" onClick={()=>handlePreDelete(accountMain.id , accountMain.name)}>Delete</MDBBtn>
                     <Link to={path}><MDBBtn color="success" size="sm">View</MDBBtn></Link>
                 </div>
                                 
@@ -149,6 +159,20 @@ const AccountsDetail = (props) => {
                     rows: tableAccounts
                 }}
             />
+            <MDBModal className="black-text" isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
+                <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>
+                    Warning
+                </MDBModalHeader>
+                <MDBModalBody>
+                    Delete account <strong className='red-text'>{currentAccountName}</strong> will delete all the transactions inside it?
+                    Are you sure to proceed?
+                </MDBModalBody>
+                <MDBModalFooter>
+                <MDBBtn color="primary" onClick={()=>handleDelete(currentAccountId)}>Please Proceed</MDBBtn>
+                <MDBBtn color="grey" onClick={()=>setModalIsOpen(!modalIsOpen)}>Cancel</MDBBtn>
+                </MDBModalFooter>
+            </MDBModal>
+
         </div>
     )
 }
