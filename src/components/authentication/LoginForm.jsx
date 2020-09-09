@@ -43,9 +43,9 @@ const LoginForm = (props) => {
                     {/* end error */}
                     <div className="inline-ul text-center">
                         <div className="white-text">
-                          
-                                <FacebookLogin login={login} showErr={showErr} setCurrentUser={props.setCurrentUser}/>
-                          
+
+                            <FacebookLogin login={login} showErr={showErr} setCurrentUser={props.setCurrentUser} />
+
 
                             <Googlelogin login={login} showErr={showErr} setErr={setErr} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} checkAuthentication={props.checkAuthentication}/>
                         </div>

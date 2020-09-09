@@ -99,6 +99,7 @@ const AccountsDetail = (props) => {
             })
             const path =`/listalltransactions/account/${accountMain.id}`
             accountMain.name = <Link to={path}><p>{accountMain.name}</p></Link>
+            console.log(accountMain.name);
             accountMain.actions = <div><button onClick={()=>handleEdit(accountMain.id)}>Edit</button><button onClick={()=>handleDelete(accountMain.id)}>Delete</button></div>
             return accountMain
         }

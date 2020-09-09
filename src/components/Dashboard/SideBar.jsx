@@ -45,7 +45,7 @@ const SideBar = (props) => {
 
                     <Link to="/training">
                         <button className="sidebar-buttons" onClick={() => { changeCurrentContent('Training Data') }}>
-                            <i className="fas fa-file-import mr-3"></i><span>Training Data</span></button>
+                        <i class="fas fa-chalkboard-teacher mr-3"></i><span>Training Data</span></button>
                     </Link>
                 </div>
             </div>

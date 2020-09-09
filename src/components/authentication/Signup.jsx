@@ -57,7 +57,7 @@ const Signup = () => {
                 <h6 className="mb-3 wow fadeInLeft" data-wow-delay="0.3s">Track your cash flow</h6>
                 <h6 className="mb-3 wow fadeInLeft" data-wow-delay="0.3s">Understand your financial habits</h6>
                 <h6 className="mb-3 wow fadeInLeft" data-wow-delay="0.3s">Make your spending stress-free</h6>
-              </div>
+              </div> 
 
               <SignupForm signupForm={signupForm}
                 handleChange={handleChange}

@@ -11,24 +11,44 @@ const Categories = (props) => {
     const [dataChartIncome, setDataChartIncome] = useState([]);
     const [dataChartExpense, setDataChartExpense] = useState([]);
 
-    const [datatableIncome, setDatatableIncome] = React.useState({
-        columns: [
-            {
-                label: 'Type',
-                field: 'type',
-            },
-            {
-                label: 'Name',
-                field: 'name',
-            },
-            {
-                label: 'Total',
-                field: 'total',
-            }
-        ],
-        rows: [
-        ],
-    });
+    const columns = [
+        {
+            label: 'Type',
+            field: 'type',
+        },
+        {
+            label: 'Name',
+            field: 'name',
+        },
+        {
+            label: 'Total',
+            field: 'total',
+        }
+    ];
+
+    const row = [
+        {
+            type: 'income',
+            name: 'Food & Drink',
+            total: 3000
+        },
+        {
+            type: 'income',
+            name: 'House',
+            total: 3000
+        },
+        {
+            type: 'income',
+            name: 'Food & Drink',
+            total: 3000
+        },
+        {
+            type: 'income',
+            name: 'Food & Drink',
+            total: 3000
+        },
+    ]
+    const [datatableIncome, setDatatableIncome] = useState([]);
 
     const [datatableExpense, setDatatableExpense] = React.useState({
         columns: [
@@ -95,11 +115,9 @@ const Categories = (props) => {
         const incomeContent = await createRow(inComeDetail);
         const expenseContent = await createRow(expenseDetail);
 
+        console.log(incomeContent.content);
         // set data table
-        setDatatableIncome({
-            ...datatableIncome,
-            rows: incomeContent.content
-        });
+        setDatatableIncome(incomeContent.content);
         setDatatableExpense({
             ...datatableExpense,
             rows: expenseContent.content
@@ -132,22 +150,29 @@ const Categories = (props) => {
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                     {/* Chart */}
-                    <PieChart donut={true} data={dataChartExpense} thousands="," prefix="$" decimal="."/>
+                    <PieChart donut={true} data={dataChartExpense} thousands="," prefix="$" decimal="." />
 
                     {/* Table */}
-                    <MDBDataTableV5 hover
+                    <MDBDataTableV5
+                        hover
                         entriesOptions={[5, 10, 20]}
                         entries={5}
-                        data={datatableExpense} />
+                        data={datatableExpense}
+                    />
                 </div>
                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     {/* Chart */}
-                    <PieChart donut={true} data={dataChartIncome} thousands="," prefix="$" decimal="."/>
+                    <PieChart donut={true} data={dataChartIncome} thousands="," prefix="$" decimal="." />
                     {/* Table */}
-                    <MDBDataTableV5 hover
+                    <MDBDataTableV5
+                        hover
                         entriesOptions={[5, 10, 20]}
                         entries={5}
-                        data={datatableIncome} />
+                        data={{
+                            columns: columns,
+                            rows: datatableIncome
+                        }}
+                        searching={true} />
                 </div>
             </div>
 
