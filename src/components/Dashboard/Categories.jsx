@@ -97,7 +97,10 @@ const Categories = (props) => {
 
         console.log(incomeContent.content);
         // set data table
-        setDatatableIncome(incomeContent.content);
+        setDatatableIncome({
+            ...datatableIncome,
+            rows: incomeContent.content
+        });
         setDatatableExpense({
             ...datatableExpense,
             rows: expenseContent.content
