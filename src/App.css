@@ -410,6 +410,11 @@ width: 100%;
   bottom: 1rem;
 }
 
-.instruction {
+.instruction, .list-cat{
   cursor: pointer;
+}
+
+.expense-cat {
+  max-height: 400px;
+  overflow: scroll;
 }

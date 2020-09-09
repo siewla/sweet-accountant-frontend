@@ -174,7 +174,7 @@ const Import = (props) => {
                                 </div>
                                 {/* <!-- Central Modal Medium Info--> */}
                                 {/* end modal */}
-                                <h3 class="font-weight-bold my-3">Import your Bank statement</h3>
+                                <h3 class="font-weight-bold my-3">Import your Bank Statement</h3>
 
                                 <p class="text-muted mb-4 pb-2">A simple and convenient way for you to import all your transactions in a minute. </p>
                                 <small class="form-text black-text"><strong>* Just accept .csv file</strong></small>
