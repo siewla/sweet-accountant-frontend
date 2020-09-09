@@ -5,13 +5,30 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import AccountsDetail from '../components/Dashboard/AccountsDetail';
 import TopMenu from '../components/Dashboard/TopMenu';
 import Categories from '../components/Dashboard/Categories'
-import Transactions from '../components/Dashboard/Transactions';
+import Transactions from '../components/Dashboard/Transactions'
 import ListAllTransactions from '../components/Dashboard/ListAllTransactions';
 import Report from '../components/Dashboard/Report';
 import Import from '../components/Dashboard/Import';
 import Training from '../components/Dashboard/Training';
 
+import {ThemeProvider} from "styled-components";
+import {GlobalStyles} from "../components/GlobalStyles"
+import { lightTheme, darkTheme } from "../components/Theme"
+
+
 const Dashboard = (props) => {
+    const [theme, setTheme] = useState('light');
+   
+    const [isDarkMode, setIsDarkMode] = useState(false)
+    
+    const setMode = () =>{
+        setIsDarkMode(!isDarkMode)
+        if (isDarkMode){
+            setTheme('light')
+        } else{
+            setTheme('dark')
+        }
+    }
     const currentUser = props.currentUser;
     const logout = props.logout;
     const updateCurrentUser = props.updateCurrentUser;
@@ -25,13 +42,16 @@ const Dashboard = (props) => {
     useEffect(() => {
         if (localStorage.getItem("currentContent")) setCurrentContent(localStorage.getItem("currentContent"));
     }, [])
+
     return (
         <div>
+            <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <GlobalStyles/>
             <Router>
                 <div className="dashboard">
                     <SideBar changeCurrentContent={changeCurrentContent} />
                     <div className="main-content">
-                        <TopMenu currentContent={currentContent} currentUser={currentUser} changeCurrentContent={changeCurrentContent} />
+                        <TopMenu setMode ={setMode} isDarkMode ={isDarkMode} currentContent={currentContent} currentUser={currentUser} changeCurrentContent={changeCurrentContent} />
                         <div className="content">
                             <Switch>
                                 <Route path="/login"
@@ -53,6 +73,7 @@ const Dashboard = (props) => {
                                     render={(props) =>
                                         <ListAllTransactions
                                             currentUser={currentUser}
+                                            changeCurrentContent={changeCurrentContent}
                                             {...props} />}
                                 />
                                 <Route path="/categories"
@@ -90,6 +111,7 @@ const Dashboard = (props) => {
                     </div>
                 </div>
             </Router>
+            </ThemeProvider>
         </div>
     )
 }

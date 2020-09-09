@@ -37,6 +37,7 @@ export default {
     },
 
     async deleteById (id) {
+        await apiUtil.delete(buildUrl(`/transactions/all/${id}`));
         const response = await apiUtil.delete(buildUrl(`/accounts/${id}`));
         return response.data;
     },
@@ -53,9 +54,18 @@ export default {
     },
 
     async getEachAccountStatistic (idAccount){
-        // console.log(idAccount)
         try {
             const response = await apiUtil.get(buildUrl(`/users/${idAccount}/accounts/statistic/each`));
+            return response.data;
+        } catch (err) {
+            console.log(err);   
+            return [];
+        }
+    },
+
+    async getAccountStatistic (idAccount){
+        try {
+            const response = await apiUtil.get(buildUrl(`/users/accounts/statistic/${idAccount}`));
             return response.data;
         } catch (err) {
             console.log(err);   

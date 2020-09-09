@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import AddNewAccount from './AddNewAccount'
 import UpdateAccount from './UpdateAccount'
-import { MDBDataTableV5 } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn, MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import usersService from '../../services/usersService'
 import accounts from '../../services/accounts'
 import { Link } from 'react-router-dom';
-
+import StatisticBox from '../StatisticBox'
 import authentication from '../../services/authentication';
-
+import {trackPromise} from 'react-promise-tracker'
 
 const AccountsDetail = (props) => {
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentUser, setCurrentUser] = useState(props.currentUser);
 
     // check authentication
     const checkAuthentication = async () => {
@@ -44,16 +44,16 @@ const AccountsDetail = (props) => {
         ]
 
     const [initialData, setData] = useState({
-        allAccounts: [],
         tableAccounts: [],
         allAccountsStatistic:{
+            totalTransactions: null,
             totalIncome: 0.00,
             totalExpense: 0.00,
             balance: 0.00
         }
     })
 
-    const { allAccounts, tableAccounts, allAccountsStatistic} = initialData
+    const { tableAccounts, allAccountsStatistic} = initialData
 
     const handleDelete = async (id) =>{
         try{
@@ -69,11 +69,12 @@ const AccountsDetail = (props) => {
 
     const [currentAccount, setCurrentAccount] =useState({
         currentAccountId: '',
-        currentAccountName: ''
+        currentAccountName: '',
     })
 
-    const {currentAccountId, currentAccountName} = currentAccount
+    const {currentAccountId, currentAccountName } = currentAccount
 
+    const [modalIsOpen, setModalIsOpen] = useState(false)
 
     const handleEdit = (id) =>{
         // console.log(id)
@@ -83,12 +84,19 @@ const AccountsDetail = (props) => {
         })
     }
 
+    const handlePreDelete = (id, name) =>{
+        setModalIsOpen(!modalIsOpen)
+        setCurrentAccount({
+            currentAccountId: id,
+            currentAccountName: name
+        })
+    }
+
     // eslint-disable-next-line 
     const fetchData= async (currentUser) => {
         const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
         const allAccountsBalance = await accounts.getEachAccountStatistic(currentUser.id)
-        // console.log(allAccountsBalance)
         const amendedAccounts = allAccountsResponse.map((accountMain,index) =>{
             allAccountsBalance.filter( account=>{ 
                 if( account.accountId === accountMain.id){
@@ -98,13 +106,18 @@ const AccountsDetail = (props) => {
                     return null
             })
             const path =`/listalltransactions/account/${accountMain.id}`
-            accountMain.name = <Link to={path}><p>{accountMain.name}</p></Link>
-            console.log(accountMain.name);
-            accountMain.actions = <div><button onClick={()=>handleEdit(accountMain.id)}>Edit</button><button onClick={()=>handleDelete(accountMain.id)}>Delete</button></div>
+
+            accountMain.actions = <div>
+                    <MDBBtn color="primary" size="sm" onClick={()=>handleEdit(accountMain.id)}>Edit</MDBBtn>
+                    <MDBBtn color="red" size="sm" onClick={()=>handlePreDelete(accountMain.id , accountMain.name)}>Delete</MDBBtn>
+                    <Link to={path}><MDBBtn color="success" size="sm">View</MDBBtn></Link>
+                </div>
+                                
             return accountMain
         }
         )
         setData({
+            totalTransactions: null,
             allAccounts: amendedAccounts,
             tableAccounts: amendedAccounts,
             allAccountsStatistic: allAccountsStatisticResponse
@@ -113,25 +126,24 @@ const AccountsDetail = (props) => {
 
     useEffect(() => {
         async function fetchCurrentUser (){
-            const data = await checkAuthentication();
+            const data = await trackPromise(checkAuthentication())
             setCurrentUser(data)
             fetchData(data)
         }
-        fetchCurrentUser()   
+
+        if (!currentUser.id){
+            fetchCurrentUser()
+        } else{
+            fetchData(currentUser)
+        } 
     // eslint-disable-next-line   
-    }, [])
+    }, [currentUser])
 
 
     return (
-        <div className="accounts">
-            <div className="d-flex justify-content-center align-items-center">
-                <div className="accounts-details-container">
-                    <h4>Credit: <strong className="grey-text">{(parseFloat(allAccountsStatistic.totalExpense)/100).toFixed(2)}</strong></h4>
-                    <h4>Debit: <strong className="grey-text">{(parseFloat(allAccountsStatistic.totalIncome)/100).toFixed(2)}</strong></h4>
-                    <h4>Balance: <strong className="grey-text">{(parseFloat(allAccountsStatistic.balance)/10).toFixed(2)}</strong></h4>
-                </div>
-                <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
-            </div>
+        <div>
+            <StatisticBox statistic={allAccountsStatistic}/>
+            <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
             {editState?
             <UpdateAccount 
                 fetchData={fetchData}
@@ -148,10 +160,20 @@ const AccountsDetail = (props) => {
                     rows: tableAccounts
                 }}
             />
-            <h1>Account Name</h1>
-            {allAccounts.length >0 && allAccounts.map(account=>{
-                return <h2 key={account.id}>{account.name}</h2>
-            })}
+            <MDBModal className="black-text" isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
+                <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>
+                    Warning
+                </MDBModalHeader>
+                <MDBModalBody>
+                    Delete account <strong className='red-text'>{currentAccountName}</strong> will delete all the transactions inside it?
+                    Are you sure to proceed?
+                </MDBModalBody>
+                <MDBModalFooter>
+                <MDBBtn color="primary" onClick={()=>handleDelete(currentAccountId)}>Please Proceed</MDBBtn>
+                <MDBBtn color="grey" onClick={()=>setModalIsOpen(!modalIsOpen)}>Cancel</MDBBtn>
+                </MDBModalFooter>
+            </MDBModal>
+
         </div>
     )
 }

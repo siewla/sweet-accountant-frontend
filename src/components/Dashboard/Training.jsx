@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import importService from '../../services/import';
 
 const Traning = (props) => {
@@ -19,7 +19,7 @@ const Traning = (props) => {
     }
 
     return (
-        <div className="categories card">
+        <div className="categories card black-text">
 
             <form className="text-center border border-light p-5" onSubmit={handleSubmit} encType="multipart/form-data">
 

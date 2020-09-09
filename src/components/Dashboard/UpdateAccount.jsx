@@ -23,12 +23,9 @@ const UpdateAccount = (props) => {
 
     const handleSubmit = async event =>{
         event.preventDefault();
-        // await accountsServices.create(accountName, props.currentUser.id);
-        // console.log(props.accountId)
-        // console.log(formData)
-        const response = await accounts.updateById(props.accountId, formData)
-        // console.log(response)
+        await accounts.updateById(props.accountId, formData)
         props.fetchData(props.currentUser)
+        props.toggleDisplayEditForm(false)
     }
 
     useEffect(() => {
@@ -50,7 +47,8 @@ const UpdateAccount = (props) => {
                         required
                     />
                     <div className="text-center">
-                        <MDBBtn type="submit">Update</MDBBtn>
+                        <MDBBtn color="primary" type="submit">Update</MDBBtn>
+                        <MDBBtn color="grey" onClick={()=>props.toggleDisplayEditForm(false)}>Cancel</MDBBtn>
                     </div>
                 </form>
         </div>

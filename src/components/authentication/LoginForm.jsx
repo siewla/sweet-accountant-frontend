@@ -1,6 +1,6 @@
 import React from 'react'
-import Googlelogin from './Googlelogin';
-import FacebookLogin from './FacebookLogin';
+import Googlelogin from './Googlelogin'
+import FacebookLogin from './FacebookLogin'
 
 const LoginForm = (props) => {
     const { email, password } = props.loginForm;
@@ -42,10 +42,9 @@ const LoginForm = (props) => {
 
                     {/* end error */}
                     <div className="inline-ul text-center">
-                        <div className="white-text">
 
-                            <FacebookLogin login={login} showErr={showErr} setCurrentUser={props.setCurrentUser} />
-
+                        <div className="white-text">                          
+                            <FacebookLogin login={login} showErr={showErr} setCurrentUser={props.setCurrentUser}/>
 
                             <Googlelogin login={login} showErr={showErr} setErr={setErr} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} checkAuthentication={props.checkAuthentication}/>
                         </div>

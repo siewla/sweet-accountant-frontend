@@ -22,12 +22,13 @@ const AddNewAccount = (props) => {
         await accountsServices.create(accountName);
         setModalIsOpen(false);
         props.fetchData(props.currentUser)
+        window.location.reload()
     }
 
     return (
         <div>
-            <MDBBtn onClick={()=>setModalIsOpen(!modalIsOpen)}>Add New Account</MDBBtn>
-            <MDBModal isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
+            <MDBBtn className="add-new-account-button" onClick={()=>setModalIsOpen(!modalIsOpen)}>Add New Account</MDBBtn>
+            <MDBModal className="black-text" isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
                 <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>Add New Account</MDBModalHeader>
                 <MDBModalBody>
                 <form onSubmit={handleSubmit}>        

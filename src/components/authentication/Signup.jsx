@@ -4,13 +4,19 @@ import { Redirect } from 'react-router-dom';
 import usersService from '../../services/usersService';
 import { useState } from 'react'
 
-const Signup = () => {
+const Signup = (props) => {
 
+  const login = props.login;
+  
   const [signupForm, setSignupForm] = useState({
     username: '',
     email: '',
     password: ''
   });
+
+  const showErr = (err) => {
+    setErr(err);
+ }
 
   const [err, setErr] = useState(null);
 
@@ -63,6 +69,12 @@ const Signup = () => {
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
                 err={err}
+                login={login} 
+                showErr={showErr}
+                setErr={setErr}
+                currentUser={props.currentUser} 
+                setCurrentUser={props.setCurrentUser}
+                checkAuthentication={props.checkAuthentication}
               />
             </div>
           </div>

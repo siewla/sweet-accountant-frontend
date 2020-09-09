@@ -2,55 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { MDBDataTableV5 } from 'mdbreact';
 import CategoriesService from '../../services/categories';
 import authentication from '../../services/authentication';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { PieChart } from 'react-chartkick';
 import 'chart.js';
+import { MDBBtn } from 'mdbreact';
 
 const Categories = (props) => {
     const history = useHistory();
     const [dataChartIncome, setDataChartIncome] = useState([]);
     const [dataChartExpense, setDataChartExpense] = useState([]);
-
-    const columns = [
-        {
-            label: 'Type',
-            field: 'type',
-        },
-        {
-            label: 'Name',
-            field: 'name',
-        },
-        {
-            label: 'Total',
-            field: 'total',
-        }
-    ];
-
-    const row = [
-        {
-            type: 'income',
-            name: 'Food & Drink',
-            total: 3000
-        },
-        {
-            type: 'income',
-            name: 'House',
-            total: 3000
-        },
-        {
-            type: 'income',
-            name: 'Food & Drink',
-            total: 3000
-        },
-        {
-            type: 'income',
-            name: 'Food & Drink',
-            total: 3000
-        },
-    ]
-    const [datatableIncome, setDatatableIncome] = useState([]);
-
-    const [datatableExpense, setDatatableExpense] = React.useState({
+    const [datatableIncome, setDatatableIncome] = useState({
         columns: [
             {
                 label: 'Type',
@@ -63,6 +24,33 @@ const Categories = (props) => {
             {
                 label: 'Total',
                 field: 'total',
+            },
+            {
+                label: 'Action',
+                field: 'action',
+            }
+        ],
+        rows: [
+        ],
+    });
+
+    const [datatableExpense, setDatatableExpense] = useState({
+        columns: [
+            {
+                label: 'Type',
+                field: 'type',
+            },
+            {
+                label: 'Name',
+                field: 'name',
+            },
+            {
+                label: 'Total',
+                field: 'total',
+            },
+            {
+                label: 'Action',
+                field: 'action',
             }
         ],
         rows: [
@@ -81,27 +69,19 @@ const Categories = (props) => {
         }
     }
 
-    const routeChange = (categoryId) => {
-        let path = `listalltransactions/category/${categoryId}`;
-        history.push(path);
-    }
-
-
-    const handleAccount = (e) => {
-        routeChange(e)
-    }
-
     const createRow = async (detail) => {
         const content = [];
         const dataChart = [];
         for (let i = 0; i < detail.length; i++) {
-            const category = await CategoriesService.getOne(detail[i].categoryId);
+            const category = await CategoriesService.getOne(detail[i].categoryId)
+            const path =`/listalltransactions/category/${category.id}`
             content.push({
                 type: category.type,
-                name: <p onClick={() => handleAccount(category.id)}>{category.name}</p>,
-                total: detail[i].total
+                name: category.name,
+                total: detail[i].total,
+                action: <Link to={path}><MDBBtn color="success" size="sm">View</MDBBtn></Link>
             });
-            dataChart.push([category.name, detail[i].total]);
+            dataChart.push([category.name, detail[i].total])
         }
         const result = { content, dataChart }
         return result;
@@ -146,7 +126,7 @@ const Categories = (props) => {
                         aria-selected="false">Income</a>
                 </li>
             </ul>
-            <div className="tab-content" id="myTabContent">
+            <div className="tab-content black-text" id="myTabContent">
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                     {/* Chart */}
@@ -157,7 +137,7 @@ const Categories = (props) => {
                         hover
                         entriesOptions={[5, 10, 20]}
                         entries={5}
-                        data={datatableExpense}
+                        data={datatableExpense} 
                     />
                 </div>
                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
@@ -168,11 +148,8 @@ const Categories = (props) => {
                         hover
                         entriesOptions={[5, 10, 20]}
                         entries={5}
-                        data={{
-                            columns: columns,
-                            rows: datatableIncome
-                        }}
-                        searching={true} />
+                        data={datatableIncome} 
+                    />
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import usersService from '../../services/usersService';
-import { MDBModal, MDBModalBody, MDBModalHeader } from 'mdbreact';
+import { MDBModal, MDBModalBody, MDBModalHeader, MDBBtn } from 'mdbreact';
 
 const Profile = (props) => {
     const { username, email, id } = props.currentUser;
@@ -42,11 +42,11 @@ const Profile = (props) => {
     return (
         <div>
             <div className="profile z-depth-1 card text-center">
-                <h1>Hi, {username}! </h1>
-                <p>{email}</p>
+                <h1 className="black-text">Hi, {username}! </h1>
+                <h2 className="black-text">{email}</h2>
                 <button className="btn btn-default" onClick={()=>setModalIsOpen(true)}>Edit Profile</button>
                 <button className="btn btn-light" onClick={logout}>SIGN OUT</button>
-                <MDBModal isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
+                <MDBModal className="black-text" isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
                     <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>
                         <i className="fa fa-user-circle" aria-hidden="true">Edit Profile</i> 
                     </MDBModalHeader>
@@ -62,7 +62,8 @@ const Profile = (props) => {
                                 <label data-error="wrong" data-success="right" htmlFor="form29" className="ml-0">Password </label>
                             </div>
                             <div className="text-center mt-4">
-                                <button type="submit" className="btn btn-cyan mt-1"> Update and Save</button>
+                            <MDBBtn color="primary" type="submit">Edit</MDBBtn>
+                            <MDBBtn color="grey" onClick={()=>setModalIsOpen(!modalIsOpen)}>Cancel</MDBBtn>
                             </div>
                         </form>
                     </MDBModalBody>

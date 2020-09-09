@@ -70,9 +70,9 @@ export default {
                 startDate: startDate,
                 endDate: endDate
             }
-            console.log(data)
+            // console.log(data)
             const response = await apiUtil.post(buildUrl(`/transactions/filter`), data);
-            console.log('transaction', response)
+            // console.log('transaction', response)
             return response.data;
         } catch (err) {
             console.log(err);   

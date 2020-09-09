@@ -51,7 +51,7 @@ const Import = (props) => {
     }, [])
 
     return (
-        <div className="categories card">
+        <div className="categories card black-text">
 
             <form className="text-center border border-light p-5" onSubmit={handleSubmit} encType="multipart/form-data">
 
