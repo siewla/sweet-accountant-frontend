@@ -16,7 +16,7 @@ const Facebooklogin = (props) => {
 
     return (
         <FacebookLogin
-            appId="2397031347257750"
+            appId={process.env.REACT_APP_FACEBOOK_APPID}
             callback={responseFacebook}
             fields="email"
             scope="public_profile,email"
