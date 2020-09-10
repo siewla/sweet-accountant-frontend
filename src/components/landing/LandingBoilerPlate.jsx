@@ -7,8 +7,8 @@ import Login from '../authentication/Login';
 import PageHeader from '../PageHeader'
 import PageFooter from '../PageFooter'
 import SlideImages from './SlideImages';
-import Information from './Information';
-
+import Features from './Features';
+import FeedBack from './FeedBack';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const Landing = (props) => {
@@ -26,7 +26,8 @@ const Landing = (props) => {
                     <Route path="/signup" render={() => <Signup login={login} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} checkAuthentication={props.checkAuthentication}/>} />
                     <Route path="/login" render={() => <Login login={login} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} checkAuthentication={props.checkAuthentication}/>} />
                 </Switch>
-                <Information />
+                <Features />
+                <FeedBack />
                 <PageFooter />
             </Router>
             

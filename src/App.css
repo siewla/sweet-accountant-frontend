@@ -3,7 +3,6 @@
 *{
   font-family: 'Nunito', sans-serif;
 }
-
 .landing-container {
   padding: 10%;
   min-height: 800px;
@@ -167,6 +166,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 1%;
 }
 
 .current-content{
@@ -185,10 +185,10 @@
 }
 
 /* Profile */
-.profile {
-    margin: 5% auto;
-}
 
+.profile-content {
+  padding: 20%;
+}
 /* All Transactions */
 .filters-container{
   width: 70vw;
@@ -217,6 +217,7 @@
   width: 60%;
   margin: auto;
   margin-top: 5%;
+  padding: 2%;
 }
 
 .tab-pane {
@@ -235,99 +236,13 @@
   filter: blur(2px);
 }
 
-.chart {
-  width: 100%;
-}
-.chart-part {
-  width: 50%;
-  padding: 1%;
-}
-
-.chart-bill {
-  width: 40%;
-  padding: 1%;
-}
-
-.information-2 {
-  margin-left: 10%;
-}
-.information {
- 
-width: 100%;
- text-align: center;
- background-image: url('https://cdn.pixabay.com/photo/2020/06/30/14/04/bridge-5356471_960_720.jpg');
- background-position: center; /* Center the image */
- background-repeat: no-repeat; /* Do not repeat the image */
- background-size: cover;
-  padding: 10%;
-  font-size: 50px;
-  color: white;
-}
-
-
-.information-1 {
-  padding: 2%;
+.feature {
   margin-top: 15%;
-  margin-left: 5%;
 }
-
-.bill-content {
-  padding: 1%;
-  width: 30%;
-  position: relative;
-  left: 35%;
-  bottom: 450px;
-  cursor: pointer;
+.feedback {
+  background-color: whitesmoke;
+  margin-top: 15%;
 }
-
-.bill-content-2 {
-  padding: 1%;
-  width: 40%;
-  position: relative;
-  left: 35%;
-  bottom: 420px;
-  cursor: pointer;
-}
-
-.bill-content > p {
-  background-color: #021a4a;
-  padding: 10%;
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-  color: white;
-}
-
- .bill-content-2:hover, .chart-content:hover {
-  box-shadow: 6px 6px 4px 3px #000000
-}
-.bill-content-2 > p {
-  background-color: #efb891;
-  padding: 10%;
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-}
-.chart-content {
-  padding: 1%;
-  width: 30%;
-  position: relative;
-  left: 45%;
-  bottom: 250px;
-  color: white;
-  cursor: pointer;
-}
-
-.chart-content > p {
-  background-color: #77a8cc;
-  padding: 10%;
-  margin: 0;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.get {
-  text-align: center;
-  padding: 12%;
-}
-
 /* statistic-box */
 .statistic-box{
   width: 60vw;

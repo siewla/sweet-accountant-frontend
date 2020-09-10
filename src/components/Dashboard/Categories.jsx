@@ -6,6 +6,7 @@ import { useHistory, Link } from 'react-router-dom';
 import { PieChart } from 'react-chartkick';
 import 'chart.js';
 import { MDBBtn } from 'mdbreact';
+import {trackPromise} from 'react-promise-tracker';
 
 const Categories = (props) => {
     const history = useHistory();
@@ -87,13 +88,13 @@ const Categories = (props) => {
         return result;
     }
     const fetchData = async () => {
-        const currentUser = await checkAuthentication();
+        const currentUser = await trackPromise(checkAuthentication());
 
-        const inComeDetail = await CategoriesService.getIncomeDetail(currentUser.id);
-        const expenseDetail = await CategoriesService.getExpenseDetail(currentUser.id);
+        const inComeDetail = await trackPromise(CategoriesService.getIncomeDetail(currentUser.id));
+        const expenseDetail = await trackPromise(CategoriesService.getExpenseDetail(currentUser.id));
 
-        const incomeContent = await createRow(inComeDetail);
-        const expenseContent = await createRow(expenseDetail);
+        const incomeContent = await trackPromise(createRow(inComeDetail)) ;
+        const expenseContent = await trackPromise(createRow(expenseDetail)) ;
 
         console.log(incomeContent.content);
         // set data table
