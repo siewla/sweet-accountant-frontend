@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import StatisticBox from '../StatisticBox'
 import transactions from '../../services/transactions'
 import accounts from '../../services/accounts'
 import categoriesService from '../../services/categories'
 import usersService from '../../services/usersService'
 import authentication from '../../services/authentication'
-import {trackPromise} from 'react-promise-tracker'
+import { trackPromise } from 'react-promise-tracker'
 import TransactionsList from './TransactionsList'
 
 
 const Transactions = (props) => {
-    const [currentUser, setCurrentUser]= useState(props.currentUser)
+    const [currentUser, setCurrentUser] = useState(props.currentUser)
 
     const checkAuthentication = async () => {
         const response = await authentication.checkAuthentication();
-        if(response.message) {
+        if (response.message) {
             return []
         } else {
             return response
@@ -24,8 +24,8 @@ const Transactions = (props) => {
     const [initialData, setData] = useState({
         incomeCategories: [],
         expenseCategories: [],
-        allAccounts:[],
-        allAccountsStatistic:{
+        allAccounts: [],
+        allAccountsStatistic: {
             totalTransactions: 0,
             totalIncome: 0.00,
             totalExpense: 0.00,
@@ -34,51 +34,51 @@ const Transactions = (props) => {
         categoryFilterName: '',
         accountFilterName: ''
     })
-    
-    const {incomeCategories, expenseCategories, allAccounts, allAccountsStatistic, accountFilterName, categoryFilterName} = initialData
+
+    const { incomeCategories, expenseCategories, allAccounts, allAccountsStatistic, accountFilterName, categoryFilterName } = initialData
 
     const [transactionsList, setTransactionsList] = useState({
         listAllTransactionsId: null,
         listAllTransactionsType: 'all'
     })
 
-    const {listAllTransactionsId, listAllTransactionsType} = transactionsList
+    const { listAllTransactionsId, listAllTransactionsType } = transactionsList
 
     const [filterMsg, setFilterMsg] = useState('none')
 
     const handleFilter = async (filterId, filterType) => {
 
-        if( filterType === 'account'){
+        if (filterType === 'account') {
             const name = await accounts.getOne(filterId)
             setFilterMsg(`Account Name: ${name.name}`)
-        } else if( filterType === 'category'){
+        } else if (filterType === 'category') {
             const name = await categoriesService.getOne(filterId)
             setFilterMsg(`Category Name: ${name.name}`)
         }
-        if (filterType===null){
+        if (filterType === null) {
             setTransactionsList({
                 listAllTransactionsId: null,
                 listAllTransactionsType: 'all'
             })
-        } else{
+        } else {
             setTransactionsList({
                 listAllTransactionsId: filterId,
                 listAllTransactionsType: filterType
             })
         }
-        
+
         console.log(listAllTransactionsType)
     }
 
     useEffect(() => {
-        async function fetchData (user){
+        async function fetchData(user) {
             const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(user.id)
-            const allTransactionsResponse = await trackPromise( transactions.getAllTransactions(user.id))
+            const allTransactionsResponse = await trackPromise(transactions.getAllTransactions(user.id))
             allAccountsStatisticResponse.totalTransactions = allTransactionsResponse.length
-            const incomeResponse = await trackPromise( categoriesService.getAllIncomeCategories())
-            const expenseResponse = await trackPromise( categoriesService.getAllExpenseCategories())
-            const allAccountsResponse = await trackPromise( usersService.getAllAccounts(user.id))
-            setData((prevState) =>({
+            const incomeResponse = await trackPromise(categoriesService.getAllIncomeCategories())
+            const expenseResponse = await trackPromise(categoriesService.getAllExpenseCategories())
+            const allAccountsResponse = await trackPromise(usersService.getAllAccounts(user.id))
+            setData((prevState) => ({
                 ...prevState,
                 allTransactions: allTransactionsResponse,
                 allAccountsStatistic: allAccountsStatisticResponse,
@@ -88,15 +88,15 @@ const Transactions = (props) => {
             }))
         }
 
-        async function fetchCurrentUser (){
+        async function fetchCurrentUser() {
             const data = await trackPromise(checkAuthentication())
             setCurrentUser(data)
             fetchData(data)
         }
 
-        if (!currentUser.id){
+        if (!currentUser.id) {
             fetchCurrentUser()
-        } else{
+        } else {
             fetchData(currentUser)
         }
 
@@ -105,34 +105,38 @@ const Transactions = (props) => {
 
     return (
         <div>
-            <StatisticBox statistic={allAccountsStatistic}/>
-            <div className="filters-container">
-                <h4>Filters</h4>
-                <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value, 'category')}>
-                    <option>Filtered by Income Categories</option>
-                    {incomeCategories.map(category => {
-                        return <option value={category.id} value2={category.name} key={category.id}>{category.name}</option>
-                    })}
-                </select>
-                <select className="browser-default custom-select" value={categoryFilterName} onChange={(e)=>handleFilter(e.target.value, 'category')}>
-                    <option>Filtered by Expense Categories</option>
-                    {expenseCategories.map(category => {
-                        return <option value={category.id} name={category.name} key={category.id}>{category.name}</option>
-                    })}
-                </select>
-                <select className="browser-default custom-select" value={accountFilterName} onChange={(e)=>handleFilter(e.target.value, 'account')}>
-                    <option>Filtered by Account</option>
-                    {allAccounts.map(account => {
-                        return <option value={account.id} name={account.name} key={account.id}>{account.name}</option>
-                    })}
-                </select>
+            <div className="statistic-filter">
+                <StatisticBox statistic={allAccountsStatistic} />
+                <div className="filters-container z-depth-1">
+                    <h5 className="card-header white-text info-color">Filters</h5>
+                    <select className="browser-default custom-select" value={categoryFilterName} onChange={(e) => handleFilter(e.target.value, 'category')}>
+                        <option>Filtered by Income Categories</option>
+                        {incomeCategories.map(category => {
+                            return <option value={category.id} value2={category.name} key={category.id}>{category.name}</option>
+                        })}
+                    </select>
+                    <select className="browser-default custom-select" value={categoryFilterName} onChange={(e) => handleFilter(e.target.value, 'category')}>
+                        <option>Filtered by Expense Categories</option>
+                        {expenseCategories.map(category => {
+                            return <option value={category.id} name={category.name} key={category.id}>{category.name}</option>
+                        })}
+                    </select>
+                    <select className="browser-default custom-select" value={accountFilterName} onChange={(e) => handleFilter(e.target.value, 'account')}>
+                        <option>Filtered by Account</option>
+                        {allAccounts.map(account => {
+                            return <option value={account.id} name={account.name} key={account.id}>{account.name}</option>
+                        })}
+                    </select>
+                </div>
             </div>
-            <TransactionsList 
+
+
+            <TransactionsList
                 type={listAllTransactionsType}
                 typeId={listAllTransactionsId}
                 currentUser={currentUser}
                 filterMsg={filterMsg}
-                setFilterMsg ={setFilterMsg}
+                setFilterMsg={setFilterMsg}
             />
         </div>
     )
