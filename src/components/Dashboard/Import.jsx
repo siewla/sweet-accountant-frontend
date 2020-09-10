@@ -73,9 +73,9 @@ const Import = (props) => {
                                 </p>
                                 {/* Modal */}
                                 {/* <!-- Central Modal Medium Info --> */}
-                                <div class="modal fade" id="centralModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                                <div class="modal fade right" id="centralModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-notify modal-info" role="document">
+                                     <div class="modal-dialog modal-full-height modal-right modal-notify modal-info" role="document">
                                         {/* <!--Content--> */}
                                         <div class="modal-content">
                                             {/* <!--Header--> */}

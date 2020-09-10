@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import transactions from '../../services/transactions'
 import categoriesService from '../../services/categories'
 import usersService from '../../services/usersService'
@@ -12,13 +12,13 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 const TransactionsList = (props) => {
-    const [currentUser, setCurrentUser]= useState(props.currentUser)
+    const [currentUser, setCurrentUser] = useState(props.currentUser)
     const [startDate, setStartDate] = useState(null); //1 week ago
     const [endDate, setEndDate] = useState(null);
 
     const checkAuthentication = async () => {
         const response = await authentication.checkAuthentication();
-        if(response.message) {
+        if (response.message) {
             return []
         } else {
             return response
@@ -31,26 +31,26 @@ const TransactionsList = (props) => {
         incomeCategories: [],
         expenseCategories: [],
         allCategories: [],
-        allAccounts:[],
+        allAccounts: [],
         allTransactions: [],
     })
 
-    const { incomeCategories, expenseCategories, allCategories, allAccounts, allTransactions} = initialData
+    const { incomeCategories, expenseCategories, allCategories, allAccounts, allTransactions } = initialData
 
     const [editState, toggleDisplayEditForm] = useState(false)
 
-    const [currentTransactionId, setCurrentTransactionId] =useState(null)
+    const [currentTransactionId, setCurrentTransactionId] = useState(null)
 
-    const handleEdit = (transactionId) =>{
+    const handleEdit = (transactionId) => {
         toggleDisplayEditForm(true)
         setCurrentTransactionId(transactionId)
     }
 
-    const handleDelete = async (transactionId) =>{
-        try{
+    const handleDelete = async (transactionId) => {
+        try {
             await transactions.deleteTransactionById(transactionId)
             setTriggerEffect(!triggerEffect)
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
         // console.log('handle delete', transactionId)
@@ -76,40 +76,39 @@ const TransactionsList = (props) => {
     //     return common;
     // }
 
-    const handleDateSubmit = async() =>{
+    const handleDateSubmit = async () => {
         props.setFilterMsg('date')
         const allTransactionsRangeResponse = await transactions.getAllTransactionsByRange(startDate, endDate)
         const amendedTransactions = amendTransactions(allTransactionsRangeResponse, allAccounts, allCategories)
         // const matchedTransactions = getCommon(amendedTransactions, allTransactions)
-        setData((prevState) =>({
+        setData((prevState) => ({
             ...prevState,
             // allTransactions: matchedTransactions
             allTransactions: amendedTransactions
         }))
     }
 
-    const handleClear = async() => {
+    const handleClear = async () => {
         props.setFilterMsg('none')
         const transactionsResponse = await transactions.getAllTransactions(currentUser.id)
         const amendedTransactions = amendTransactions(transactionsResponse, allAccounts, allCategories)
-        setData((prevState) =>({
+        setData((prevState) => ({
             ...prevState,
             allTransactions: amendedTransactions
         }))
     }
 
-    const amendTransactions = (transactions, allAccounts, allCategories) =>{
-        transactions.map((transaction,index) =>
-        {
-            allAccounts.filter( account=>{ 
-                if( account.id === transaction.accountId){
+    const amendTransactions = (transactions, allAccounts, allCategories) => {
+        transactions.map((transaction, index) => {
+            allAccounts.filter(account => {
+                if (account.id === transaction.accountId) {
                     transaction.accountName = account.name
                     return transaction
                 } else
                     return null
             })
-            allCategories.filter ( category =>{
-                if ( category.id === transaction.categoryId){
+            allCategories.filter(category => {
+                if (category.id === transaction.categoryId) {
                     transaction.categoryName = category.name
                     return transaction
                 } else
@@ -117,28 +116,28 @@ const TransactionsList = (props) => {
             })
 
             const calendarStrings = {
-                lastDay : 'DD/MM/YYYY',
-                sameDay : 'DD/MM/YYYY',
-                nextDay : 'DD/MM/YYYY',
-                lastWeek : 'DD/MM/YYYY',
-                nextWeek : 'DD/MM/YYYY',
-                sameElse : 'DD/MM/YYYY'
+                lastDay: 'DD/MM/YYYY',
+                sameDay: 'DD/MM/YYYY',
+                nextDay: 'DD/MM/YYYY',
+                lastWeek: 'DD/MM/YYYY',
+                nextWeek: 'DD/MM/YYYY',
+                sameElse: 'DD/MM/YYYY'
             };
 
             transaction.paidAt = <Moment calendar={calendarStrings}>{transaction.paidAt}</Moment>
-            transaction.amount = (parseFloat(transaction.amount)/100).toFixed(2)
+            transaction.amount = (parseFloat(transaction.amount) / 100).toFixed(2)
             const idForTransaction = transaction.id
-            transaction.actions = <div><MDBBtn color="primary" size="sm" onClick={()=>handleEdit(idForTransaction)}>Edit</MDBBtn><MDBBtn color="red" size="sm" onClick={()=>handleDelete(idForTransaction)}>Delete</MDBBtn></div>
+            transaction.actions = <div><MDBBtn color="primary" size="sm" onClick={() => handleEdit(idForTransaction)}>Edit</MDBBtn><MDBBtn color="red" size="sm" onClick={() => handleDelete(idForTransaction)}>Delete</MDBBtn></div>
             return transaction
         })
-        return transactions 
+        return transactions
     }
 
 
     useEffect(() => {
-        async function fetchData (user){
-        let transactionsResponse;
-            switch (props.type){
+        async function fetchData(user) {
+            let transactionsResponse;
+            switch (props.type) {
                 case 'account':
                     transactionsResponse = await transactions.getAllTransactionsByAccountId(props.typeId)
                     break
@@ -149,8 +148,8 @@ const TransactionsList = (props) => {
                     transactionsResponse = await transactions.getAllTransactions(user.id)
                     break;
                 default:
-                    transactionsResponse =[]
-                break
+                    transactionsResponse = []
+                    break
             }
             const incomeResponse = await categoriesService.getAllIncomeCategories()
             const expenseResponse = await categoriesService.getAllExpenseCategories()
@@ -166,15 +165,15 @@ const TransactionsList = (props) => {
             })
         }
 
-        async function fetchCurrentUser (){
+        async function fetchCurrentUser() {
             const data = await checkAuthentication()
             setCurrentUser(data)
             fetchData(data)
         }
 
-        if (!currentUser.id){
+        if (!currentUser.id) {
             fetchCurrentUser()
-        } else{
+        } else {
             fetchData(currentUser)
         }
 
@@ -184,53 +183,57 @@ const TransactionsList = (props) => {
 
     return (
         <div>
-            
-            {props.filterMsg!=='disabled' ? <div>
-                <div className="date-filter-container">
-                    <h5>Filtered by Date</h5>
+
+            {props.filterMsg !== 'disabled' ? <div>
+                <div className="date-filter-container z-depth-1">
+                    <h5 className="card-header default-color">Filtered by Date</h5>
                     <div className="date-filter-container-column">
-                        <h6>From </h6>
-                        <DatePicker
-                            selected={startDate}
-                            onChange={date => setStartDate(date)}
-                            selectsStart
-                            startDate={startDate}
-                            endDate={endDate}
-                            maxDate={new Date()}
-                        />
+                        <div>
+                            <h6>From</h6>
+                            <DatePicker
+                                selected={startDate}
+                                onChange={date => setStartDate(date)}
+                                selectsStart
+                                startDate={startDate}
+                                endDate={endDate}
+                                maxDate={new Date()}
+                            />
+                        </div>
+                        <div>
+                            <h6>To </h6>
+                            <DatePicker
+                                selected={endDate}
+                                onChange={date => setEndDate(date)}
+                                selectsEnd
+                                startDate={startDate}
+                                endDate={endDate}
+                                maxDate={new Date()}
+                            />
+                        </div>
+                        <MDBBtn className="float-right" color="primary" size="sm" onClick={() => handleDateSubmit()}>Submit</MDBBtn>
                     </div>
-                    <div className="date-filter-container-column">
-                        <h6>To </h6>
-                        <DatePicker
-                            selected={endDate}
-                            onChange={date => setEndDate(date)}
-                            selectsEnd
-                            startDate={startDate}
-                            endDate={endDate}
-                            maxDate={new Date()}
-                        />
-                    </div>
-                    <MDBBtn className="float-right" color="primary" size="sm" onClick={()=>handleDateSubmit()}>Submit</MDBBtn>
+
                 </div>
+
                 <h5>Filtered by {props.filterMsg}</h5>
-                <MDBBtn color="unique" onClick={()=>handleClear()}>Clear Filter</MDBBtn>
-            </div>: null}
-            {editState?
-            <UpdateIndividualTransaction 
-                incomeCategories={incomeCategories}
-                expenseCategories={expenseCategories}
-                allAccounts={allAccounts}
-                triggerEffect = {triggerEffect}
-                setTriggerEffect = {setTriggerEffect}
-                currentUser={currentUser}
-                toggleDisplayEditForm={toggleDisplayEditForm}
-                transactionId={currentTransactionId}
-            />:null}
-            <MDBDataTableV5 
+                <MDBBtn color="unique" onClick={() => handleClear()}>Clear Filter</MDBBtn>
+            </div> : null}
+            {editState ?
+                <UpdateIndividualTransaction
+                    incomeCategories={incomeCategories}
+                    expenseCategories={expenseCategories}
+                    allAccounts={allAccounts}
+                    triggerEffect={triggerEffect}
+                    setTriggerEffect={setTriggerEffect}
+                    currentUser={currentUser}
+                    toggleDisplayEditForm={toggleDisplayEditForm}
+                    transactionId={currentTransactionId}
+                /> : null}
+            <MDBDataTableV5
                 hover
-                entriesOptions = {[5, 10, 25, 50]}
-                entries = {5}
-                data = {{
+                entriesOptions={[5, 10, 25, 50]}
+                entries={5}
+                data={{
                     columns: dataColumn,
                     rows: allTransactions
                 }}
