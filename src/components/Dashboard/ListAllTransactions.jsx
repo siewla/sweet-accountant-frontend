@@ -56,7 +56,7 @@ const ListAllTransactions = (props) => {
     }, [currentUser, typeName])
 
     return (
-        <div>
+        <div className ="list-all-transactions-container">
             {
                 type ==='account'?<IndividualAccountStatisticBox currentUser={currentUser} typeId={typeId}/>: null
             }

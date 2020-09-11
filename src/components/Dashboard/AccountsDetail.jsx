@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 import StatisticBox from '../StatisticBox'
 import authentication from '../../services/authentication';
 import {trackPromise} from 'react-promise-tracker'
+import NumberFormat from 'react-number-format';
+
 
 const AccountsDetail = (props) => {
     const [currentUser, setCurrentUser] = useState(props.currentUser);
@@ -100,7 +102,8 @@ const AccountsDetail = (props) => {
         const amendedAccounts = allAccountsResponse.map((accountMain,index) =>{
             allAccountsBalance.filter( account=>{ 
                 if( account.accountId === accountMain.id){
-                    accountMain.balance = (parseFloat(account.balance)/100).toFixed(2)
+                    // accountMain.balance = (parseFloat(account.balance)/100).toFixed(2)
+                    accountMain.balance =<NumberFormat value={(parseFloat(account.balance)/100).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                     return accountMain
                 } else
                     return null

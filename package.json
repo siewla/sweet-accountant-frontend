@@ -25,6 +25,7 @@
     "react-google-login": "^5.1.21",
     "react-loading": "^2.0.3",
     "react-moment": "^0.9.7",
+    "react-number-format": "^4.4.1",
     "react-parallax": "^3.0.3",
     "react-promise-tracker": "^2.1.0",
     "react-responsive-carousel": "^3.2.9",

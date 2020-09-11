@@ -7,6 +7,8 @@ import { PieChart } from 'react-chartkick';
 import 'chart.js';
 import { MDBBtn } from 'mdbreact';
 import {trackPromise} from 'react-promise-tracker';
+import NumberFormat from 'react-number-format';
+
 
 const Categories = (props) => {
     const [dataChartIncome, setDataChartIncome] = useState([]);
@@ -78,7 +80,8 @@ const Categories = (props) => {
             content.push({
                 type: category.type,
                 name: category.name,
-                total: detail[i].total,
+                // total: detail[i].total,
+                total: <NumberFormat value={detail[i].total} displayType={'text'} thousandSeparator={true} prefix={'$'} />,
                 action: <Link to={path}><MDBBtn color="success" size="sm">View</MDBBtn></Link>
             });
             dataChart.push([category.name, detail[i].total])

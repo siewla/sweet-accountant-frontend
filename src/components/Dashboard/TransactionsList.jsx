@@ -3,14 +3,16 @@ import transactions from '../../services/transactions'
 import categoriesService from '../../services/categories'
 import usersService from '../../services/usersService'
 import authentication from '../../services/authentication'
-import { MDBDataTableV5, MDBBtn } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn } from 'mdbreact'
 import dataColumn from './transactionsTableDataColumn'
 import Moment from 'react-moment';
-import UpdateIndividualTransaction from './UpdateIndividualTransaction';
+import UpdateIndividualTransaction from './UpdateIndividualTransaction'
 import DatePicker from "react-datepicker";
 import { trackPromise } from 'react-promise-tracker'
 import Loader from '../Loader'
-import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css"
+import NumberFormat from 'react-number-format'
+
 
 
 const TransactionsList = (props) => {
@@ -127,7 +129,8 @@ const TransactionsList = (props) => {
             };
 
             transaction.paidAt = <Moment calendar={calendarStrings}>{transaction.paidAt}</Moment>
-            transaction.amount = (parseFloat(transaction.amount) / 100).toFixed(2)
+            // transaction.amount = (parseFloat(transaction.amount) / 100).toFixed(2)
+            transaction.amount =<NumberFormat value={(parseFloat(transaction.amount)/100).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
             const idForTransaction = transaction.id
             transaction.actions = <div><MDBBtn color="primary" size="sm" onClick={() => handleEdit(idForTransaction)}>Edit</MDBBtn><MDBBtn color="red" size="sm" onClick={() => handleDelete(idForTransaction)}>Delete</MDBBtn></div>
             return transaction
@@ -232,7 +235,7 @@ const TransactionsList = (props) => {
                     transactionId={currentTransactionId}
                 /> : null}
             <Loader>
-                <MDBDataTableV5
+                <MDBDataTableV5 className="transactions-table"
                     hover
                     entriesOptions={[5, 10, 25, 50]}
                     entries={5}
