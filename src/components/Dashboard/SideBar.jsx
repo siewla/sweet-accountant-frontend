@@ -8,7 +8,7 @@ const SideBar = (props) => {
 
             <div>
                 <h3 className="logo-wrapper waves-effect text-center">
-                    <img src="../../../img/sweet.png" className="img-fluid" alt="" />
+                    <img src="../../../img/image.png" className="img-fluid" alt="" />
                 </h3>
                 <h3 className="text-center dashboard-title">
                     <i className="fas fa-chart-pie mr-3"></i>Dashboard</h3>

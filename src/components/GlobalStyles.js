@@ -28,6 +28,38 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .import {
-    background-color: ${({ theme }) => theme.import}
+    background-color: ${({ theme }) => theme.import};
+  }
+
+  .logo-wrapper {
+    background-color: ${({ theme }) => theme.logo}
+  }
+
+  .card {
+    background-color: ${({ theme }) => theme.card};
+    color: ${({ theme }) => theme.text};
+  }
+
+  .table {
+    background-color: ${({ theme }) => theme.table};
+    color: ${({ theme }) => theme.text};
+  }
+
+  .form-import {
+    color: ${({ theme }) => theme.text};
+  }
+
+  .edit-transaction-form {
+    background-color: ${({ theme }) => theme.table};
+    color: ${({ theme }) => theme.text};
+  }
+
+  .form-control {
+    background-color: ${({ theme }) => theme.table};
+    color: ${({ theme }) => theme.text};
+  }
+
+  .profile-content {
+    color: ${({ theme }) => theme.text_profile};
   }
   `
