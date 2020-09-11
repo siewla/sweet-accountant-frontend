@@ -199,6 +199,10 @@
   height: fit-content;
 }
 
+.filters {
+  padding: 4%;
+  margin: 0;
+}
 .statistic-filter {
   display: flex;
   flex-flow: row wrap;
