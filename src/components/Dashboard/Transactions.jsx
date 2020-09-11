@@ -108,7 +108,7 @@ const Transactions = (props) => {
             <div className="statistic-filter">
                 <StatisticBox statistic={allAccountsStatistic} />
                 <div className="filters-container z-depth-1">
-                    <h5 className="card-header white-text info-color">Filters</h5>
+                    <h5 className="filters white-text info-color">Filters</h5>
                     <select className="browser-default custom-select" value={categoryFilterName} onChange={(e) => handleFilter(e.target.value, 'category')}>
                         <option>Filtered by Income Categories</option>
                         {incomeCategories.map(category => {
