@@ -348,3 +348,11 @@
   max-height: 400px;
   overflow: scroll;
 }
+
+.all-accounts-container, .list-all-transactions-container{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  padding-top: 5vh;
+}

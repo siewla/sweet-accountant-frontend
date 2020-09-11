@@ -141,7 +141,7 @@ const AccountsDetail = (props) => {
 
 
     return (
-        <div>
+        <div className="all-accounts-container">
             <StatisticBox statistic={allAccountsStatistic}/>
             <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
             {editState?

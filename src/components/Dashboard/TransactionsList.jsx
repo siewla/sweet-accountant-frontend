@@ -8,6 +8,8 @@ import dataColumn from './transactionsTableDataColumn'
 import Moment from 'react-moment';
 import UpdateIndividualTransaction from './UpdateIndividualTransaction';
 import DatePicker from "react-datepicker";
+import { trackPromise } from 'react-promise-tracker'
+import Loader from '../Loader'
 import "react-datepicker/dist/react-datepicker.css";
 
 
@@ -139,13 +141,13 @@ const TransactionsList = (props) => {
             let transactionsResponse;
             switch (props.type) {
                 case 'account':
-                    transactionsResponse = await transactions.getAllTransactionsByAccountId(props.typeId)
+                    transactionsResponse = await trackPromise (transactions.getAllTransactionsByAccountId(props.typeId))
                     break
                 case 'category':
-                    transactionsResponse = await transactions.getAllTransactionsByCategoryId(props.typeId)
+                    transactionsResponse = await trackPromise (transactions.getAllTransactionsByCategoryId(props.typeId))
                     break
                 case 'all':
-                    transactionsResponse = await transactions.getAllTransactions(user.id)
+                    transactionsResponse = await trackPromise( transactions.getAllTransactions(user.id))
                     break;
                 default:
                     transactionsResponse = []
@@ -229,15 +231,19 @@ const TransactionsList = (props) => {
                     toggleDisplayEditForm={toggleDisplayEditForm}
                     transactionId={currentTransactionId}
                 /> : null}
-            <MDBDataTableV5
-                hover
-                entriesOptions={[5, 10, 25, 50]}
-                entries={5}
-                data={{
-                    columns: dataColumn,
-                    rows: allTransactions
-                }}
-            />
+            <Loader>
+                <MDBDataTableV5
+                    hover
+                    entriesOptions={[5, 10, 25, 50]}
+                    entries={5}
+                    data={{
+                        columns: dataColumn,
+                        rows: allTransactions
+                    }}
+                />
+            </Loader>
+
+            
         </div>
     )
 }

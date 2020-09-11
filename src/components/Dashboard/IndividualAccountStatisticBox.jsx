@@ -34,7 +34,7 @@ const IndividualAccountStatisticBox = (props) => {
     }, [])
 
     return (
-        <div>
+        <div className="list-all-transactions-container">
             <StatisticBox statistic={accountStatistic}/>
         </div>
     )
