@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import AddNewAccount from './AddNewAccount'
 import UpdateAccount from './UpdateAccount'
-import { MDBDataTableV5, MDBBtn, MDBContainer, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
+import { MDBDataTableV5, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import usersService from '../../services/usersService'
 import accounts from '../../services/accounts'
 import { Link } from 'react-router-dom';

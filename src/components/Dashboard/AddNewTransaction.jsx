@@ -4,7 +4,6 @@ import categoriesService from '../../services/categories'
 import usersService from '../../services/usersService'
 import authentication from '../../services/authentication'
 import {trackPromise} from 'react-promise-tracker'
-import Loader from '../Loader'
 import AddNewTransactionForm from './AddNewTransactionForm'
 
 const AddNewTransaction = (props) => {

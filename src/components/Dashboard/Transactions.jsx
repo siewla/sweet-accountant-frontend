@@ -67,7 +67,7 @@ const Transactions = (props) => {
             })
         }
 
-        console.log(listAllTransactionsType)
+        // console.log(listAllTransactionsType)
     }
 
     useEffect(() => {

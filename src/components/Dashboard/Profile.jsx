@@ -41,26 +41,26 @@ const Profile = (props) => {
 
     return (
         <div className="">
-            <div class="view grey lighten-3">
-                {/* <div class="mask"> */}
+            <div className="view grey lighten-3">
+                {/* <div className="mask"> */}
 
-                <div class="container h-100">
+                <div className="container h-100">
 
-                    <div class="row align-items-center h-100 profile-content">
+                    <div className="row align-items-center h-100 profile-content">
 
-                        <div class="col-md-6">
-                            <h1 class="mb-4">Start <span class="text-warning">your jouney</span><br /><span class="cyan-text">to reach</span> your goal</h1>
+                        <div className="col-md-6">
+                            <h1 className="mb-4">Start <span className="text-warning">your jouney</span><br /><span className="cyan-text">to reach</span> your goal</h1>
 
-                            <h3 class="mb-4 pb-2 dark-grey-text">Hi, {username}!</h3>
-                            <p class="mb-4 pb-2 dark-grey-text">{email}</p>
+                            <h3 className="mb-4 pb-2 dark-grey-text">Hi, {username}!</h3>
+                            <p className="mb-4 pb-2 dark-grey-text">{email}</p>
 
-                            <button class="btn btn-primary btn-rounded btn-md ml-md-0" onClick={() => setModalIsOpen(true)}>Edit Profile</button>
-                            <button class="btn btn-outline-grey btn-rounded btn-md" onClick={logout}>SIGN OUT</button>
+                            <button className="btn btn-primary btn-rounded btn-md ml-md-0" onClick={() => setModalIsOpen(true)}>Edit Profile</button>
+                            <button className="btn btn-outline-grey btn-rounded btn-md" onClick={logout}>SIGN OUT</button>
 
                         </div>
 
-                        <div class="col-md-6">
-                            <img src="https://mdbootstrap.com/img/illustrations/hiker-man-colour.svg" alt="" class="img-fluid" />
+                        <div className="col-md-6">
+                            <img src="https://mdbootstrap.com/img/illustrations/hiker-man-colour.svg" alt="" className="img-fluid" />
                         </div>
 
                     </div>

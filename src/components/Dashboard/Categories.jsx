@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { MDBDataTableV5 } from 'mdbreact';
 import CategoriesService from '../../services/categories';
 import authentication from '../../services/authentication';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { PieChart } from 'react-chartkick';
 import 'chart.js';
 import { MDBBtn } from 'mdbreact';
 import {trackPromise} from 'react-promise-tracker';
 
 const Categories = (props) => {
-    const history = useHistory();
     const [dataChartIncome, setDataChartIncome] = useState([]);
     const [dataChartExpense, setDataChartExpense] = useState([]);
     const [datatableIncome, setDatatableIncome] = useState({
@@ -96,7 +95,7 @@ const Categories = (props) => {
         const incomeContent = await trackPromise(createRow(inComeDetail)) ;
         const expenseContent = await trackPromise(createRow(expenseDetail)) ;
 
-        console.log(incomeContent.content);
+        // console.log(incomeContent.content);
         // set data table
         setDatatableIncome({
             ...datatableIncome,
