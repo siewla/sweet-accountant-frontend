@@ -4,6 +4,8 @@ import reportService from '../../services/report';
 import { LineChart, ColumnChart } from 'react-chartkick';
 import 'chart.js';
 import categoriesService from '../../services/categories';
+import { trackPromise } from 'react-promise-tracker';
+import Loader from '../Loader';
 
 const Report = (props) => {
     const [dataIncome, setDataIncome] = useState({});
@@ -37,25 +39,23 @@ const Report = (props) => {
                     expense: type === "expense" ? data[i].total : 0
                 }
             })
-
-            //{ name: "food", data: {income: 0, expense: 10000} }
         }
         return result;
     }
 
     const fetchData = async () => {
-        const currentUser = await checkAuthentication();
-        const incomeData = await reportService.calculateTransactionsIncome(currentUser.id);
-        const expenseData = await reportService.calculateTransactionsExpense(currentUser.id);
+        const currentUser = await trackPromise(checkAuthentication());
+        const incomeData = await trackPromise(reportService.calculateTransactionsIncome(currentUser.id));
+        const expenseData = await trackPromise(reportService.calculateTransactionsExpense(currentUser.id));
         setDataIncome(incomeData);
         setDataExpense(expenseData);
 
 
-        const incomeCat = await categoriesService.getIncomeDetail(currentUser.id);
-        const inComeResult = await changeData(incomeCat, "income");
+        const incomeCat = await trackPromise(categoriesService.getIncomeDetail(currentUser.id));
+        const inComeResult = await trackPromise(changeData(incomeCat, "income"));
 
-        const expenseCat = await categoriesService.getExpenseDetail(currentUser.id);
-        const expenseResult = await changeData(expenseCat, "expense");
+        const expenseCat = await trackPromise(categoriesService.getExpenseDetail(currentUser.id));
+        const expenseResult = await trackPromise(changeData(expenseCat, "expense"));
 
         setDataCategorie([...inComeResult, ...expenseResult]);
         // console.log([...inComeResult, ...expenseResult]);
@@ -80,10 +80,13 @@ const Report = (props) => {
             </ul>
             <div className="tab-content" id="myTabContent">
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <LineChart data={currentData === "expense" ? dataExpense : dataIncome}
-                        thousands="," prefix="$"
-                        colors={currentData === "expense" ? ["#b00", "#666"] : ''}
-                        decimal="." />
+                    <Loader>
+                        <LineChart data={currentData === "expense" ? dataExpense : dataIncome}
+                            thousands="," prefix="$"
+                            colors={currentData === "expense" ? ["#b00", "#666"] : ''}
+                            decimal="." />
+                    </Loader>
+
 
                     <div className="text-center">
                         <button className="btn peach-gradient" onClick={toggleCurrentData} id="expense">Expense</button>
@@ -91,7 +94,10 @@ const Report = (props) => {
                     </div>
                 </div>
                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <ColumnChart data={dataCategories} stacked={true} thousands="," prefix="$" decimal="."/>
+                    <Loader>
+                        <ColumnChart data={dataCategories} stacked={true} thousands="," prefix="$" decimal="." />
+                    </Loader>
+
                 </div>
 
             </div>

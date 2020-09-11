@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import { PieChart } from 'react-chartkick';
 import 'chart.js';
 import { MDBBtn } from 'mdbreact';
-import {trackPromise} from 'react-promise-tracker';
+import { trackPromise } from 'react-promise-tracker';
 import NumberFormat from 'react-number-format';
-
+import Loader from '../Loader';
 
 const Categories = (props) => {
     const [dataChartIncome, setDataChartIncome] = useState([]);
@@ -76,13 +76,13 @@ const Categories = (props) => {
         const dataChart = [];
         for (let i = 0; i < detail.length; i++) {
             const category = await CategoriesService.getOne(detail[i].categoryId)
-            const path =`/listalltransactions/category/${category.id}`
+            const path = `/listalltransactions/category/${category.id}`
             content.push({
                 type: category.type,
                 name: category.name,
                 // total: detail[i].total,
                 total: <NumberFormat value={detail[i].total} displayType={'text'} thousandSeparator={true} prefix={'$'} />,
-                action: <Link to={path}><MDBBtn color="success" size="sm">View</MDBBtn></Link>
+                action: <Link to={path}><MDBBtn color="success" size="sm"><i class="fas fa-eye fa-lg"></i></MDBBtn></Link>
             });
             dataChart.push([category.name, detail[i].total])
         }
@@ -95,8 +95,8 @@ const Categories = (props) => {
         const inComeDetail = await trackPromise(CategoriesService.getIncomeDetail(currentUser.id));
         const expenseDetail = await trackPromise(CategoriesService.getExpenseDetail(currentUser.id));
 
-        const incomeContent = await trackPromise(createRow(inComeDetail)) ;
-        const expenseContent = await trackPromise(createRow(expenseDetail)) ;
+        const incomeContent = await trackPromise(createRow(inComeDetail));
+        const expenseContent = await trackPromise(createRow(expenseDetail));
 
         // console.log(incomeContent.content);
         // set data table
@@ -134,28 +134,33 @@ const Categories = (props) => {
             </ul>
             <div className="tab-content black-text" id="myTabContent">
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <Loader>
+                        {/* Chart */}
+                        <PieChart donut={true} data={dataChartExpense} thousands="," prefix="$" decimal="." />
 
-                    {/* Chart */}
-                    <PieChart donut={true} data={dataChartExpense} thousands="," prefix="$" decimal="." />
+                        {/* Table */}
+                        <MDBDataTableV5
+                            hover
+                            entriesOptions={[5, 10, 20]}
+                            entries={5}
+                            data={datatableExpense}
+                        />
+                    </Loader>
 
-                    {/* Table */}
-                    <MDBDataTableV5
-                        hover
-                        entriesOptions={[5, 10, 20]}
-                        entries={5}
-                        data={datatableExpense} 
-                    />
                 </div>
                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    {/* Chart */}
-                    <PieChart donut={true} data={dataChartIncome} thousands="," prefix="$" decimal="." />
-                    {/* Table */}
-                    <MDBDataTableV5
-                        hover
-                        entriesOptions={[5, 10, 20]}
-                        entries={5}
-                        data={datatableIncome} 
-                    />
+                    <Loader>
+                        {/* Chart */}
+                        <PieChart donut={true} data={dataChartIncome} thousands="," prefix="$" decimal="." />
+                        {/* Table */}
+                        <MDBDataTableV5
+                            hover
+                            entriesOptions={[5, 10, 20]}
+                            entries={5}
+                            data={datatableIncome}
+                        />
+                    </Loader>
+
                 </div>
             </div>
 
