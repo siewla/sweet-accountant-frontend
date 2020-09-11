@@ -184,6 +184,8 @@
 
 .content{
   width: 100%;
+  background: #ededef;
+  height: 100%;
 }
 
 /* Profile */
@@ -193,22 +195,21 @@
 }
 /* All Transactions */
 .filters-container{
-  width: 40vh;
-  margin: auto;
+  width: 40%;
+  height: fit-content;
 }
 
 .statistic-filter {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  width: 80%;
+  width: 70%;
   margin: 3% auto;
 
 }
 .date-filter-container{
-  width: 50%;
+  width: 60%;
   padding: 1vh;
-  margin: auto;
 }
 
 .date-filter-container-column{
@@ -355,4 +356,19 @@
   justify-items: center;
   align-items: center;
   padding-top: 5vh;
+}
+
+/* table */
+.table-1{
+  width: 80%;
+  margin: auto;
+}
+
+.filter-clear {
+  display: flex;
+  width: 70%;
+  margin: auto;
+  flex-direction: row wrap;
+  justify-content: space-between;
+  margin-bottom: 2%;
 }

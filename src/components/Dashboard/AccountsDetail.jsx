@@ -7,7 +7,7 @@ import accounts from '../../services/accounts'
 import { Link } from 'react-router-dom';
 import StatisticBox from '../StatisticBox'
 import authentication from '../../services/authentication';
-import {trackPromise} from 'react-promise-tracker'
+import { trackPromise } from 'react-promise-tracker'
 import NumberFormat from 'react-number-format';
 
 
@@ -17,7 +17,7 @@ const AccountsDetail = (props) => {
     // check authentication
     const checkAuthentication = async () => {
         const response = await authentication.checkAuthentication();
-        if(response.message) {
+        if (response.message) {
             return []
         } else {
             return response
@@ -25,29 +25,29 @@ const AccountsDetail = (props) => {
     }
 
     const dataColumn = [
-            {
-                label: '#',
-                field: 'id'
+        {
+            label: '#',
+            field: 'id'
 
-            },
-            {
-                label: 'Account Name',
-                field: 'name'
+        },
+        {
+            label: 'Account Name',
+            field: 'name'
 
-            },
-            {
-                label: 'Balance',
-                field: 'balance'
-            },
-            {
-                label: 'Actions',
-                field: 'actions'
-            }
-        ]
+        },
+        {
+            label: 'Balance',
+            field: 'balance'
+        },
+        {
+            label: 'Actions',
+            field: 'actions'
+        }
+    ]
 
     const [initialData, setData] = useState({
         tableAccounts: [],
-        allAccountsStatistic:{
+        allAccountsStatistic: {
             totalTransactions: null,
             totalIncome: 0.00,
             totalExpense: 0.00,
@@ -55,30 +55,30 @@ const AccountsDetail = (props) => {
         }
     })
 
-    const { tableAccounts, allAccountsStatistic} = initialData
+    const { tableAccounts, allAccountsStatistic } = initialData
 
-    const handleDelete = async (id) =>{
-        try{
+    const handleDelete = async (id) => {
+        try {
             await accounts.deleteById(id)
             window.location.reload()
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
-    // console.log('handle delete', transactionId)
+        // console.log('handle delete', transactionId)
     }
 
     const [editState, toggleDisplayEditForm] = useState(false)
 
-    const [currentAccount, setCurrentAccount] =useState({
+    const [currentAccount, setCurrentAccount] = useState({
         currentAccountId: '',
         currentAccountName: '',
     })
 
-    const {currentAccountId, currentAccountName } = currentAccount
+    const { currentAccountId, currentAccountName } = currentAccount
 
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
-    const handleEdit = (id) =>{
+    const handleEdit = (id) => {
         // console.log(id)
         toggleDisplayEditForm(true)
         setCurrentAccount({
@@ -86,7 +86,7 @@ const AccountsDetail = (props) => {
         })
     }
 
-    const handlePreDelete = (id, name) =>{
+    const handlePreDelete = (id, name) => {
         setModalIsOpen(!modalIsOpen)
         setCurrentAccount({
             currentAccountId: id,
@@ -95,27 +95,27 @@ const AccountsDetail = (props) => {
     }
 
     // eslint-disable-next-line 
-    const fetchData= async (currentUser) => {
+    const fetchData = async (currentUser) => {
         const allAccountsStatisticResponse = await accounts.getAllAccountsStatistic(currentUser.id)
         const allAccountsResponse = await usersService.getAllAccounts(currentUser.id)
         const allAccountsBalance = await accounts.getEachAccountStatistic(currentUser.id)
-        const amendedAccounts = allAccountsResponse.map((accountMain,index) =>{
-            allAccountsBalance.filter( account=>{ 
-                if( account.accountId === accountMain.id){
+        const amendedAccounts = allAccountsResponse.map((accountMain, index) => {
+            allAccountsBalance.filter(account => {
+                if (account.accountId === accountMain.id) {
                     // accountMain.balance = (parseFloat(account.balance)/100).toFixed(2)
-                    accountMain.balance =<NumberFormat value={(parseFloat(account.balance)/100).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                    accountMain.balance = <NumberFormat value={(parseFloat(account.balance) / 100).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                     return accountMain
                 } else
                     return null
             })
-            const path =`/listalltransactions/account/${accountMain.id}`
+            const path = `/listalltransactions/account/${accountMain.id}`
 
             accountMain.actions = <div>
-                    <MDBBtn color="primary" size="sm" onClick={()=>handleEdit(accountMain.id)}>Edit</MDBBtn>
-                    <MDBBtn color="red" size="sm" onClick={()=>handlePreDelete(accountMain.id , accountMain.name)}>Delete</MDBBtn>
-                    <Link to={path}><MDBBtn color="success" size="sm">View</MDBBtn></Link>
-                </div>
-                                
+                <MDBBtn color="primary" size="sm" onClick={() => handleEdit(accountMain.id)}><i class="fas fa-edit fa-lg"></i></MDBBtn>
+                <MDBBtn color="red" size="sm" onClick={() => handlePreDelete(accountMain.id, accountMain.name)}><i class="fas fa-trash-alt fa-lg"></i></MDBBtn>
+                <Link to={path}><MDBBtn color="success" size="sm"><i class="fas fa-eye fa-lg"></i></MDBBtn></Link>
+            </div>
+
             return accountMain
         }
         )
@@ -128,43 +128,44 @@ const AccountsDetail = (props) => {
     }
 
     useEffect(() => {
-        async function fetchCurrentUser (){
+        async function fetchCurrentUser() {
             const data = await trackPromise(checkAuthentication())
             setCurrentUser(data)
             fetchData(data)
         }
 
-        if (!currentUser.id){
+        if (!currentUser.id) {
             fetchCurrentUser()
-        } else{
+        } else {
             fetchData(currentUser)
-        } 
-    // eslint-disable-next-line   
+        }
+        // eslint-disable-next-line   
     }, [currentUser])
 
 
     return (
         <div className="all-accounts-container">
-            <StatisticBox statistic={allAccountsStatistic}/>
-            <AddNewAccount currentUser={currentUser} fetchData={fetchData}/>
-            {editState?
-            <UpdateAccount 
-                fetchData={fetchData}
-                currentUser={currentUser}
-                toggleDisplayEditForm={toggleDisplayEditForm}
-                accountId={currentAccountId}
-            />:null}
-            <MDBDataTableV5 
+            <StatisticBox statistic={allAccountsStatistic} />
+            <AddNewAccount currentUser={currentUser} fetchData={fetchData} />
+            {editState ?
+                <UpdateAccount
+                    fetchData={fetchData}
+                    currentUser={currentUser}
+                    toggleDisplayEditForm={toggleDisplayEditForm}
+                    accountId={currentAccountId}
+                /> : null}
+            <MDBDataTableV5
+                className="accounts-container"
                 hover
-                entriesOptions = {[5, 10, 25, 50]}
-                entries = {5}
-                data = {{
+                entriesOptions={[5, 10, 25, 50]}
+                entries={5}
+                data={{
                     columns: dataColumn,
                     rows: tableAccounts
                 }}
             />
-            <MDBModal className="black-text" isOpen={modalIsOpen} toggle={()=>setModalIsOpen(!modalIsOpen)}>
-                <MDBModalHeader toggle={()=>setModalIsOpen(!modalIsOpen)}>
+            <MDBModal className="black-text" isOpen={modalIsOpen} toggle={() => setModalIsOpen(!modalIsOpen)}>
+                <MDBModalHeader toggle={() => setModalIsOpen(!modalIsOpen)}>
                     Warning
                 </MDBModalHeader>
                 <MDBModalBody>
@@ -172,8 +173,8 @@ const AccountsDetail = (props) => {
                     Are you sure to proceed?
                 </MDBModalBody>
                 <MDBModalFooter>
-                <MDBBtn color="primary" onClick={()=>handleDelete(currentAccountId)}>Please Proceed</MDBBtn>
-                <MDBBtn color="grey" onClick={()=>setModalIsOpen(!modalIsOpen)}>Cancel</MDBBtn>
+                    <MDBBtn color="primary" onClick={() => handleDelete(currentAccountId)}>Please Proceed</MDBBtn>
+                    <MDBBtn color="grey" onClick={() => setModalIsOpen(!modalIsOpen)}>Cancel</MDBBtn>
                 </MDBModalFooter>
             </MDBModal>
 

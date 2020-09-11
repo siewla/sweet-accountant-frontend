@@ -130,9 +130,11 @@ const TransactionsList = (props) => {
 
             transaction.paidAt = <Moment calendar={calendarStrings}>{transaction.paidAt}</Moment>
             // transaction.amount = (parseFloat(transaction.amount) / 100).toFixed(2)
-            transaction.amount =<NumberFormat value={(parseFloat(transaction.amount)/100).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+            transaction.amount = <NumberFormat value={(parseFloat(transaction.amount) / 100).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
             const idForTransaction = transaction.id
-            transaction.actions = <div><MDBBtn color="primary" size="sm" onClick={() => handleEdit(idForTransaction)}>Edit</MDBBtn><MDBBtn color="red" size="sm" onClick={() => handleDelete(idForTransaction)}>Delete</MDBBtn></div>
+            transaction.actions = <div><MDBBtn color="primary" size="sm" onClick={() => handleEdit(idForTransaction)}><i class="far fa-edit fa-lg"></i></MDBBtn>
+                <MDBBtn color="red" size="sm" onClick={() => handleDelete(idForTransaction)}><i class="fas fa-trash-alt fa-lg"></i></MDBBtn>
+            </div>
             return transaction
         })
         return transactions
@@ -144,13 +146,13 @@ const TransactionsList = (props) => {
             let transactionsResponse;
             switch (props.type) {
                 case 'account':
-                    transactionsResponse = await trackPromise (transactions.getAllTransactionsByAccountId(props.typeId))
+                    transactionsResponse = await trackPromise(transactions.getAllTransactionsByAccountId(props.typeId))
                     break
                 case 'category':
-                    transactionsResponse = await trackPromise (transactions.getAllTransactionsByCategoryId(props.typeId))
+                    transactionsResponse = await trackPromise(transactions.getAllTransactionsByCategoryId(props.typeId))
                     break
                 case 'all':
-                    transactionsResponse = await trackPromise( transactions.getAllTransactions(user.id))
+                    transactionsResponse = await trackPromise(transactions.getAllTransactions(user.id))
                     break;
                 default:
                     transactionsResponse = []
@@ -188,8 +190,7 @@ const TransactionsList = (props) => {
 
     return (
         <div>
-
-            {props.filterMsg !== 'disabled' ? <div>
+            {props.filterMsg !== 'disabled' ? <div className="filter-clear">
                 <div className="date-filter-container z-depth-1">
                     <h5 className="card-header default-color">Filtered by Date</h5>
                     <div className="date-filter-container-column">
@@ -219,9 +220,11 @@ const TransactionsList = (props) => {
                     </div>
 
                 </div>
+                <div>
+                    <h5>Filtered by {props.filterMsg}</h5>
+                    <MDBBtn color="unique" onClick={() => handleClear()}>Clear Filter</MDBBtn>
+                </div>
 
-                <h5>Filtered by {props.filterMsg}</h5>
-                <MDBBtn color="unique" onClick={() => handleClear()}>Clear Filter</MDBBtn>
             </div> : null}
             {editState ?
                 <UpdateIndividualTransaction
@@ -235,7 +238,7 @@ const TransactionsList = (props) => {
                     transactionId={currentTransactionId}
                 /> : null}
             <Loader>
-                <MDBDataTableV5 className="transactions-table"
+                <MDBDataTableV5 className="transactions-table table-1 z-depth-1"
                     hover
                     entriesOptions={[5, 10, 25, 50]}
                     entries={5}
@@ -246,7 +249,7 @@ const TransactionsList = (props) => {
                 />
             </Loader>
 
-            
+
         </div>
     )
 }
