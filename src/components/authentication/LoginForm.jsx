@@ -48,9 +48,9 @@ const LoginForm = (props) => {
 
                             <Googlelogin login={login} showErr={showErr} setErr={setErr} currentUser={props.currentUser} setCurrentUser={props.setCurrentUser} checkAuthentication={props.checkAuthentication}/>
                         </div>
-                        <a href="/" className="p-2 m-2 ins-ic">
+                        {/* <a href="/" className="p-2 m-2 ins-ic">
                             Forget password?
-                        </a>
+                        </a> */}
                     </div>
                 </div>
             </form>
